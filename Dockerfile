@@ -30,7 +30,7 @@ COPY src/ src/
 RUN dotnet publish src/Lager.Api/Lager.Api.csproj -c Release -o /app/publish --no-restore -p:UseAppHost=false
 
 # ---- 3) Laufzeit-Image -------------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 # QuestPDF/SkiaSharp (Versandetikett als PDF) braucht unter Linux fontconfig samt einer Schrift; curl für den Healthcheck.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends fontconfig libfontconfig1 fonts-dejavu-core curl \
