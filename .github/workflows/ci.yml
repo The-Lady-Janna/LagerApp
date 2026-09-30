@@ -42,7 +42,7 @@ jobs:
       # Einige Backend-Tests führen TypeScript-Module aus dem Frontend mit Node aus (ab Node 22.18).
       # Ohne eine feste Version hinge es vom Runner-Image ab, ob sie laufen oder still übersprungen werden.
       - name: Node.js einrichten (für die Frontend-Logik-Tests des Backends)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '22'
 
@@ -99,7 +99,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Node.js einrichten
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
           cache: npm
