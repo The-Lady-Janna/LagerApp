@@ -1,0 +1,50 @@
+{
+  "what": "die Benutzer",
+  "title": "Benutzer",
+  "new": "+ Neuer Benutzer",
+  "saveFailed": "Speichern fehlgeschlagen:",
+  "toggleFailed": "Statusänderung fehlgeschlagen:",
+  "caption": "Benutzer",
+  "col": {
+    "username": "Username",
+    "displayName": "Anzeigename",
+    "email": "Email",
+    "roles": "Rollen",
+    "lastLogin": "Letzter Login",
+    "status": "Status",
+    "actions": "Aktionen"
+  },
+  "deactivate": "Deaktivieren",
+  "activate": "Aktivieren",
+  "confirm": {
+    "deactivateTitle": "Benutzer deaktivieren?",
+    "rolesTitle": "Rollen ändern?",
+    "saveRoles": "Rollen speichern",
+    "deactivateBody": "<strong>{{name}}</strong> kann sich danach nicht mehr anmelden. Der Audit-Trail bleibt erhalten; der Benutzer lässt sich wieder aktivieren.",
+    "rolesBody": "Rollen von <strong>{{name}}</strong> ändern auf: {{roles}}.",
+    "noRole": "keine Rolle"
+  },
+  "row": {
+    "you": "(du)",
+    "selfAdminTip": "Die eigene Admin-Rolle kann nicht entzogen werden.",
+    "never": "nie",
+    "active": "✓ aktiv",
+    "inactive": "inaktiv",
+    "pwChange": " · ⚠ PW-Wechsel",
+    "pwReset": "PW reset",
+    "selfDeactivateTip": "Das eigene Konto kann nicht deaktiviert werden."
+  },
+  "create": {
+    "title": "Neuer Benutzer",
+    "initialPassword": "Initial-Passwort (≥ {{min}} Zeichen)",
+    "failed": "Anlegen fehlgeschlagen:",
+    "submit": "Anlegen"
+  },
+  "reset": {
+    "title": "Passwort zurücksetzen — {{name}}",
+    "label": "Zurücksetzen",
+    "hint": "Der Benutzer muss beim nächsten Login das Passwort ändern. Account-Lock wird zurückgesetzt.",
+    "newPassword": "Neues Passwort (≥ {{min}} Zeichen)",
+    "failed": "Zurücksetzen fehlgeschlagen:"
+  }
+}

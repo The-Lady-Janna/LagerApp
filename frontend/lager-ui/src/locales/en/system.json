@@ -1,0 +1,94 @@
+{
+  "title": "Backup & restore",
+  "what": "the backup settings",
+  "backupsWhat": "the backups",
+  "warning": "<strong>Backups are unencrypted</strong> and contain all data including password hashes. A backup on the same drive does not protect against a disk failure: download the files or copy the backup directory externally.",
+  "blocked": {
+    "restart": "Please restart the server first.",
+    "notAllowed": "Restore is not enabled in this environment."
+  },
+  "restored": {
+    "title": "Restore successful. Restart required.",
+    "safety": "The state before the restore is in the list as the safety copy <code>{{name}}</code>. Restart the server (Docker: <code>docker compose restart</code>, otherwise restart the service or process) and then sign in again."
+  },
+  "create": "Create backup now",
+  "creating": "Creating backup…",
+  "upload": "Restore from a backup file…",
+  "createFailed": "Backup failed:",
+  "deleteFailed": "Deleting failed:",
+  "downloadFailed": "Download failed: ",
+  "empty": "No backups yet. “Create backup now” creates the first one.",
+  "caption": "Backups",
+  "col": {
+    "name": "Name",
+    "kind": "Type",
+    "size": "Size",
+    "created": "Created",
+    "actions": "Actions"
+  },
+  "kind": {
+    "backup": "Backup",
+    "beforeRestore": "Before restore"
+  },
+  "row": {
+    "download": "Download",
+    "downloadAria": "Download: {{name}}",
+    "restore": "Restore",
+    "restoreAria": "Restore: {{name}}",
+    "deleteAria": "Delete: {{name}}"
+  },
+  "delete": {
+    "title": "Delete backup?",
+    "body": "<strong>{{name}}</strong> will be deleted permanently. This cannot be undone.",
+    "beforeRestore": "This is the safety copy from an earlier restore: the state at that time can no longer be restored afterwards."
+  },
+  "settings": {
+    "title": "Settings",
+    "schedule": "Schedule",
+    "scheduleTip": "Backup:Schedule — daily start time as HH:mm in UTC",
+    "nextRun": "Next run",
+    "nextRunTip": "In your local time",
+    "retention": "Retention",
+    "retentionTip": "Backup:RetentionCount — older backups are deleted after each new one",
+    "restore": "Restore",
+    "allowed": "enabled",
+    "blocked": "blocked",
+    "restoreTip": "Backup:AllowRestore — always allowed in Development",
+    "invalidSchedule": "The schedule “{{schedule}}” is invalid (expected: HH:mm in UTC, e.g. 02:00). No scheduled backups are running.",
+    "noSchedule": "No schedule set: backups are only created manually. For daily backups set <code>Backup__Schedule</code> (e.g. <code>02:00</code>, UTC).",
+    "restoreBlockedNote": "Restore is blocked here. To restore, set <code>Backup__AllowRestore=true</code> and restart the server (only for the duration of the restore).",
+    "dirCustom": "The backups are in the configured backup directory (Backup__Directory).",
+    "dirDefault": "The backups are next to the database; with Backup__Directory another directory (e.g. a dedicated volume) can be set.",
+    "readOnly": "The settings are read-only here; they come from the server configuration."
+  },
+  "schedule": {
+    "off": "off",
+    "invalid": "invalid",
+    "daily": "daily {{schedule}} {{timeZone}}"
+  },
+  "retention": {
+    "last": "the last {{count}} backups",
+    "unlimited": "unlimited"
+  },
+  "mysql": {
+    "title": "MySQL: backup with mysqldump",
+    "intro": "Backup and restore through the application only exist for SQLite. The MySQL database is backed up with <code>mysqldump</code> (regularly, e.g. via cron) and restored with the <code>mysql</code> client:",
+    "backup": "Back up",
+    "restore": "Restore",
+    "note": "Replace placeholders in angle brackets. Dumps contain all data including password hashes: store them protected."
+  },
+  "memory": "The database is not stored in a file (in-memory): backup and restore are not possible.",
+  "restore": {
+    "title": "Restore the database?",
+    "label": "Restore now",
+    "warnTitle": "Warning: the running database will be replaced.",
+    "warn1": "All changes since the state of the chosen backup are lost (stock, orders, users, passwords).",
+    "warn2": "Beforehand, the current state is stored as the safety copy “before-restore”; it is kept.",
+    "warn3": "Afterwards the server must be restarted; until then the application still works with the old connection.",
+    "backup": "Backup: <strong>{{name}}</strong>",
+    "file": "Backup file (SQLite, at most {{max}})",
+    "tooBig": "The file is {{size}}, larger than allowed ({{max}}).",
+    "confirmPhrase": "To confirm, enter <strong>{{phrase}}</strong>",
+    "failed": "Restore failed:"
+  }
+}

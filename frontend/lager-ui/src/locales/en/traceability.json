@@ -1,0 +1,113 @@
+{
+  "openTrace": "Open lot traceability",
+  "days": {
+    "expiredDays": "expired {{count}} days ago",
+    "expiredYesterday": "expired yesterday",
+    "today": "expires today",
+    "tomorrow": "expires tomorrow",
+    "inDays": "{{count}} days left"
+  },
+  "col": {
+    "status": "Status",
+    "article": "Article",
+    "location": "Location",
+    "lot": "Lot",
+    "expiry": "Expiry",
+    "quantity": "Quantity",
+    "deliveryNote": "Delivery note",
+    "targetBin": "Target bin",
+    "date": "Date",
+    "time": "Time",
+    "operation": "Operation",
+    "document": "Document",
+    "order": "Order",
+    "customer": "Customer",
+    "pickList": "Pick list",
+    "picked": "Picked"
+  },
+  "expiring": {
+    "title": "Expiring lots",
+    "periodAria": "Period of the expiry warning list",
+    "period": "Period:",
+    "days": "{{count}} days",
+    "hint": "Expired lots and those expiring within {{days}} days, sorted by expiry date. Critical = at most 7 days (on the day of expiry itself the goods are still usable).",
+    "what": "the expiry warning list",
+    "none": "No expired or soon-to-expire lots in the next {{days}} days. 🎉",
+    "summary": "<strong>{{rows}}</strong> stock line(s): <expired>{{expired}} expired</expired>, <critical>{{critical}} critical</critical>, {{soon}} soon",
+    "caption": "Expired and soon-to-expire lots",
+    "colExpiry": "Expires",
+    "more": "… and {{count}} more lines (shorten the period)."
+  },
+  "title": "Lot traceability",
+  "intro": "Where did the lot come from, where is it now, what happened to it and which orders may be affected?",
+  "searchAria": "Search lot",
+  "lotNumber": "Lot number",
+  "lotPlaceholder": "e.g. LOT-2026-01",
+  "search": "Search",
+  "slashNotAllowed": "Lot numbers containing “/” cannot be looked up here (the server treats the slash in the address as a path separator).",
+  "what": "the lot",
+  "notFound": "No lot “{{lot}}” found — no goods receipt, stock or movement carries this number.",
+  "tile": {
+    "lot": "Lot",
+    "inbound": "Receipt booked",
+    "inboundTip": "Total of the booked goods receipts of this lot",
+    "stock": "Current stock",
+    "movements": "Movements",
+    "orders": "Orders",
+    "ordersTip": "Possibly affected orders"
+  },
+  "inbounds": {
+    "title": "Goods receipts",
+    "none": "No goods receipt recorded with this lot (e.g. legacy stock or stock from a correction).",
+    "caption": "Goods receipts of lot {{lot}}"
+  },
+  "stock": {
+    "title": "Current stock",
+    "none": "No stock left — the lot is used up or written off.",
+    "caption": "Current stock of lot {{lot}}"
+  },
+  "movements": {
+    "title": "Movements (ledger)",
+    "none": "No movements booked.",
+    "caption": "Movements of lot {{lot}}"
+  },
+  "orders": {
+    "title": "Possibly affected orders",
+    "hint": "Derived from the pick bookings of the lot (pick list → lines with the same article and location). A pick line does not know the lot: if several lots were in the location, an order may have been supplied from another one.",
+    "none": "No order can be derived from this lot.",
+    "caption": "Orders for lot {{lot}}"
+  },
+  "reason": {
+    "Inbound": "Goods receipt",
+    "Pick": "Picking",
+    "Return": "Return",
+    "Inventory": "Stocktake",
+    "ReplenishmentOut": "Replenishment (out)",
+    "ReplenishmentIn": "Replenishment (in)",
+    "Adjust": "Correction",
+    "BinMove": "Bin move",
+    "ReturnB": "Return B-grade (blocked)",
+    "ReturnScrap": "Return defective (scrap)"
+  },
+  "reference": {
+    "InboundShipment": "Goods receipt",
+    "PickList": "Pick list",
+    "InventoryCount": "Stocktake",
+    "ReturnShipment": "Return",
+    "ReplenishmentTask": "Replenishment",
+    "ManualAdjust": "Manual correction"
+  },
+  "lines": {
+    "article": "Line {{no}}: choose an article.",
+    "bin": "Line {{no}}: choose a target bin.",
+    "quantity": "Line {{no}}: quantity must be a whole number between 1 and {{max}}.",
+    "lotLength": "Line {{no}}: the lot may have at most {{max}} characters.",
+    "expiryInvalid": "Line {{no}}: expiry date is not a valid date.",
+    "expiryYear": "Line {{no}}: expiry date must be after the year 2000.",
+    "expiryPast": "Line {{no}}: expiry date is in the past — new goods must not be expired.",
+    "lotRequired": "Line {{no}}: the article is tracked with lot and expiry date — enter the lot.",
+    "expiryRequired": "Line {{no}}: the article is tracked with lot and expiry date — enter the expiry date.",
+    "lotExpiryConflict": "Line {{no}}: lot {{lot}} appears in line {{other}} with a different expiry date — a lot has exactly one expiry date per location.",
+    "none": "Enter at least one line with article, target bin and quantity."
+  }
+}

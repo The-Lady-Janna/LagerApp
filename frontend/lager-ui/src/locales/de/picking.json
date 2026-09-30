@@ -1,0 +1,244 @@
+{
+  "error": "Fehler:",
+  "open": "Öffnen",
+  "col": {
+    "number": "Nummer",
+    "status": "Status",
+    "lines": "Positionen",
+    "created": "Erstellt",
+    "actions": "Aktionen",
+    "location": "Lagerplatz",
+    "sku": "SKU",
+    "quantity": "Menge",
+    "order": "Bestellung"
+  },
+  "lists": {
+    "what": "die Picklisten",
+    "title": "Picklisten",
+    "caption": "Picklisten",
+    "cardTitle": "Picklisten ({{count}})",
+    "distance": "Distanz",
+    "waypoints": "Wegpunkte",
+    "empty": "Noch keine Picklisten generiert.",
+    "devOnlyTip": "Entwicklungsfunktion: der Server erlaubt sie nur in der Umgebung Development.",
+    "reset": {
+      "button": "Nicht gepackte Picklisten zurücksetzen ({{count}})",
+      "pending": "Setze zurück…",
+      "confirmHead_one": "{{count}} nicht gepackte Pickliste zurücksetzen?",
+      "confirmHead_other": "{{count}} nicht gepackte Picklisten zurücksetzen?",
+      "confirmBody": "Es werden nur Picklisten entfernt, die noch nicht gepackt sind. Bereits gepackte Picklisten (Status \"Completed\") und der dabei gebuchte Bestand bleiben erhalten. Die betroffenen Bestellungen werden auf Status \"New\" zurückgesetzt.\n\nDieser Vorgang lässt sich nicht rückgängig machen.",
+      "done": "{{count}} nicht gepackte Pickliste(n) entfernt.",
+      "skipped": "{{count}} bereits gepackte Pickliste(n) blieben erhalten.",
+      "failed": "Fehler beim Reset:"
+    },
+    "reseed": {
+      "button": "Komplette DB löschen + Demo-Daten neu erzeugen (nur Entwicklung)",
+      "pending": "Setze Datenbank neu auf…",
+      "confirm": "ACHTUNG: Alle Daten werden gelöscht und durch Demo-Daten ersetzt.\n\nDas betrifft: Artikel, Lager-Layout (Regale, Bins), Bestand, Bestellungen, Picklisten, Wände und Pickpunkte. Alle deine manuell angelegten Items gehen verloren.\n\nWeiter?",
+      "confirmAgain": "Wirklich sicher? Letzte Warnung — alle aktuellen Daten werden weg sein.",
+      "result": "{{message}} — {{articles}} Artikel, {{shelves}} Regale, {{bins}} Bins, {{stockItems}} Bestandsbuchungen, {{orders}} Bestellungen, {{walls}} Wände, {{pickPoints}} Pickpunkte.",
+      "failed": "Fehler beim Reseed:"
+    },
+    "bulk": {
+      "title": "Bulk-Testdaten",
+      "hint": "Entwicklungsfunktion (der Server erlaubt sie nur in der Umgebung Development). Fügt zufällige Artikel (~5%), Bestände (~10%) und Bestellungen (~85%) <strong>zusätzlich</strong> zur bestehenden DB hinzu. Mehrfacher Klick stapelt — jeder Lauf hat eindeutige BULK-IDs.",
+      "count": "Anzahl",
+      "button": "+ {{count}} Bulk-Daten",
+      "pending": "Erzeuge {{count}} Items…",
+      "confirm": "{{count}} zufällige Testdatensätze erzeugen?\n\nArtikel, Bestände und Bestellungen werden ZUSÄTZLICH zur bestehenden Datenbank angelegt und lassen sich nicht gesammelt wieder entfernen. Nur für Entwicklungs-/Testumgebungen gedacht.",
+      "result": "{{message}} ({{articles}} Artikel + {{stockItems}} Bestände + {{orders}} Bestellungen)"
+    }
+  },
+  "detail": {
+    "what": "die Pickliste",
+    "title": "Pickliste {{number}}",
+    "status": "Status:",
+    "distance": "Gesamtdistanz:",
+    "lines": "Positionen:",
+    "cart": "Wagen:",
+    "finish": "✔ Picking abschließen",
+    "toPack": "📦 Zum Packen",
+    "packed": "✔ Verpackt",
+    "openMobile": "📱 Mobile-Picker öffnen",
+    "confirm": {
+      "title": "Picking abschließen?",
+      "label": "Als gepickt markieren",
+      "body": "Die Pickliste wird als „fertig gepickt“ markiert. Danach taucht sie unter „Packen“ zum Verpacken auf."
+    },
+    "recalc": {
+      "title": "Route neu berechnen",
+      "hint": "Wenn du Wände, Regale oder Bins geändert hast, rechnet das die Route mit dem aktuellen Layout neu durch. Reihenfolge und Wegpunkte werden aktualisiert.",
+      "start": "Startpunkt",
+      "startAuto": "Automatisch (erster Start-Pickpunkt)",
+      "end": "Endpunkt (optional)",
+      "noEnd": "— kein Rückweg —",
+      "pending": "Berechne…",
+      "done": "Route aktualisiert."
+    },
+    "routeTitle": "Route auf Lager",
+    "order": {
+      "title": "Reihenfolge",
+      "caption": "Reihenfolge der Positionen"
+    }
+  },
+  "packing": {
+    "title": "Packen",
+    "overview": "Übersicht",
+    "tile": {
+      "ready": "Bereit zum Packen",
+      "picking": "Noch im Picken",
+      "done": "Bereits verpackt"
+    },
+    "ready": {
+      "title": "Bereit zum Packen ({{count}})",
+      "hint": "Picklisten, die fertig gepickt sind und auf die Verpackung warten."
+    },
+    "picking": {
+      "title": "Noch im Picken ({{count}})",
+      "hint": "Aus Picker-Sicht noch nicht abgeschlossen — sobald \"Picking abschließen\" geklickt wird, wandern sie nach oben."
+    },
+    "done": {
+      "title": "Verpackt ({{count}})"
+    },
+    "empty": "Keine Einträge.",
+    "cart": "Wagen",
+    "orders": "Bestellungen",
+    "pack": "📦 Packen"
+  },
+  "pack": {
+    "title": "Pickliste {{number}} – Packen",
+    "alreadyPacked": " (bereits verpackt)",
+    "deviationConfirm": "Achtung: Die bestätigten Mengen weichen vom Soll ab.\nDas wird so in der Pickliste festgehalten — sicher absenden?",
+    "parcels": "Pakete",
+    "intro": "Jede Bestellung wird zu <strong>einem Paket</strong>. Trage pro Position ein, wie viele Stück tatsächlich verpackt wurden — vorbelegt ist die Plan-Menge (bzw. die im Mobile-Picker gezählte Menge). Beim Abschicken wird die Pickliste als <strong>Completed</strong> markiert und alle Mengen gespeichert.",
+    "fromPicker": {
+      "counted_one": "Vom Mobile-Picker übernommen: {{count}} gezählte Position",
+      "counted_other": "Vom Mobile-Picker übernommen: {{count}} gezählte Positionen",
+      "deviations": ", davon {{count}} mit Abweichung vom Soll ({{list}})",
+      "none": ", keine Abweichung vom Soll",
+      "check": ". Bitte prüfen — gebucht wird erst mit „Packen abschließen“."
+    },
+    "allPlanned": "Alle auf Plan-Menge",
+    "totalsMatch": "Soll: <strong>{{planned}}</strong> · Ist: <strong>{{actual}}</strong> ✓",
+    "totalsDiff": "Soll: <strong>{{planned}}</strong> · Ist: <strong>{{actual}}</strong> ⚠ Abweichung",
+    "caption": "Positionen der Pickliste nach Paketen",
+    "colArticle": "Artikel",
+    "colPlanned": "Soll",
+    "colActual": "Ist",
+    "parcel": "📦 Paket {{n}} — Bestellung <code>{{order}}</code>",
+    "parcelInfo_one": "({{count}} Position, Soll {{planned}} / Ist {{actual}}{{mark}})",
+    "parcelInfo_other": "({{count}} Positionen, Soll {{planned}} / Ist {{actual}}{{mark}})",
+    "actualAria": "Ist-Menge {{sku}}",
+    "confirmed": "bestätigt: {{quantity}}",
+    "ok": "OK",
+    "alreadyPackedButton": "Bereits verpackt",
+    "confirming": "Bestätige…",
+    "finish": "Packen abschließen",
+    "pdfBusy": "Lade PDF…",
+    "pdf": "📄 Lieferschein als PDF",
+    "backToList": "Zurück zur Pickliste",
+    "failed": "Packen fehlgeschlagen:"
+  },
+  "mobile": {
+    "loading": "Lade Pickliste…",
+    "empty": "Keine Positionen in dieser Pickliste.",
+    "skuNotInBin": "SKU \"{{sku}}\" nicht in diesem Bin",
+    "targetReached": "{{sku}}: Soll-Menge bereits gezählt",
+    "scanned": "{{sku}} +1 → {{result}} von {{total}}",
+    "undone": "Scan {{sku}} rückgängig gemacht",
+    "binConfirmedMsg": "Bin {{bin}} bestätigt",
+    "wrongBin": "Falscher Bin gescannt: {{scanned}} (erwartet: {{expected}})",
+    "finishFailed": "Picking konnte nicht abgeschlossen werden.",
+    "back": "Zurück",
+    "pickList": "Pickliste",
+    "stop": "Stop {{n}} / {{total}}",
+    "binConfirmed": "✓ Bin bestätigt",
+    "goToBin": "Gehe zu Bin",
+    "scanBin": "📷 Bin scannen",
+    "order": "Bestellung",
+    "planned": "Soll",
+    "decrease": "{{sku}} Menge verringern",
+    "countedAria": "{{sku}} gepickte Menge",
+    "increase": "{{sku}} Menge erhöhen",
+    "notCounted": "Nicht gezählt – gilt als Soll",
+    "counted": "Gezählt: {{counted}} von {{planned}}",
+    "scanArticle": "📷 Artikel scannen (+1)",
+    "undo": "↶ Scan rückgängig ({{sku}})",
+    "deviations_one": "⚠ {{count}} Position weichen vom Soll ab: {{list}}. Die gezählten Mengen werden auf der Pack-Seite als Ist-Menge vorbelegt; gebucht wird erst, wenn dort „Packen abschließen“ bestätigt wird.",
+    "deviations_other": "⚠ {{count}} Positionen weichen vom Soll ab: {{list}}. Die gezählten Mengen werden auf der Pack-Seite als Ist-Menge vorbelegt; gebucht wird erst, wenn dort „Packen abschließen“ bestätigt wird.",
+    "retryHint": "Deine Zählstände sind noch da — bitte erneut auf „Picking abschließen“ tippen.",
+    "prev": "← Zurück",
+    "next": "Weiter →",
+    "finish": "✓ Picking abschließen"
+  },
+  "carts": {
+    "what": "die Pickwagen",
+    "title": "Pickwagen-Konfigurationen",
+    "formEdit": "Wagen bearbeiten",
+    "formNew": "Neue Wagen-Konfiguration",
+    "name": "Name",
+    "namePlaceholder": "z. B. Standard-Wagen",
+    "levels": "Anzahl Ebenen",
+    "maxWeight": "Max. Gesamtgewicht (kg)",
+    "levelWidth": "Ebenen-Breite (mm)",
+    "levelDepth": "Ebenen-Tiefe (mm)",
+    "levelHeight": "Ebenen-Höhe (mm)",
+    "schema": "Schema-Vorschau",
+    "volume": "Gesamtvolumen: <strong>{{volume}} m³</strong> ({{levels}} Ebenen × {{w}}×{{d}}×{{h}} mm)",
+    "saveChanges": "Änderungen speichern",
+    "create": "Wagen anlegen",
+    "saveFailed": "Speichern fehlgeschlagen:",
+    "deleteFailed": "Löschen fehlgeschlagen:",
+    "list": {
+      "title": "Vorhandene Konfigurationen ({{count}})",
+      "caption": "Vorhandene Konfigurationen",
+      "levels": "Ebenen",
+      "dimensions": "Ebenen-Maße (B×T×H mm)",
+      "maxWeight": "Max. Gewicht",
+      "volume": "Volumen",
+      "empty": "Noch keine Pickwagen konfiguriert."
+    },
+    "delete": {
+      "title": "Wagen-Konfiguration löschen?",
+      "body": "Die Konfiguration <strong>{{name}}</strong> wird gelöscht. Das lässt sich nicht rückgängig machen."
+    },
+    "schemaAria": "Schema des Pickwagens mit {{levels}} Ebenen, Tiefe {{depth}} mm",
+    "level": "Ebene {{n}}",
+    "depth": "Tiefe: {{depth}} mm"
+  },
+  "waves": {
+    "what": "die Wellen",
+    "title": "Wellen",
+    "new": "+ Neue Welle",
+    "caption": "Wellen",
+    "description": "Beschreibung",
+    "cutoff": "Cutoff",
+    "orders": "Orders",
+    "pickLists": "Picklisten",
+    "release": {
+      "title": "Welle freigeben?",
+      "label": "Freigeben",
+      "body": "Welle <code>{{number}}</code> mit {{count}} Bestellung(en) freigeben: es wird eine konsolidierte Pickliste erzeugt."
+    },
+    "cancel": {
+      "title": "Welle abbrechen?",
+      "label": "Welle abbrechen",
+      "back": "Zurück",
+      "body": "Welle <code>{{number}}</code> wird abgebrochen. Das lässt sich nicht rückgängig machen."
+    },
+    "row": {
+      "release": "▶ Release"
+    },
+    "form": {
+      "title": "Neue Welle",
+      "descriptionPlaceholder": "z.B. Vormittags-Cutoff 12:00",
+      "cutoff": "Cutoff-Zeit (optional)",
+      "select": "Orders auswählen ({{selected}} / {{total}})",
+      "none": "Keine offenen Orders verfügbar.",
+      "orderInfo": "{{count}} Positionen",
+      "orderInfoRef": "{{count}} Positionen · {{ref}}",
+      "create": "Welle anlegen ({{count}})",
+      "createFailed": "Anlegen fehlgeschlagen:"
+    }
+  }
+}

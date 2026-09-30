@@ -1,0 +1,105 @@
+{
+  "title": "Import & export (CSV)",
+  "intro": "The files are made for <strong>Excel with German settings</strong>: UTF-8 with BOM, semicolon as delimiter, decimal comma. Anyone feeding another program chooses the comma as delimiter (then with a decimal point). The import reads both notations.",
+  "delimiter": "Delimiter",
+  "delimiterSemicolon": "Semicolon (;), Excel default",
+  "delimiterComma": "Comma (,)",
+  "heading": {
+    "export": "Export",
+    "import": "Import"
+  },
+  "exportFailed": "Export failed:",
+  "saved": "Saved: <code>{{name}}</code>",
+  "exportAria": "Export {{label}}",
+  "from": "From",
+  "to": "To (inclusive)",
+  "user": "User (empty = all)",
+  "rangeInvalid": "“From” must be before “To”.",
+  "downloadAria": "Download {{label}} as CSV",
+  "download": "Download",
+  "importHint": "Every import first checks without writing anything (dry run) and shows the errors per row. Only “Apply” writes, in one transaction and through the normal rules (stock only as a booking in the ledger). Sensible order: articles, then stock, then orders. Sample files are in the project under <code>docs/samples/</code>.",
+  "importAria": "Import {{label}}",
+  "requiredColumns": "Required columns: {{columns}}",
+  "importButtonAria": "Import {{label}}",
+  "importFile": "Import file…",
+  "import": {
+    "articles": {
+      "label": "Articles",
+      "description": "Creates articles or changes existing ones (per SKU). Running the same import twice changes nothing. If a column is missing in the file, the field stays unchanged.",
+      "required": "Sku; for new articles also Name, LengthMm, WidthMm, HeightMm"
+    },
+    "stock": {
+      "label": "Stock",
+      "description": "Sets the stock per article, location and lot to the value in the file. The difference is booked and appears in the ledger (operation “CsvImport”).",
+      "required": "Sku, Location (storage location), Quantity; optional LotNumber, ExpiryDate"
+    },
+    "orders": {
+      "label": "Orders",
+      "description": "Creates new orders (one row per line). An existing order number is an error; existing orders are never changed.",
+      "required": "OrderNumber, Sku, Quantity; optional CustomerReference, Priority, DueDate, ExternalReference"
+    }
+  },
+  "export": {
+    "articles": {
+      "label": "Articles",
+      "description": "The article master data, importable again (same structure as the article import)."
+    },
+    "stock": {
+      "label": "Stock",
+      "description": "One row per article, location and lot with quantity and expiry date."
+    },
+    "orders": {
+      "label": "Orders",
+      "description": "One row per order line; the order header data repeats."
+    },
+    "movements": {
+      "label": "Movements (ledger)",
+      "description": "All stock bookings, oldest first."
+    },
+    "audit": {
+      "label": "Audit",
+      "description": "The audit trail, oldest entries first."
+    }
+  },
+  "blocked": {
+    "check": "Check the file first.",
+    "noneFree": "No row is free of errors: there is nothing to apply.",
+    "nothing": "There is nothing to apply: everything is already like this in the database.",
+    "rowErrors": "There are row errors: correct the file or skip the faulty rows."
+  },
+  "dialog": {
+    "title": "Import {{label}}",
+    "requiredColumns": "Required columns: <strong>{{columns}}</strong>. Columns are recognised by their name; the order does not matter.",
+    "file": "CSV file (at most {{size}} and {{rows}} rows)",
+    "delimiterSemicolon": "Semicolon (;), Excel default with decimal comma",
+    "tooBig": "The file is {{size}}, larger than allowed ({{max}}). Please split it into several files.",
+    "failed": "Import failed:",
+    "close": "Close",
+    "applying": "Applying…",
+    "apply": "Apply",
+    "checking": "Checking…",
+    "check": "Check (dry run)",
+    "recheck": "Check again"
+  },
+  "preview": {
+    "aria": "Result of the check",
+    "created": "New",
+    "updated": "Updated",
+    "unchanged": "Unchanged",
+    "errors": "Errors",
+    "rowsRead": "({{rows}} rows read).",
+    "caption": "Row errors",
+    "colLine": "Row",
+    "colKey": "Key",
+    "colError": "Error",
+    "truncated": "The first {{shown}} of {{total}} errors are shown.",
+    "skip": "Skip faulty rows and apply the remaining {{num}}"
+  },
+  "done": {
+    "aria": "Result of the import",
+    "applied": "Import completed.",
+    "notApplied": "Nothing was written.",
+    "auditNote": "The import appears in the audit trail as one summary entry{{suffix}}.",
+    "idSuffix": " (ID {{id}})"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "what": "die Retouren",
+  "title": "Retouren",
+  "new": "+ Neue Retoure",
+  "error": "Fehler:",
+  "caption": "Retouren",
+  "col": {
+    "rma": "RMA",
+    "customer": "Kunde",
+    "status": "Status",
+    "lines": "Positionen",
+    "created": "Erstellt",
+    "processed": "Verarbeitet",
+    "actions": "Aktionen"
+  },
+  "confirm": {
+    "title": "Retoure verarbeiten?",
+    "label": "Retoure verarbeiten",
+    "body": "Retoure <code>{{rma}}</code> wird abgeschlossen; {{count}} verkaufsfähige(s) Stück werden in den Bestand gebucht. Das lässt sich nicht rückgängig machen."
+  },
+  "row": {
+    "close": "Zu",
+    "details": "Details",
+    "process": "✓ Verarbeiten"
+  },
+  "line": {
+    "sku": "SKU",
+    "quantity": "Menge",
+    "lot": "Lot",
+    "qc": "QC",
+    "targetBin": "Ziel-Bin",
+    "note": "Notiz",
+    "binAria": "Ziel-Bin {{sku}}",
+    "binPlaceholder": "— Bin (nur Sellable) —",
+    "noteAria": "Notiz {{sku}}",
+    "optionalCap": "Optional"
+  },
+  "form": {
+    "title": "Neue Retoure",
+    "customerRef": "Kunden-Referenz",
+    "notes": "Notizen",
+    "caption": "Positionen der neuen Retoure",
+    "article": "Artikel",
+    "articleAria": "Artikel Zeile {{n}}",
+    "quantityAria": "Menge Zeile {{n}}",
+    "lotAria": "Lot Zeile {{n}}",
+    "removeAria": "Zeile {{n}} entfernen",
+    "choose": "— wähle —",
+    "optional": "optional",
+    "addLine": "+ Zeile",
+    "create": "Anlegen (Draft)"
+  }
+}

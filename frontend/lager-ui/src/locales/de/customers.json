@@ -1,0 +1,42 @@
+{
+  "title": "Kunden",
+  "what": "die Kunden",
+  "newButton": "+ Neuer Kunde",
+  "new": {
+    "title": "Neuer Kunde"
+  },
+  "code": "Code",
+  "name": "Name",
+  "create": "Anlegen",
+  "createFailed": "Kunde anlegen fehlgeschlagen:",
+  "createFailedFallback": "Kunde anlegen fehlgeschlagen.",
+  "saveFailed": "Speichern fehlgeschlagen:",
+  "saveFailedFallback": "Speichern fehlgeschlagen.",
+  "addressFailed": "Adresse hinzufügen fehlgeschlagen:",
+  "addressFailedFallback": "Adresse hinzufügen fehlgeschlagen.",
+  "none": "Noch keine Kunden angelegt.",
+  "addresses_one": "{{count}} Adresse",
+  "addresses_other": "{{count}} Adressen",
+  "email": "Email",
+  "phone": "Telefon",
+  "currency": "Währung",
+  "discount": "Rabatt %",
+  "notes": "Notizen",
+  "addressesTitle": "Adressen",
+  "caption": "Adressen von {{name}}",
+  "label": "Label",
+  "address": "Adresse",
+  "newAddress": "Neue Adresse",
+  "kind": {
+    "label": "Typ",
+    "Shipping": "Lieferadresse",
+    "Billing": "Rechnungsadresse",
+    "Both": "Beides"
+  },
+  "labelPlaceholder": "z.B. HQ",
+  "country": "Land",
+  "street": "Straße",
+  "zip": "PLZ",
+  "city": "Stadt",
+  "addAddress": "+ Adresse hinzufügen"
+}

@@ -1,0 +1,50 @@
+{
+  "what": "the users",
+  "title": "Users",
+  "new": "+ New user",
+  "saveFailed": "Saving failed:",
+  "toggleFailed": "Status change failed:",
+  "caption": "Users",
+  "col": {
+    "username": "Username",
+    "displayName": "Display name",
+    "email": "Email",
+    "roles": "Roles",
+    "lastLogin": "Last login",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "deactivate": "Deactivate",
+  "activate": "Activate",
+  "confirm": {
+    "deactivateTitle": "Deactivate user?",
+    "rolesTitle": "Change roles?",
+    "saveRoles": "Save roles",
+    "deactivateBody": "<strong>{{name}}</strong> will no longer be able to sign in afterwards. The audit trail is kept; the user can be activated again.",
+    "rolesBody": "Change roles of <strong>{{name}}</strong> to: {{roles}}.",
+    "noRole": "no role"
+  },
+  "row": {
+    "you": "(you)",
+    "selfAdminTip": "Your own admin role cannot be removed.",
+    "never": "never",
+    "active": "✓ active",
+    "inactive": "inactive",
+    "pwChange": " · ⚠ password change",
+    "pwReset": "Reset PW",
+    "selfDeactivateTip": "Your own account cannot be deactivated."
+  },
+  "create": {
+    "title": "New user",
+    "initialPassword": "Initial password (≥ {{min}} characters)",
+    "failed": "Creating failed:",
+    "submit": "Create"
+  },
+  "reset": {
+    "title": "Reset password — {{name}}",
+    "label": "Reset",
+    "hint": "The user must change the password at the next login. The account lock is reset.",
+    "newPassword": "New password (≥ {{min}} characters)",
+    "failed": "Reset failed:"
+  }
+}

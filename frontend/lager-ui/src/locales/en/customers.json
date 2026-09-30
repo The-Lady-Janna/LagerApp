@@ -1,0 +1,42 @@
+{
+  "title": "Customers",
+  "what": "the customers",
+  "newButton": "+ New customer",
+  "new": {
+    "title": "New customer"
+  },
+  "code": "Code",
+  "name": "Name",
+  "create": "Create",
+  "createFailed": "Creating the customer failed:",
+  "createFailedFallback": "Creating the customer failed.",
+  "saveFailed": "Saving failed:",
+  "saveFailedFallback": "Saving failed.",
+  "addressFailed": "Adding the address failed:",
+  "addressFailedFallback": "Adding the address failed.",
+  "none": "No customers yet.",
+  "addresses_one": "{{count}} address",
+  "addresses_other": "{{count}} addresses",
+  "email": "Email",
+  "phone": "Phone",
+  "currency": "Currency",
+  "discount": "Discount %",
+  "notes": "Notes",
+  "addressesTitle": "Addresses",
+  "caption": "Addresses of {{name}}",
+  "label": "Label",
+  "address": "Address",
+  "newAddress": "New address",
+  "kind": {
+    "label": "Type",
+    "Shipping": "Shipping address",
+    "Billing": "Billing address",
+    "Both": "Both"
+  },
+  "labelPlaceholder": "e.g. HQ",
+  "country": "Country",
+  "street": "Street",
+  "zip": "ZIP",
+  "city": "City",
+  "addAddress": "+ Add address"
+}

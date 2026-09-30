@@ -1,0 +1,46 @@
+# Build-Kontext klein halten und nichts Lokales ins Image ziehen (Dockerfile im Repo-Root, docker build .).
+
+# Build-Ausgaben und Abhängigkeiten: werden im Image neu gebaut/installiert
+**/bin/
+**/obj/
+**/node_modules/
+**/dist/
+**/wwwroot/
+
+# Versionsverwaltung, IDEs, lokale Werkzeuge
+.git/
+.github/
+.vs/
+.vscode/
+.idea/
+.claude/
+.playwright-mcp/
+**/*.user
+
+# Lokale Daten, Logs und Secrets gehören nie ins Image
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.db-journal
+**/*.sqlite
+**/*.sqlite3
+**/*.bak
+**/logs/
+**/*.log
+.env
+.env.*
+!.env.example
+**/jwt.key
+**/*.key
+**/*.pem
+**/*.pfx
+**/appsettings.Production.json
+**/appsettings.*.local.json
+
+# Wird für das Image nicht gebraucht
+tests/
+docs/
+TestResults/
+coverage/
+**/*.md
+deploy/

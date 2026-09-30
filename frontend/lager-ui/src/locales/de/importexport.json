@@ -1,0 +1,105 @@
+{
+  "title": "Import & Export (CSV)",
+  "intro": "Die Dateien sind für <strong>Excel mit deutscher Einstellung</strong> gemacht: UTF-8 mit BOM, Semikolon als Trennzeichen, Dezimalkomma. Wer ein anderes Programm füttert, wählt das Komma als Trennzeichen (dann mit Dezimalpunkt). Der Import liest beide Schreibweisen.",
+  "delimiter": "Trennzeichen",
+  "delimiterSemicolon": "Semikolon (;), Excel-Standard",
+  "delimiterComma": "Komma (,)",
+  "heading": {
+    "export": "Export",
+    "import": "Import"
+  },
+  "exportFailed": "Export fehlgeschlagen:",
+  "saved": "Gespeichert: <code>{{name}}</code>",
+  "exportAria": "Export {{label}}",
+  "from": "Von",
+  "to": "Bis (einschließlich)",
+  "user": "Benutzer (leer = alle)",
+  "rangeInvalid": "„Von“ muss vor „Bis“ liegen.",
+  "downloadAria": "{{label}} als CSV herunterladen",
+  "download": "Herunterladen",
+  "importHint": "Jeder Import prüft zuerst, ohne etwas zu schreiben (Trockenlauf), und zeigt je Zeile die Fehler. Erst „Übernehmen“ schreibt, in einer Transaktion und über die normalen Regeln (Bestand nur als Buchung im Ledger). Sinnvolle Reihenfolge: Artikel, dann Bestand, dann Bestellungen. Beispieldateien liegen im Projekt unter <code>docs/samples/</code>.",
+  "importAria": "Import {{label}}",
+  "requiredColumns": "Pflichtspalten: {{columns}}",
+  "importButtonAria": "{{label}} importieren",
+  "importFile": "Datei importieren…",
+  "import": {
+    "articles": {
+      "label": "Artikel",
+      "description": "Legt Artikel an oder ändert vorhandene (je SKU). Derselbe Import zweimal ändert nichts. Fehlt eine Spalte in der Datei, bleibt das Feld unverändert.",
+      "required": "Sku; für neue Artikel zusätzlich Name, LengthMm, WidthMm, HeightMm"
+    },
+    "stock": {
+      "label": "Bestand",
+      "description": "Setzt den Bestand je Artikel, Lagerplatz und Charge auf den Wert der Datei. Gebucht wird die Differenz, sie steht im Ledger (Vorgang „CsvImport“).",
+      "required": "Sku, Location (Lagerplatz), Quantity; optional LotNumber, ExpiryDate"
+    },
+    "orders": {
+      "label": "Bestellungen",
+      "description": "Legt neue Bestellungen an (eine Zeile je Position). Eine vorhandene Bestellnummer ist ein Fehler; vorhandene Bestellungen werden nie geändert.",
+      "required": "OrderNumber, Sku, Quantity; optional CustomerReference, Priority, DueDate, ExternalReference"
+    }
+  },
+  "export": {
+    "articles": {
+      "label": "Artikel",
+      "description": "Der Artikelstamm, wieder importierbar (derselbe Aufbau wie der Artikel-Import)."
+    },
+    "stock": {
+      "label": "Bestand",
+      "description": "Eine Zeile je Artikel, Lagerplatz und Charge mit Menge und MHD."
+    },
+    "orders": {
+      "label": "Bestellungen",
+      "description": "Eine Zeile je Bestellposition; die Kopfdaten der Bestellung wiederholen sich."
+    },
+    "movements": {
+      "label": "Bewegungen (Ledger)",
+      "description": "Alle Bestandsbuchungen, älteste zuerst."
+    },
+    "audit": {
+      "label": "Audit",
+      "description": "Der Audit-Trail, älteste Einträge zuerst."
+    }
+  },
+  "blocked": {
+    "check": "Zuerst die Datei prüfen.",
+    "noneFree": "Keine Zeile ist fehlerfrei: es gibt nichts zu übernehmen.",
+    "nothing": "Es gibt nichts zu übernehmen: alles steht schon so in der Datenbank.",
+    "rowErrors": "Es gibt Zeilenfehler: Datei korrigieren oder die fehlerhaften Zeilen auslassen."
+  },
+  "dialog": {
+    "title": "{{label}} importieren",
+    "requiredColumns": "Pflichtspalten: <strong>{{columns}}</strong>. Die Spalten werden an ihrem Namen erkannt, die Reihenfolge ist egal.",
+    "file": "CSV-Datei (höchstens {{size}} und {{rows}} Zeilen)",
+    "delimiterSemicolon": "Semikolon (;), Excel-Standard mit Dezimalkomma",
+    "tooBig": "Die Datei ist mit {{size}} größer als erlaubt ({{max}}). Bitte in mehrere Dateien aufteilen.",
+    "failed": "Import fehlgeschlagen:",
+    "close": "Schließen",
+    "applying": "Übernehme…",
+    "apply": "Übernehmen",
+    "checking": "Prüfe…",
+    "check": "Prüfen (Trockenlauf)",
+    "recheck": "Erneut prüfen"
+  },
+  "preview": {
+    "aria": "Ergebnis der Prüfung",
+    "created": "Neu",
+    "updated": "Aktualisiert",
+    "unchanged": "Unverändert",
+    "errors": "Fehler",
+    "rowsRead": "({{rows}} Zeilen gelesen).",
+    "caption": "Zeilenfehler",
+    "colLine": "Zeile",
+    "colKey": "Schlüssel",
+    "colError": "Fehler",
+    "truncated": "Es werden die ersten {{shown}} von {{total}} Fehlern gezeigt.",
+    "skip": "Fehlerhafte Zeilen auslassen und die übrigen {{num}} übernehmen"
+  },
+  "done": {
+    "aria": "Ergebnis der Übernahme",
+    "applied": "Import abgeschlossen.",
+    "notApplied": "Es wurde nichts geschrieben.",
+    "auditNote": "Der Import steht im Audit-Trail als ein Sammel-Eintrag{{suffix}}.",
+    "idSuffix": " (Kennung {{id}})"
+  }
+}

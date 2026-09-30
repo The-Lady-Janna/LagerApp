@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Domain", "src\Lager.Domain\Lager.Domain.csproj", "{B8112D90-0E76-4473-BEB5-BF6C6581EAFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Application", "src\Lager.Application\Lager.Application.csproj", "{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Infrastructure", "src\Lager.Infrastructure\Lager.Infrastructure.csproj", "{649DE913-06D0-4443-BFE2-B3CED6D98BE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Contracts", "src\Lager.Contracts\Lager.Contracts.csproj", "{8D672F52-73E1-46B2-B4F9-201776B18F00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Api", "src\Lager.Api\Lager.Api.csproj", "{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8277217D-FF4C-4B9E-9D53-42D2E626C809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lager.Tests", "tests\Lager.Tests\Lager.Tests.csproj", "{932B8FE8-2DC4-4B40-93BF-856D51E7654A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8112D90-0E76-4473-BEB5-BF6C6581EAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8112D90-0E76-4473-BEB5-BF6C6581EAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8112D90-0E76-4473-BEB5-BF6C6581EAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8112D90-0E76-4473-BEB5-BF6C6581EAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{649DE913-06D0-4443-BFE2-B3CED6D98BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649DE913-06D0-4443-BFE2-B3CED6D98BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649DE913-06D0-4443-BFE2-B3CED6D98BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649DE913-06D0-4443-BFE2-B3CED6D98BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D672F52-73E1-46B2-B4F9-201776B18F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D672F52-73E1-46B2-B4F9-201776B18F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D672F52-73E1-46B2-B4F9-201776B18F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D672F52-73E1-46B2-B4F9-201776B18F00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{932B8FE8-2DC4-4B40-93BF-856D51E7654A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{932B8FE8-2DC4-4B40-93BF-856D51E7654A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{932B8FE8-2DC4-4B40-93BF-856D51E7654A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{932B8FE8-2DC4-4B40-93BF-856D51E7654A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B8112D90-0E76-4473-BEB5-BF6C6581EAFC} = {7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}
+		{DD865149-01A1-43A6-ADBD-ACF0D6DDF7E4} = {7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}
+		{649DE913-06D0-4443-BFE2-B3CED6D98BE9} = {7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}
+		{8D672F52-73E1-46B2-B4F9-201776B18F00} = {7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}
+		{5A1267D3-5816-4B3B-AD6E-8D6CCFCC7BFC} = {7B887BFC-2DF1-46C7-9CE5-7EB6B1B6BDFD}
+		{932B8FE8-2DC4-4B40-93BF-856D51E7654A} = {8277217D-FF4C-4B9E-9D53-42D2E626C809}
+	EndGlobalSection
+EndGlobal

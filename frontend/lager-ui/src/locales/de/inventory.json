@@ -1,0 +1,55 @@
+{
+  "title": "Inventur",
+  "what": "die Inventuren",
+  "whatOne": "die Inventur",
+  "details": "Details",
+  "start": {
+    "title": "Neue Inventur starten",
+    "hint": "Snapshot't den aktuellen Bestand. Anschließend kannst du Ist-Mengen erfassen und gegen Soll abgleichen.",
+    "namePlaceholder": "z.B. Jahresinventur 2026",
+    "onlyBin": "Nur ein Bin (optional)",
+    "allBins": "— alle Bins —",
+    "submit": "Starten",
+    "starting": "Starte…",
+    "failed": "Inventur konnte nicht gestartet werden:"
+  },
+  "list": {
+    "caption": "Inventuren"
+  },
+  "col": {
+    "name": "Name",
+    "status": "Status",
+    "lines": "Positionen",
+    "created": "Erstellt",
+    "reconciled": "Reconciled",
+    "actions": "Aktionen"
+  },
+  "detail": {
+    "title": "Inventur — {{name}}",
+    "status": "Status:",
+    "lines": "Positionen:",
+    "diffSum": "Σ |Diff|:",
+    "back": "← Liste",
+    "uncountedTip": "Es sind noch {{count}} Position(en) nicht gezählt.",
+    "reconciling": "Buche…",
+    "reconcile": "✓ Reconcile (Diffs anwenden)",
+    "uncounted": "Noch {{count}} Position(en) ohne Zählung.",
+    "reconcileFailed": "Inventur konnte nicht abgeschlossen werden:",
+    "countFailed": "Zählung konnte nicht gespeichert werden:",
+    "caption": "Zählpositionen der Inventur",
+    "colBin": "Bin",
+    "colSku": "SKU",
+    "colExpected": "Soll",
+    "colCounted": "Ist",
+    "colDiff": "Diff",
+    "colReason": "Grund",
+    "countedAria": "Ist-Menge {{bin}} {{sku}}",
+    "open": "offen",
+    "reasonAria": "Grund {{bin}} {{sku}}"
+  },
+  "confirm": {
+    "title": "Inventur abschließen?",
+    "label": "Inventur abschließen",
+    "body": "Die Differenzen ({{total}} Stück insgesamt) werden als Bestandsanpassungen gebucht und die Inventur wird abgeschlossen. Das lässt sich nicht rückgängig machen."
+  }
+}

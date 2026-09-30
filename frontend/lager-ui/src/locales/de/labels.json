@@ -1,0 +1,102 @@
+{
+  "title": "Etiketten drucken",
+  "intro": "Lagerplatz-, Artikel- und Bestell-Etiketten mit Code 128. Direkt aus dem Browser auf einen Bürodrucker (Einzeletikett oder A4-Bogen) oder als ZPL-Datei für einen Zebra-Drucker.",
+  "settings": "Einstellungen",
+  "kindLabel": "Etikettenart",
+  "kind": {
+    "bin": "Lagerplatz",
+    "article": "Artikel",
+    "order": "Bestellung"
+  },
+  "what": {
+    "bin": "die Lagerplätze",
+    "article": "die Artikel",
+    "order": "die Bestellungen"
+  },
+  "format": "Format",
+  "formats": {
+    "single": "Einzeletikett 50 × 30 mm (Rolle)",
+    "a4": "A4-Bogen 3 × 8 (24 Etiketten à 70 × 36 mm)"
+  },
+  "copies": "Kopien je Etikett",
+  "start": "Startposition auf dem Bogen (1–{{max}})",
+  "print": "Drucken",
+  "zpl": "ZPL herunterladen",
+  "zplLoading": "ZPL wird geladen …",
+  "nothing": "Noch nichts ausgewählt.",
+  "count_one": "{{count}} Etikett",
+  "count_other": "{{count}} Etiketten",
+  "copiesSuffix": " × {{copies}} Kopien = {{total}}",
+  "onPages_one": "auf {{count}} Seite",
+  "onPages_other": "auf {{count}} Seiten",
+  "printHint": "Im Druckdialog des Browsers die Skalierung auf 100 % („Tatsächliche Größe“) und die Ränder auf „Keine“ stellen, sonst passt das Raster nicht auf den Bogen und die Barcodes werden verzerrt. Die ZPL-Datei enthält die gewählten Etiketten (Kopien per <code>^PQ</code>) und wird an den Zebra-Drucker gesendet oder in Zebra Designer geöffnet.",
+  "zplFailed": "ZPL-Download fehlgeschlagen:",
+  "zplDone_one": "{{count}} Etikett als <code>{{file}}</code> gespeichert.",
+  "zplDone_other": "{{count}} Etiketten als <code>{{file}}</code> gespeichert.",
+  "selection": "Auswahl: {{kind}}",
+  "tooMany": "<strong>Zu viele Etiketten für einen Druck im Browser:</strong> {{total}} (höchstens {{max}} je Druckauftrag). Weniger Etiketten oder Kopien wählen; für große Mengen den ZPL-Download nutzen (die Kopien vervielfacht dann der Drucker).",
+  "unreadable": {
+    "title": "Nicht als Code 128 darstellbar:",
+    "note": "Diese Etiketten zeigen den Code nur als Text."
+  },
+  "tooDense": {
+    "text": "<strong>Zu lang für dieses Format:</strong> die Balken wären schmaler als {{min}} mm, das Scannen ist dann unsicher. Ein größeres Format (A4-Bogen) oder ein kürzerer Code hilft.",
+    "item": "{{width}} mm je Modul"
+  },
+  "preview": {
+    "aria": "Vorschau der Etiketten",
+    "tooMany": "Für diese Menge gibt es keine Vorschau.",
+    "empty": "Wähle oben Etiketten aus, dann erscheint hier die Vorschau."
+  },
+  "confirm": {
+    "printTitle": "Viele Etiketten drucken?",
+    "printBody": "Der Druckauftrag umfasst {{total}} Etiketten auf {{pages}} Seiten. Mit „Drucken“ öffnet sich der Druckdialog des Browsers.",
+    "zplTitle": "ZPL für viele Etiketten laden?",
+    "zplBody": "Für {{count}} Etiketten wird je Etikett ein Abruf an den Server gesendet und die Datei danach gespeichert. Das kann einen Moment dauern."
+  },
+  "sheet": {
+    "page": "Seite {{n}} von {{total}}",
+    "missing": "Code nicht als Code 128 darstellbar"
+  },
+  "label": {
+    "shelf": "Regal {{shelf}}",
+    "customer": "Kunde: {{ref}}"
+  },
+  "code128": {
+    "empty": "Der Code ist leer.",
+    "char": "Das Zeichen \"{{char}}\" (U+{{point}}) ist in Code 128 nicht darstellbar; erlaubt sind ASCII-Zeichen von Leerzeichen bis ~."
+  },
+  "picker": {
+    "selectAll": "Alle Treffer auswählen ({{count}})",
+    "deselect": "Treffer abwählen",
+    "clear": "Auswahl leeren",
+    "status": "{{selected}} ausgewählt, {{hits}} Treffer",
+    "selectAllAria": "Alle Treffer auswählen",
+    "more": "Die ersten {{shown}} von {{total}} Treffern sind aufgelistet — Filter oder Suche eingrenzen. „Alle Treffer auswählen“ gilt für alle {{total}}.",
+    "warehouse": "Lager",
+    "allWarehouses": "Alle Lager",
+    "aisle": "Gang",
+    "allAisles": "Alle Gänge",
+    "shelf": "Regal",
+    "allShelves": "Alle Regale",
+    "search": "Suche",
+    "binPlaceholder": "Lagerplatz-Code",
+    "binRow": "Etikett für Lagerplatz {{code}}",
+    "binsNone": "Noch keine Lagerplätze angelegt.",
+    "binsFilter": "Keine Lagerplätze passen zum Filter.",
+    "colBin": "Lagerplatz",
+    "articlePlaceholder": "SKU, Name oder GTIN",
+    "articleRow": "Etikett für Artikel {{sku}}",
+    "articlesNone": "Noch keine Artikel angelegt.",
+    "articlesFilter": "Keine Artikel passen zur Suche.",
+    "colSku": "SKU",
+    "colName": "Name",
+    "orderPlaceholder": "Bestellnummer oder Kunde",
+    "orderRow": "Etikett für Bestellung {{number}}",
+    "ordersNone": "Noch keine Bestellungen angelegt.",
+    "ordersFilter": "Keine Bestellungen passen zur Suche.",
+    "colOrder": "Bestellnummer",
+    "colCustomer": "Kunde",
+    "colStatus": "Status"
+  }
+}

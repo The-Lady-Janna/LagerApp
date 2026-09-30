@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Lager">
+  <title>Lager</title>
+  <!-- Maskierbares Icon: der Hintergrund füllt die ganze Fläche (das Betriebssystem schneidet die Form aus),
+       das Motiv liegt in der sicheren Zone (mittlere 80 %). -->
+  <rect width="512" height="512" fill="#0f172a"/>
+  <g transform="translate(51.2 51.2) scale(0.8)">
+    <g fill="none" stroke="#cbd5e1" stroke-linecap="round">
+      <path d="M136 96v320M376 96v320" stroke-width="24"/>
+      <path d="M136 200h240M136 300h240M136 400h240" stroke-width="20"/>
+    </g>
+    <g>
+      <rect x="164" y="136" width="76" height="52" rx="6" fill="#3b82f6"/>
+      <rect x="260" y="152" width="92" height="36" rx="6" fill="#f59e0b"/>
+      <rect x="164" y="236" width="110" height="52" rx="6" fill="#f59e0b"/>
+      <rect x="296" y="220" width="56" height="68" rx="6" fill="#3b82f6"/>
+      <rect x="164" y="336" width="64" height="52" rx="6" fill="#3b82f6"/>
+      <rect x="246" y="320" width="106" height="68" rx="6" fill="#f59e0b"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+{
+  "what": "the returns",
+  "title": "Returns",
+  "new": "+ New return",
+  "error": "Error:",
+  "caption": "Returns",
+  "col": {
+    "rma": "RMA",
+    "customer": "Customer",
+    "status": "Status",
+    "lines": "Lines",
+    "created": "Created",
+    "processed": "Processed",
+    "actions": "Actions"
+  },
+  "confirm": {
+    "title": "Process return?",
+    "label": "Process return",
+    "body": "Return <code>{{rma}}</code> will be completed; {{count}} sellable piece(s) will be booked into stock. This cannot be undone."
+  },
+  "row": {
+    "close": "Close",
+    "details": "Details",
+    "process": "✓ Process"
+  },
+  "line": {
+    "sku": "SKU",
+    "quantity": "Quantity",
+    "lot": "Lot",
+    "qc": "QC",
+    "targetBin": "Target bin",
+    "note": "Note",
+    "binAria": "Target bin {{sku}}",
+    "binPlaceholder": "— bin (Sellable only) —",
+    "noteAria": "Note {{sku}}",
+    "optionalCap": "Optional"
+  },
+  "form": {
+    "title": "New return",
+    "customerRef": "Customer reference",
+    "notes": "Notes",
+    "caption": "Lines of the new return",
+    "article": "Article",
+    "articleAria": "Article line {{n}}",
+    "quantityAria": "Quantity line {{n}}",
+    "lotAria": "Lot line {{n}}",
+    "removeAria": "Remove line {{n}}",
+    "choose": "— choose —",
+    "optional": "optional",
+    "addLine": "+ Line",
+    "create": "Create (draft)"
+  }
+}

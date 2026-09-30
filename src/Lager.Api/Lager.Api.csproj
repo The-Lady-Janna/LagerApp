@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <!-- TargetFramework, Nullable, ImplicitUsings u. a. kommen aus der Directory.Build.props im Repo-Root. -->
+
+  <PropertyGroup>
+    <!--
+      XML-Dokumentation: Die <summary>-Kommentare der Controller landen in Lager.Api.xml neben der DLL; Swagger liest sie
+      (IncludeXmlComments in Program.cs, LagerOpenApi). Dokumentiert werden die Controller und ihre Antwort-Typen - das ist die
+      Beschreibung der API. Die übrigen öffentlichen Typen der Assembly (Validatoren, Seeding, Sicherheits-Plumbing ...) sind
+      keine API-Oberfläche und bleiben ohne Kommentarpflicht: CS1591 (fehlender Kommentar) und CS1573 (Teil-Kommentar an
+      Parametern) würden sonst in LagerStrict-Builds jede dieser Klassen zum Fehler machen.
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.31">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <!-- Community-Lizenz, siehe Hinweis in Documents/ShippingLabelRenderer.cs. Nur innerhalb dieser Lizenzlinie aktualisieren. -->
+    <PackageReference Include="QuestPDF" Version="2024.12.3" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+    <!-- ReadFrom.Configuration (LagerLogging in Program.cs): kommt schon transitiv über Serilog.AspNetCore, hier ausdrücklich, weil direkt verwendet. -->
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lager.Application\Lager.Application.csproj" />
+    <ProjectReference Include="..\Lager.Infrastructure\Lager.Infrastructure.csproj" />
+    <ProjectReference Include="..\Lager.Contracts\Lager.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

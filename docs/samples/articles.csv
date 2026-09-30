@@ -1,0 +1,6 @@
+﻿Sku;Name;Description;Gtin;LengthMm;WidthMm;HeightMm;WeightGrams;IsStackable;StackingAxis;StackingIncrementMm;MaxStackCount;MinStock;ReorderPoint;MaxStock;PurchasePrice;SupplierCode;AlternativeSkus;ValidFrom;ValidUntil
+DEMO-1001;Sechskantschraube M8x40;"Verzinkt, 100 Stück je Packung";4006381333931;120;80;40;450;ja;Z;30;8;20;40;200;12,50;;DEMO-1002|DEMO-1003;;
+DEMO-1002;Sechskantschraube M8x50;Verzinkt, 100 Stück je Packung;5901234123457;120;80;45;520;ja;Z;30;8;20;40;200;13,90;;DEMO-1001;;
+DEMO-1003;Unterlegscheibe M8;Edelstahl A2, 500 Stück;96385074;100;60;30;380;nein;;;;10;25;100;8,20;;;;
+DEMO-1004;Weihnachtsbaumkerzen 24er;Saisonartikel;036000291452;150;110;60;300;nein;;;;5;10;50;3,75;;;01.10.2026;31.12.2026
+DEMO-1005;Werkzeugkiste groß;Ohne GTIN, nicht stapelbar;;600;300;250;4200;nein;;;;2;4;10;49,90;;;;

@@ -1,0 +1,5 @@
+﻿OrderNumber;Sku;Quantity;CustomerReference;Priority;DueDate;ExternalReference
+DEMO-B-1001;DEMO-1001;10;Muster GmbH;1;2026-12-15;SHOP-90001
+DEMO-B-1001;DEMO-1002;5;;;;
+DEMO-B-1002;DEMO-1003;2;Meier;0;;
+DEMO-B-1003;DEMO-1005;1;Schulz;3;2026-11-30;

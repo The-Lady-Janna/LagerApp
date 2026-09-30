@@ -1,0 +1,55 @@
+{
+  "title": "Bestand",
+  "col": {
+    "sku": "SKU",
+    "name": "Name",
+    "article": "Artikel",
+    "location": "Lagerplatz",
+    "lot": "Charge",
+    "expiry": "MHD",
+    "quantity": "Menge"
+  },
+  "alerts": {
+    "title": "⚠ Bestands-Alarme",
+    "critical": "Kritisch — unter Min-Stock ({{count}})",
+    "warning": "Nachbestellen — unter ReorderPoint ({{count}})",
+    "lineMin": "{{name}} — Bestand <strong>{{quantity}}</strong> / Min {{min}}",
+    "lineReorder": "{{name}} — Bestand <strong>{{quantity}}</strong> / Reorder {{reorder}}"
+  },
+  "booking": {
+    "title": "Buchung",
+    "article": "Artikel",
+    "location": "Lagerplatz",
+    "choose": "– wählen –",
+    "delta": "Delta (+/-)",
+    "lot": "Charge / MHD",
+    "lotAuto": "Automatisch (ohne Charge zuerst, dann früheste Charge)",
+    "lotNone": "Ohne Charge",
+    "noLot": "ohne Charge",
+    "lotOption": "{{lot}} · MHD {{expiry}} · {{quantity}} Stk",
+    "newLot": "Neue Charge …",
+    "newLotNumber": "Neue Chargennummer",
+    "expiryOptional": "MHD (optional)",
+    "submit": "Buchen",
+    "failed": "Buchung fehlgeschlagen:"
+  },
+  "summary": {
+    "title": "Übersicht pro Artikel",
+    "what": "die Bestandsübersicht",
+    "caption": "Bestand pro Artikel",
+    "lots": "Chargen",
+    "total": "Menge gesamt",
+    "locations": "Anzahl Plätze",
+    "nextExpiry": "Nächstes MHD",
+    "showLots": "Chargen von {{sku}} anzeigen",
+    "hideLots": "Chargen von {{sku}} ausblenden",
+    "lotCaption": "Bestand von {{sku}} je Charge und MHD",
+    "empty": "Noch kein Bestand gebucht."
+  },
+  "detail": {
+    "title": "Detail pro Platz",
+    "what": "die Bestandsdetails",
+    "caption": "Bestand pro Lagerplatz",
+    "empty": "Kein Bestand vorhanden."
+  }
+}

@@ -1,0 +1,70 @@
+# Build-Output
+bin/
+obj/
+dist/
+.cache/
+publish/
+*.pubxml
+*.nupkg
+
+# Frontend-Build in der Auslieferung: das Backend liefert das gebaute Frontend (Vite-dist) aus wwwroot aus
+# (Dockerfile: COPY --from=frontend .../dist ./wwwroot; lokal dorthin kopiert). Gehört nie ins Repo - ein eingechecktes
+# wwwroot/index.html würde die reine API (WithoutFrontend_PureApi-Test in tests/Lager.Tests/WP16) zur Web-App machen.
+src/Lager.Api/wwwroot/
+
+# IDE / Editor
+*.user
+*.suo
+*.rsuser
+.vs/
+.vscode/
+.idea/
+
+# Lokale Tool-Ordner (KI-Assistenten, Browser-Automation usw.)
+.claude/
+.playwright-mcp/
+
+# Frontend
+node_modules/
+
+# Test-/Coverage-Artefakte
+TestResults/
+*.trx
+coverage/
+*.coverage
+
+# Secrets und lokale Konfiguration - gehoeren NIE ins Repo
+# (Produktiv-Werte per Umgebungsvariablen oder Secret-Store setzen, siehe SECURITY.md)
+appsettings.Production.json
+appsettings.*.local.json
+.env
+.env.*
+!.env.example
+*.pfx
+*.pem
+*.key
+jwt.key
+
+# SQLite-DB + Backup/Restore-Snapshots (vom Backup-/Restore-Endpoint)
+# Der Backup-Dateiname folgt der Endung der Datenbank (name-backup-<zeit>.<endung>),
+# daher sind auch die anderen SQLite-Endungen hier abgedeckt.
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+*.bak
+*-backup-*.db
+*-before-restore-*.db
+
+# Serilog-Output
+logs/
+*.log
+
+# Misc
+.DS_Store
+Thumbs.db

@@ -1,0 +1,113 @@
+{
+  "openTrace": "Chargen-Rückverfolgung öffnen",
+  "days": {
+    "expiredDays": "seit {{count}} Tagen abgelaufen",
+    "expiredYesterday": "seit gestern abgelaufen",
+    "today": "läuft heute ab",
+    "tomorrow": "läuft morgen ab",
+    "inDays": "noch {{count}} Tage"
+  },
+  "col": {
+    "status": "Status",
+    "article": "Artikel",
+    "location": "Lagerplatz",
+    "lot": "Charge",
+    "expiry": "MHD",
+    "quantity": "Menge",
+    "deliveryNote": "Lieferschein",
+    "targetBin": "Ziel-Bin",
+    "date": "Datum",
+    "time": "Zeitpunkt",
+    "operation": "Vorgang",
+    "document": "Beleg",
+    "order": "Bestellung",
+    "customer": "Kunde",
+    "pickList": "Pickliste",
+    "picked": "Gepickt"
+  },
+  "expiring": {
+    "title": "Ablaufende Chargen",
+    "periodAria": "Frist der MHD-Warnliste",
+    "period": "Frist:",
+    "days": "{{count}} Tage",
+    "hint": "Abgelaufene Chargen und solche, die innerhalb von {{days}} Tagen ablaufen, nach MHD sortiert. Kritisch = höchstens 7 Tage (am Ablauftag selbst ist die Ware noch verwendbar).",
+    "what": "die MHD-Warnliste",
+    "none": "Keine abgelaufenen oder bald ablaufenden Chargen in den nächsten {{days}} Tagen. 🎉",
+    "summary": "<strong>{{rows}}</strong> Bestandszeile(n): <expired>{{expired}} abgelaufen</expired>, <critical>{{critical}} kritisch</critical>, {{soon}} bald",
+    "caption": "Abgelaufene und bald ablaufende Chargen",
+    "colExpiry": "Ablauf",
+    "more": "… und {{count}} weitere Zeilen (Frist verkürzen)."
+  },
+  "title": "Chargen-Rückverfolgung",
+  "intro": "Wo kam die Charge her, wo liegt sie jetzt, was ist damit passiert und welche Bestellungen können betroffen sein?",
+  "searchAria": "Charge suchen",
+  "lotNumber": "Chargennummer",
+  "lotPlaceholder": "z. B. LOT-2026-01",
+  "search": "Suchen",
+  "slashNotAllowed": "Chargennummern mit „/“ lassen sich hier nicht abfragen (der Server löst den Schrägstrich in der Adresse als Pfadtrenner auf).",
+  "what": "die Charge",
+  "notFound": "Keine Charge „{{lot}}“ gefunden — weder Wareneingang noch Bestand noch Bewegung trägt diese Nummer.",
+  "tile": {
+    "lot": "Charge",
+    "inbound": "Eingang gebucht",
+    "inboundTip": "Summe der gebuchten Wareneingänge dieser Charge",
+    "stock": "Aktueller Bestand",
+    "movements": "Bewegungen",
+    "orders": "Bestellungen",
+    "ordersTip": "Möglicherweise betroffene Bestellungen"
+  },
+  "inbounds": {
+    "title": "Wareneingänge",
+    "none": "Kein Wareneingang mit dieser Charge erfasst (z. B. Altbestand oder Bestand aus einer Korrektur).",
+    "caption": "Wareneingänge der Charge {{lot}}"
+  },
+  "stock": {
+    "title": "Aktueller Bestand",
+    "none": "Kein Bestand mehr — die Charge ist verbraucht oder ausgebucht.",
+    "caption": "Aktueller Bestand der Charge {{lot}}"
+  },
+  "movements": {
+    "title": "Bewegungen (Ledger)",
+    "none": "Keine Bewegungen gebucht.",
+    "caption": "Bewegungen der Charge {{lot}}"
+  },
+  "orders": {
+    "title": "Möglicherweise betroffene Bestellungen",
+    "hint": "Abgeleitet aus den Pick-Buchungen der Charge (Pickliste → Positionen mit gleichem Artikel und Lagerplatz). Eine Pickposition kennt die Charge nicht: lagen im Lagerplatz mehrere Chargen, kann eine Bestellung auch aus einer anderen beliefert worden sein.",
+    "none": "Keine Bestellung aus dieser Charge ableitbar.",
+    "caption": "Bestellungen zur Charge {{lot}}"
+  },
+  "reason": {
+    "Inbound": "Wareneingang",
+    "Pick": "Kommissionierung",
+    "Return": "Retoure",
+    "Inventory": "Inventur",
+    "ReplenishmentOut": "Nachschub (Abgang)",
+    "ReplenishmentIn": "Nachschub (Zugang)",
+    "Adjust": "Korrektur",
+    "BinMove": "Umlagerung",
+    "ReturnB": "Retoure B-Ware (gesperrt)",
+    "ReturnScrap": "Retoure Defekt (Ausschuss)"
+  },
+  "reference": {
+    "InboundShipment": "Wareneingang",
+    "PickList": "Pickliste",
+    "InventoryCount": "Inventur",
+    "ReturnShipment": "Retoure",
+    "ReplenishmentTask": "Nachschub",
+    "ManualAdjust": "Manuelle Korrektur"
+  },
+  "lines": {
+    "article": "Zeile {{no}}: Artikel wählen.",
+    "bin": "Zeile {{no}}: Ziel-Bin wählen.",
+    "quantity": "Zeile {{no}}: Menge muss eine ganze Zahl zwischen 1 und {{max}} sein.",
+    "lotLength": "Zeile {{no}}: Die Charge darf höchstens {{max}} Zeichen haben.",
+    "expiryInvalid": "Zeile {{no}}: MHD ist kein gültiges Datum.",
+    "expiryYear": "Zeile {{no}}: MHD muss nach dem Jahr 2000 liegen.",
+    "expiryPast": "Zeile {{no}}: MHD liegt in der Vergangenheit — Neuware darf nicht abgelaufen sein.",
+    "lotRequired": "Zeile {{no}}: Der Artikel wird mit Charge und MHD geführt — Charge angeben.",
+    "expiryRequired": "Zeile {{no}}: Der Artikel wird mit Charge und MHD geführt — MHD angeben.",
+    "lotExpiryConflict": "Zeile {{no}}: Charge {{lot}} steht in Zeile {{other}} mit anderem MHD — eine Charge hat je Lagerplatz genau ein MHD.",
+    "none": "Mindestens eine Position mit Artikel, Ziel-Bin und Menge erfassen."
+  }
+}

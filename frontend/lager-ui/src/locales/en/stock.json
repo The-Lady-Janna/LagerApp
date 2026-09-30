@@ -1,0 +1,55 @@
+{
+  "title": "Stock",
+  "col": {
+    "sku": "SKU",
+    "name": "Name",
+    "article": "Article",
+    "location": "Location",
+    "lot": "Lot",
+    "expiry": "Expiry",
+    "quantity": "Quantity"
+  },
+  "alerts": {
+    "title": "⚠ Stock alerts",
+    "critical": "Critical — below min stock ({{count}})",
+    "warning": "Reorder — below reorder point ({{count}})",
+    "lineMin": "{{name}} — stock <strong>{{quantity}}</strong> / min {{min}}",
+    "lineReorder": "{{name}} — stock <strong>{{quantity}}</strong> / reorder {{reorder}}"
+  },
+  "booking": {
+    "title": "Stock booking",
+    "article": "Article",
+    "location": "Location",
+    "choose": "– choose –",
+    "delta": "Delta (+/-)",
+    "lot": "Lot / expiry",
+    "lotAuto": "Automatic (no lot first, then earliest lot)",
+    "lotNone": "No lot",
+    "noLot": "no lot",
+    "lotOption": "{{lot}} · expiry {{expiry}} · {{quantity}} pcs",
+    "newLot": "New lot …",
+    "newLotNumber": "New lot number",
+    "expiryOptional": "Expiry date (optional)",
+    "submit": "Book",
+    "failed": "Booking failed:"
+  },
+  "summary": {
+    "title": "Overview per article",
+    "what": "the stock overview",
+    "caption": "Stock per article",
+    "lots": "Lots",
+    "total": "Total quantity",
+    "locations": "Number of locations",
+    "nextExpiry": "Next expiry",
+    "showLots": "Show lots of {{sku}}",
+    "hideLots": "Hide lots of {{sku}}",
+    "lotCaption": "Stock of {{sku}} by lot and expiry date",
+    "empty": "No stock booked yet."
+  },
+  "detail": {
+    "title": "Detail per location",
+    "what": "the stock details",
+    "caption": "Stock per location",
+    "empty": "No stock available."
+  }
+}

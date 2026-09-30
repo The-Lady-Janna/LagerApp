@@ -1,0 +1,102 @@
+{
+  "title": "Print labels",
+  "intro": "Location, article and order labels with Code 128. Directly from the browser to an office printer (single label or A4 sheet) or as a ZPL file for a Zebra printer.",
+  "settings": "Settings",
+  "kindLabel": "Label type",
+  "kind": {
+    "bin": "Location",
+    "article": "Article",
+    "order": "Order"
+  },
+  "what": {
+    "bin": "the locations",
+    "article": "the articles",
+    "order": "the orders"
+  },
+  "format": "Format",
+  "formats": {
+    "single": "Single label 50 × 30 mm (roll)",
+    "a4": "A4 sheet 3 × 8 (24 labels of 70 × 36 mm)"
+  },
+  "copies": "Copies per label",
+  "start": "Start position on the sheet (1–{{max}})",
+  "print": "Print",
+  "zpl": "Download ZPL",
+  "zplLoading": "Loading ZPL …",
+  "nothing": "Nothing selected yet.",
+  "count_one": "{{count}} label",
+  "count_other": "{{count}} labels",
+  "copiesSuffix": " × {{copies}} copies = {{total}}",
+  "onPages_one": "on {{count}} page",
+  "onPages_other": "on {{count}} pages",
+  "printHint": "In the browser's print dialog set the scaling to 100 % (“Actual size”) and the margins to “None”, otherwise the grid does not fit on the sheet and the barcodes are distorted. The ZPL file contains the chosen labels (copies via <code>^PQ</code>) and is sent to the Zebra printer or opened in Zebra Designer.",
+  "zplFailed": "ZPL download failed:",
+  "zplDone_one": "{{count}} label saved as <code>{{file}}</code>.",
+  "zplDone_other": "{{count}} labels saved as <code>{{file}}</code>.",
+  "selection": "Selection: {{kind}}",
+  "tooMany": "<strong>Too many labels for printing in the browser:</strong> {{total}} (at most {{max}} per print job). Choose fewer labels or copies; for large quantities use the ZPL download (the printer then multiplies the copies).",
+  "unreadable": {
+    "title": "Cannot be shown as Code 128:",
+    "note": "These labels show the code as text only."
+  },
+  "tooDense": {
+    "text": "<strong>Too long for this format:</strong> the bars would be narrower than {{min}} mm, which makes scanning unreliable. A larger format (A4 sheet) or a shorter code helps.",
+    "item": "{{width}} mm per module"
+  },
+  "preview": {
+    "aria": "Label preview",
+    "tooMany": "There is no preview for this quantity.",
+    "empty": "Choose labels above and the preview will appear here."
+  },
+  "confirm": {
+    "printTitle": "Print many labels?",
+    "printBody": "The print job comprises {{total}} labels on {{pages}} pages. “Print” opens the browser's print dialog.",
+    "zplTitle": "Download ZPL for many labels?",
+    "zplBody": "For {{count}} labels one request per label is sent to the server and the file is saved afterwards. This may take a moment."
+  },
+  "sheet": {
+    "page": "Page {{n}} of {{total}}",
+    "missing": "Code cannot be shown as Code 128"
+  },
+  "label": {
+    "shelf": "Shelf {{shelf}}",
+    "customer": "Customer: {{ref}}"
+  },
+  "code128": {
+    "empty": "The code is empty.",
+    "char": "The character \"{{char}}\" (U+{{point}}) cannot be shown in Code 128; allowed are ASCII characters from space to ~."
+  },
+  "picker": {
+    "selectAll": "Select all hits ({{count}})",
+    "deselect": "Deselect hits",
+    "clear": "Clear selection",
+    "status": "{{selected}} selected, {{hits}} hits",
+    "selectAllAria": "Select all hits",
+    "more": "The first {{shown}} of {{total}} hits are listed — narrow the filter or search. “Select all hits” applies to all {{total}}.",
+    "warehouse": "Warehouse",
+    "allWarehouses": "All warehouses",
+    "aisle": "Aisle",
+    "allAisles": "All aisles",
+    "shelf": "Shelf",
+    "allShelves": "All shelves",
+    "search": "Search",
+    "binPlaceholder": "Location code",
+    "binRow": "Label for location {{code}}",
+    "binsNone": "No locations yet.",
+    "binsFilter": "No locations match the filter.",
+    "colBin": "Location",
+    "articlePlaceholder": "SKU, name or GTIN",
+    "articleRow": "Label for article {{sku}}",
+    "articlesNone": "No articles yet.",
+    "articlesFilter": "No articles match the search.",
+    "colSku": "SKU",
+    "colName": "Name",
+    "orderPlaceholder": "Order number or customer",
+    "orderRow": "Label for order {{number}}",
+    "ordersNone": "No orders yet.",
+    "ordersFilter": "No orders match the search.",
+    "colOrder": "Order number",
+    "colCustomer": "Customer",
+    "colStatus": "Status"
+  }
+}

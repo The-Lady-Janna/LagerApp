@@ -1,0 +1,90 @@
+{
+  "pill": {
+    "inbound": {
+      "Draft": "Draft",
+      "Received": "Received",
+      "Cancelled": "Cancelled"
+    },
+    "purchaseOrder": {
+      "Draft": "Draft",
+      "Sent": "Sent",
+      "PartiallyReceived": "Partially received",
+      "Received": "Received",
+      "Cancelled": "Cancelled"
+    },
+    "shipment": {
+      "Ready": "Ready",
+      "Labeled": "Labelled",
+      "Shipped": "Shipped",
+      "Delivered": "Delivered",
+      "Cancelled": "Cancelled"
+    },
+    "wave": {
+      "Open": "Open",
+      "Released": "Released",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "qc": {
+      "Pending": "Pending",
+      "Sellable": "Sellable",
+      "BGrade": "B grade",
+      "Defect": "Defect",
+      "Destroy": "Destroy"
+    },
+    "order": {
+      "New": "New",
+      "Picking": "Picking",
+      "Picked": "Picked",
+      "Packed": "Packed",
+      "Shipped": "Shipped",
+      "Cancelled": "Cancelled"
+    }
+  },
+  "order": {
+    "New": "New",
+    "Picking": "Picking",
+    "Picked": "Picked",
+    "Packed": "Packed",
+    "Shipped": "Shipped",
+    "Cancelled": "Cancelled"
+  },
+  "expiry": {
+    "Expired": "Expired",
+    "Critical": "Critical",
+    "Soon": "Soon",
+    "Ok": "OK"
+  },
+  "pickList": {
+    "Pending": "Created",
+    "InProgress": "In progress",
+    "Picked": "Picked",
+    "Completed": "Packed",
+    "Cancelled": "Cancelled"
+  },
+  "inventory": {
+    "Open": "Open",
+    "Reconciled": "Reconciled",
+    "Cancelled": "Cancelled"
+  },
+  "return": {
+    "Draft": "Draft",
+    "Processed": "Processed",
+    "Cancelled": "Cancelled"
+  },
+  "replenishment": {
+    "Open": "Open",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled"
+  },
+  "binType": {
+    "Standard": "Standard",
+    "HotPick": "Hot pick",
+    "Reserve": "Reserve"
+  },
+  "auditOperation": {
+    "Added": "Added",
+    "Modified": "Modified",
+    "Deleted": "Deleted"
+  }
+}

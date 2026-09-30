@@ -1,0 +1,94 @@
+{
+  "title": "Backup & Restore",
+  "what": "die Backup-Einstellungen",
+  "backupsWhat": "die Backups",
+  "warning": "<strong>Backups sind unverschlüsselt</strong> und enthalten alle Daten samt Passwort-Hashes. Ein Backup auf demselben Laufwerk schützt nicht vor einem Plattenausfall: Dateien herunterladen oder das Backup-Verzeichnis extern kopieren.",
+  "blocked": {
+    "restart": "Bitte zuerst den Server neu starten.",
+    "notAllowed": "Der Restore ist in dieser Umgebung nicht freigegeben."
+  },
+  "restored": {
+    "title": "Restore erfolgreich. Neustart erforderlich.",
+    "safety": "Der Stand vor dem Restore liegt als Sicherheitskopie <code>{{name}}</code> in der Liste. Server neu starten (Docker: <code>docker compose restart</code>, sonst den Dienst bzw. Prozess neu starten) und danach neu anmelden."
+  },
+  "create": "Backup jetzt erstellen",
+  "creating": "Erstelle Backup…",
+  "upload": "Backup-Datei einspielen…",
+  "createFailed": "Backup fehlgeschlagen:",
+  "deleteFailed": "Löschen fehlgeschlagen:",
+  "downloadFailed": "Download fehlgeschlagen: ",
+  "empty": "Noch keine Backups vorhanden. „Backup jetzt erstellen“ legt das erste an.",
+  "caption": "Backups",
+  "col": {
+    "name": "Name",
+    "kind": "Art",
+    "size": "Größe",
+    "created": "Erstellt",
+    "actions": "Aktionen"
+  },
+  "kind": {
+    "backup": "Backup",
+    "beforeRestore": "Vor Restore"
+  },
+  "row": {
+    "download": "Herunterladen",
+    "downloadAria": "Herunterladen: {{name}}",
+    "restore": "Wiederherstellen",
+    "restoreAria": "Wiederherstellen: {{name}}",
+    "deleteAria": "Löschen: {{name}}"
+  },
+  "delete": {
+    "title": "Backup löschen?",
+    "body": "<strong>{{name}}</strong> wird dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.",
+    "beforeRestore": "Das ist die Sicherheitskopie aus einem früheren Restore: der damalige Stand ist danach nicht mehr wiederherstellbar."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "schedule": "Zeitplan",
+    "scheduleTip": "Backup:Schedule — tägliche Startzeit als HH:mm in UTC",
+    "nextRun": "Nächster Lauf",
+    "nextRunTip": "In Ihrer Ortszeit",
+    "retention": "Aufbewahrung",
+    "retentionTip": "Backup:RetentionCount — ältere Backups werden nach jedem neuen gelöscht",
+    "restore": "Restore",
+    "allowed": "freigegeben",
+    "blocked": "gesperrt",
+    "restoreTip": "Backup:AllowRestore — in Development immer erlaubt",
+    "invalidSchedule": "Der Zeitplan „{{schedule}}“ ist ungültig (erwartet: HH:mm in UTC, z. B. 02:00). Es laufen keine zeitgesteuerten Backups.",
+    "noSchedule": "Kein Zeitplan eingestellt: Backups entstehen nur manuell. Für tägliche Backups <code>Backup__Schedule</code> setzen (z. B. <code>02:00</code>, UTC).",
+    "restoreBlockedNote": "Der Restore ist hier gesperrt. Zum Wiederherstellen <code>Backup__AllowRestore=true</code> setzen und den Server neu starten (nur für die Dauer des Restores).",
+    "dirCustom": "Die Backups liegen im konfigurierten Backup-Verzeichnis (Backup__Directory).",
+    "dirDefault": "Die Backups liegen neben der Datenbank; mit Backup__Directory lässt sich ein anderes Verzeichnis (z. B. ein eigenes Volume) festlegen.",
+    "readOnly": "Die Einstellungen sind hier nur lesbar; sie kommen aus der Server-Konfiguration."
+  },
+  "schedule": {
+    "off": "aus",
+    "invalid": "ungültig",
+    "daily": "täglich {{schedule}} {{timeZone}}"
+  },
+  "retention": {
+    "last": "die letzten {{count}} Backups",
+    "unlimited": "unbegrenzt"
+  },
+  "mysql": {
+    "title": "MySQL: Sicherung mit mysqldump",
+    "intro": "Backup und Restore über die Anwendung gibt es nur für SQLite. Die MySQL-Datenbank wird mit <code>mysqldump</code> gesichert (regelmäßig, z. B. per Cron) und mit dem <code>mysql</code>-Client wieder eingespielt:",
+    "backup": "Sichern",
+    "restore": "Wiederherstellen",
+    "note": "Platzhalter in spitzen Klammern ersetzen. Dumps enthalten alle Daten samt Passwort-Hashes: geschützt ablegen."
+  },
+  "memory": "Die Datenbank liegt nicht in einer Datei (In-Memory): Backup und Restore sind nicht möglich.",
+  "restore": {
+    "title": "Datenbank wiederherstellen?",
+    "label": "Jetzt wiederherstellen",
+    "warnTitle": "Achtung: Die laufende Datenbank wird ersetzt.",
+    "warn1": "Alle Änderungen seit dem Stand der gewählten Sicherung gehen verloren (Bestand, Bestellungen, Benutzer, Passwörter).",
+    "warn2": "Vorher wird der aktuelle Stand als Sicherheitskopie „before-restore“ abgelegt; sie bleibt erhalten.",
+    "warn3": "Danach muss der Server neu gestartet werden, bis dahin arbeitet die Anwendung noch mit der alten Verbindung.",
+    "backup": "Sicherung: <strong>{{name}}</strong>",
+    "file": "Backup-Datei (SQLite, maximal {{max}})",
+    "tooBig": "Die Datei ist mit {{size}} größer als erlaubt ({{max}}).",
+    "confirmPhrase": "Zur Bestätigung <strong>{{phrase}}</strong> eingeben",
+    "failed": "Restore fehlgeschlagen:"
+  }
+}

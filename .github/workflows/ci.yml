@@ -1,0 +1,128 @@
+# Continuous Integration: baut und testet Backend und Frontend bei jedem Push auf main und bei jedem Pull Request.
+#
+# - Beide Jobs laufen unabhängig voneinander, beide müssen grün sein.
+# - Der Workflow braucht keine Secrets und hat nur lesenden Zugriff auf den Repository-Inhalt.
+# - Lokal nachstellen: siehe CONTRIBUTING.md, Abschnitt "Bauen und Testen".
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+# Veraltete Läufe desselben Branchs/PRs abbrechen, sobald ein neuer Commit ankommt.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Englische CLI-Ausgabe: der Schwachstellen-Check unten wertet einen englischen Text aus.
+  DOTNET_CLI_UI_LANGUAGE: en
+
+jobs:
+  backend:
+    name: Backend (.NET)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: .NET SDK einrichten (Version aus global.json)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      # Einige Backend-Tests führen TypeScript-Module aus dem Frontend mit Node aus (ab Node 22.18).
+      # Ohne eine feste Version hinge es vom Runner-Image ab, ob sie laufen oder still übersprungen werden.
+      - name: Node.js einrichten (für die Frontend-Logik-Tests des Backends)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # LagerStrict (Directory.Build.props): Warnungen sind Fehler, dazu gehören auch die
+      # NuGet-Audit-Meldungen NU1901-NU1904 (bekannte Schwachstellen). Deshalb schon beim Restore setzen.
+      - name: Pakete wiederherstellen
+        run: dotnet restore Lager.sln -p:LagerStrict=true
+
+      - name: Bauen (strikt, Warnungen sind Fehler)
+        run: dotnet build Lager.sln -c Release -p:LagerStrict=true --no-restore
+
+      - name: Tests ausführen (mit Coverage)
+        run: >
+          dotnet test tests/Lager.Tests -c Release --no-build
+          --collect:"XPlat Code Coverage"
+          --logger "trx;LogFileName=test-results.trx"
+          --results-directory ./TestResults
+
+      - name: Testergebnisse und Coverage hochladen
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-testergebnisse
+          path: |
+            TestResults/**/*.trx
+            TestResults/**/coverage.cobertura.xml
+          if-no-files-found: warn
+          retention-days: 14
+
+      # "dotnet list package --vulnerable" endet auch bei Treffern mit Exit-Code 0,
+      # deshalb wird die Ausgabe ausgewertet. Prüft auch transitive Pakete.
+      - name: Auf Pakete mit bekannten Schwachstellen prüfen
+        run: |
+          dotnet list Lager.sln package --vulnerable --include-transitive 2>&1 | tee vulnerable-packages.txt
+          if grep -q "has the following vulnerable packages" vulnerable-packages.txt; then
+            echo "::error title=Verwundbare NuGet-Pakete::Mindestens ein Paket hat eine bekannte Schwachstelle (siehe Ausgabe oben)."
+            exit 1
+          fi
+
+  frontend:
+    name: Frontend (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # Vite 8 und ESLint 10 verlangen Node ^20.19 || >=22.13 (siehe "engines" in package.json).
+        node: ['20.19', '22']
+    defaults:
+      run:
+        working-directory: frontend/lager-ui
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: frontend/lager-ui/package-lock.json
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Typprüfung (tsc -b)
+        run: npm run typecheck
+
+      - name: Tests (Vitest)
+        run: npm test
+
+      - name: Produktions-Build
+        run: npm run build
+
+      # Das Ergebnis hängt nicht von der Node-Version ab, deshalb genügt ein Lauf.
+      # Ein neues Advisory kann diesen Schritt auch ohne Codeänderung rot färben;
+      # Dependabot schlägt dann das passende Update vor.
+      - name: Auf Abhängigkeiten mit bekannten Schwachstellen prüfen
+        if: ${{ matrix.node == '22' }}
+        run: npm audit --audit-level=high

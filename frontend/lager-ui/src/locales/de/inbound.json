@@ -1,0 +1,62 @@
+{
+  "title": "Wareneingang",
+  "what": "die Wareneingänge",
+  "new": "+ Neuer Wareneingang",
+  "partial": "Lieferung {{number}} wurde angelegt, aber nur mit {{saved}} von {{total}} Position(en). Bitte in der Liste prüfen und fehlende Positionen nachtragen.",
+  "created": "Lieferung {{number}} mit {{count}} Position(en) angelegt (Entwurf). Zum Buchen „Empfangen“ wählen.",
+  "receiveFailed": "Wareneingang buchen fehlgeschlagen:",
+  "form": {
+    "title": "Neuer Wareneingang",
+    "number": "Shipment-Nummer (optional, Auto wenn leer)",
+    "supplierRef": "Lieferanten-Referenz",
+    "lines": "Positionen",
+    "linesCaption": "Positionen des neuen Wareneingangs",
+    "addLine": "+ Zeile",
+    "create": "Anlegen (Draft)",
+    "fix": "Bitte korrigieren:",
+    "createFailed": "Anlegen fehlgeschlagen:"
+  },
+  "col": {
+    "article": "Artikel",
+    "targetBin": "Ziel-Bin",
+    "quantity": "Menge",
+    "lot": "Lot",
+    "expiry": "MHD",
+    "actions": "Aktionen",
+    "number": "Nummer",
+    "supplier": "Lieferant",
+    "status": "Status",
+    "lines": "Positionen",
+    "created": "Erstellt",
+    "received": "Empfangen",
+    "sku": "SKU",
+    "bin": "Bin"
+  },
+  "list": {
+    "caption": "Wareneingänge"
+  },
+  "confirm": {
+    "title": "Wareneingang buchen?",
+    "label": "Wareneingang buchen",
+    "body": "Lieferung <code>{{number}}</code> ({{count}} Position(en)) wird empfangen und der Bestand in die Ziel-Bins gebucht. Das lässt sich nicht rückgängig machen."
+  },
+  "row": {
+    "close": "Zu",
+    "details": "Details",
+    "receive": "📥 Empfangen"
+  },
+  "line": {
+    "articleAria": "Artikel Zeile {{n}}",
+    "binAria": "Ziel-Bin Zeile {{n}}",
+    "quantityAria": "Menge Zeile {{n}}",
+    "lotAria": "Lot Zeile {{n}}",
+    "expiryAria": "MHD Zeile {{n}}",
+    "removeAria": "Zeile {{n}} entfernen",
+    "choose": "— wähle —",
+    "required": "Pflicht",
+    "optional": "optional",
+    "trackedHint": "Dieser Artikel wird bereits mit Charge und MHD geführt — beides ist Pflicht.",
+    "putaway": "💡 Putaway-Vorschlag:",
+    "suggestionTitle": "{{reason}} · Capacity-Score {{score}}"
+  }
+}

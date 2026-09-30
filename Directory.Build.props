@@ -1,0 +1,46 @@
+<Project>
+
+  <!--
+    Zentrale Build-Einstellungen für alle Projekte (src/ und tests/).
+    Projektspezifisches (SDK, Pakete, Referenzen) bleibt in der jeweiligen .csproj.
+  -->
+
+  <PropertyGroup Label="Sprache und Framework">
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Reproduzierbarkeit">
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Label="NuGet-Audit">
+    <!-- Meldet bekannte Schwachstellen (NU1901-NU1904), auch bei transitiven Paketen. -->
+    <NuGetAudit>true</NuGetAudit>
+    <NuGetAuditMode>all</NuGetAuditMode>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Metadaten">
+    <!--
+      Lizenz: MIT (siehe LICENSE im Repository-Wurzelverzeichnis). Die Projekte werden nicht als
+      NuGet-Pakete veröffentlicht, daher gibt es bewusst kein PackageLicenseExpression.
+    -->
+    <Product>Lager</Product>
+    <Authors>The-Lady-Janna</Authors>
+    <Copyright>Copyright (c) 2026 The-Lady-Janna</Copyright>
+    <RepositoryUrl>https://github.com/The-Lady-Janna/LagerApp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Company></Company>
+  </PropertyGroup>
+
+  <!--
+    Strikter Modus für CI: dotnet build -p:LagerStrict=true
+    Lokal bleiben Warnungen Warnungen, in CI brechen sie den Build ab.
+  -->
+  <PropertyGroup Condition="'$(LagerStrict)' == 'true'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

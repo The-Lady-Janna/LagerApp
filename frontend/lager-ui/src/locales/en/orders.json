@@ -1,0 +1,128 @@
+{
+  "title": "Orders",
+  "what": "the orders",
+  "choose": "– choose –",
+  "overview": "Overview",
+  "overdue": " (overdue)",
+  "open": "Open",
+  "tile": {
+    "total": "Total",
+    "open": "Status New (open)",
+    "withStock": "With stock",
+    "withoutStock": "Without stock",
+    "fifo": "Dropped due to FIFO",
+    "fifoTip": "Has enough stock on its own, but more urgent or older orders use it up first",
+    "ineligible": "Not pickable in total"
+  },
+  "cart": {
+    "title": "Generate cart pick list",
+    "hint": "Bundles open orders ({{count}} available) into one combined pick list until the chosen cart is full (volume or weight). The order of priority, due date, receipt applies. Orders without sufficient stock are skipped.",
+    "config": "Cart configuration",
+    "option": "{{name}} ({{levels}} levels, {{volume}} m³, {{weight}} kg)",
+    "generating": "Generating…",
+    "fill": "Fill cart",
+    "optimize": "Visit as few locations as possible",
+    "optimizeHint": " — chooses orders whose articles share bins with those already chosen (greedy)",
+    "none": "No cart configuration created yet. <a>Set one up now</a>.",
+    "failed": "The pick list could not be created:"
+  },
+  "manual": {
+    "title": "Create manual order",
+    "number": "Order number",
+    "customerRef": "Customer reference",
+    "customer": "Customer",
+    "noCustomer": "– no customer –",
+    "address": "Shipping address",
+    "noAddress": "– none –",
+    "chooseCustomerFirst": "– choose a customer first –",
+    "priority": "Priority",
+    "due": "Due on (optional)",
+    "lines": "Lines",
+    "articleAria": "Article for line {{n}}",
+    "article": "– article –",
+    "quantityAria": "Quantity for line {{n}}",
+    "removeAria": "Remove line {{n}}",
+    "addLine": "+ Line",
+    "create": "Create order",
+    "failed": "The order could not be created:"
+  },
+  "list": {
+    "title": "Orders ({{count}})",
+    "titleFiltered": "Orders ({{count}} of {{total}})",
+    "sortHint": "New first (priority, due date, receipt), without stock at the bottom",
+    "all": "All",
+    "caption": "Orders",
+    "empty": "No orders."
+  },
+  "col": {
+    "number": "No.",
+    "status": "Status",
+    "priority": "Prio",
+    "due": "Due",
+    "customer": "Customer",
+    "source": "Source",
+    "lines": "Lines",
+    "created": "Created",
+    "stock": "Stock",
+    "actions": "Actions"
+  },
+  "stock": {
+    "none": "no stock",
+    "fifoConflict": "FIFO conflict",
+    "ok": "OK"
+  },
+  "priority": {
+    "0": "Normal",
+    "1": "Elevated",
+    "2": "High",
+    "3": "Urgent"
+  },
+  "cancel": {
+    "button": "Cancel order",
+    "aria": "Cancel order {{number}}",
+    "confirm": "Cancel order {{number}}?\n{{consequence}}",
+    "consequenceNew": "It can no longer be edited afterwards.",
+    "consequenceOther": "Its lines are removed from the pick list. Stock does not change (booking only happens when packing).",
+    "failed": "Cancelling failed:",
+    "failedFallback": "Cancelling failed."
+  },
+  "detail": {
+    "what": "the order",
+    "notFound": "Order not found.",
+    "title": "Order {{number}}",
+    "status": "Status:",
+    "source": "Source:",
+    "customerRef": "Customer ref.:",
+    "customer": "Customer:",
+    "priority": "Priority:",
+    "due": "Due:",
+    "created": "Created:",
+    "externalRef": "External reference:",
+    "address": "Shipping address:",
+    "noAddress": "— (no shipping address linked)",
+    "cancelling": "Cancelling…",
+    "cancel": "Cancel order",
+    "lines": "Lines",
+    "colSku": "SKU",
+    "colQuantity": "Quantity",
+    "pick": {
+      "title": "Generate pick list",
+      "start": "Start point",
+      "startAuto": "Automatic (first start pick point)",
+      "end": "End point (optional)",
+      "noEnd": "— no return route —",
+      "failedFallback": "Pick list failed."
+    },
+    "pack": {
+      "title": "Packing suggestion",
+      "hint": "A heuristic (carton choice by volume and weight), not a 3D packing optimisation: use it as a guide, not as a rule.",
+      "computing": "Calculating…",
+      "failed": "Packing suggestion failed:",
+      "failedFallback": "Packing suggestion failed.",
+      "warnings": "Notes on the packing suggestion:",
+      "cartons": "{{count}} carton(s)",
+      "cartonsUnpacked": "{{count}} carton(s), {{unpacked}} unpacked",
+      "carton": "<strong>Carton {{n}}: {{type}}</strong> ({{l}}×{{w}}×{{h}} mm, {{weight}} kg, fill level {{fill}}%)"
+    }
+  }
+}

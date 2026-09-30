@@ -1,0 +1,32 @@
+# Beispiel: Caddy als Reverse-Proxy mit automatischem TLS vor Lager.
+# Verwendung: docker compose --profile https up --build   (docker-compose.yml, Dienst "caddy")
+#
+# Ohne HTTPS funktionieren im Browser weder der Kamera-Scanner noch der Service-Worker (beides braucht einen "Secure
+# Context", ausgenommen localhost). Caddy holt das Zertifikat selbst.
+#
+# Einstellungen (in .env, Vorlage .env.example):
+#   LAGER_DOMAIN=lager.example.com   öffentlicher Name; Caddy beantragt ein Let's-Encrypt-Zertifikat (Ports 80 und 443 müssen
+#                                    aus dem Internet erreichbar sein). Standard "localhost".
+#   AllowedHosts=lager.example.com   sonst weist Lager den Host-Header mit 400 ab.
+#   Security__ForwardedHeaders__Enabled=true
+#                                    damit Lager die echte Client-IP aus X-Forwarded-For nutzt (Rate-Limit je Client);
+#                                    ohne diese Einstellung sähe es nur die IP des Proxys.
+#   Cors__AllowedOrigins__0          nur nötig, wenn ein anderer Origin die API aufruft; die mitgelieferte Oberfläche
+#                                    läuft unter demselben Origin und braucht kein CORS.
+#
+# Lokale/LAN-Namen ohne öffentliches DNS (z. B. lager.lan): "tls internal" unten einkommentieren. Caddy stellt dann Zertifikate
+# aus seiner eigenen CA aus; deren Root-Zertifikat (im Volume caddy-data unter pki/authorities/local/root.crt) muss auf den
+# Geräten als vertrauenswürdig installiert werden, sonst warnt der Browser.
+
+{$LAGER_DOMAIN:localhost} {
+	# tls internal
+
+	# Antworten komprimiert Lager selbst (Brotli/Gzip); hier keine zweite Komprimierung.
+	reverse_proxy lager:8080 {
+		# Herkunft des Clients für Lager: Schema, Client-IP und Host (Caddy setzt sie ohnehin; ausdrücklich, damit eine vom
+		# Client mitgeschickte Fälschung nie durchgereicht wird).
+		header_up X-Forwarded-Proto {scheme}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Host {host}
+	}
+}

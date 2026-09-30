@@ -1,0 +1,84 @@
+{
+  "sidebar": "Seitenleiste",
+  "main": "Hauptnavigation",
+  "skipLink": "Zum Inhalt springen",
+  "toggle": "Navigation",
+  "groups": {
+    "stammdaten": "Stammdaten",
+    "wareneingang": "Wareneingang",
+    "bestand": "Bestand",
+    "auslieferung": "Auslieferung",
+    "auswertung": "Auswertung",
+    "system": "System",
+    "weitere": "Weitere"
+  },
+  "routes": {
+    "articles": "Artikel",
+    "suppliers": "Lieferanten",
+    "customers": "Kunden",
+    "layout": "Lager-Layout",
+    "cart-configs": "Pickwagen",
+    "warehouses": "Lagerstruktur",
+    "labels": "Etiketten",
+    "import-export": "Import & Export",
+    "inbound": "Wareneingang",
+    "purchase-orders": "Beschaffung",
+    "replenishment": "Replenishment",
+    "stock": "Bestand",
+    "inventory": "Inventur",
+    "orders": "Bestellungen",
+    "picklists": "Picklisten",
+    "waves": "Wellen",
+    "packing": "Packen",
+    "shipments": "Versand",
+    "returns": "Retouren",
+    "reports": "Reports",
+    "audit": "Audit",
+    "traceability": "Chargen-Trace",
+    "users": "Benutzer",
+    "system": "Backup & Restore"
+  },
+  "footer": {
+    "loggedInAs": "Eingeloggt als <strong>{{name}}</strong>",
+    "noRole": "keine Rolle",
+    "changePassword": "🔒 Passwort ändern"
+  },
+  "theme": {
+    "label": "Farbschema",
+    "title": "Theme: {{name}}",
+    "short": {
+      "light": "☀️ hell",
+      "dark": "🌙 dunkel",
+      "auto": "🖥 auto"
+    },
+    "names": {
+      "light": "Hell",
+      "dark": "Dunkel",
+      "auto": "Automatisch (wie das Betriebssystem)"
+    }
+  },
+  "language": {
+    "label": "Sprache",
+    "names": {
+      "de": "Deutsch",
+      "en": "English"
+    }
+  },
+  "search": {
+    "title": "Suche",
+    "aria": "Suche nach Artikeln, Bins, Bestellungen und Kunden",
+    "placeholder": "Suche Artikel, Bins, Orders, Kunden… (mind. 2 Zeichen)",
+    "results": "Suchergebnisse",
+    "hits_one": "{{count}} Treffer",
+    "hits_other": "{{count}} Treffer",
+    "loading": "Lade Suchdaten…",
+    "noHits": "Keine Treffer.",
+    "kind": {
+      "article": "Artikel",
+      "bin": "Bin",
+      "order": "Order",
+      "customer": "Kunde"
+    },
+    "footer": "↑↓ navigieren · Enter öffnen · Esc schließen · <kbd>Cmd/Ctrl+K</kbd> öffnen"
+  }
+}

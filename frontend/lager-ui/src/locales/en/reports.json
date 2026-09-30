@@ -1,0 +1,126 @@
+{
+  "title": "Reports",
+  "what": "the KPIs",
+  "noPicks": "No picks in the period.",
+  "noData": "No data.",
+  "sparklineAria": "{{label}}: trend over {{count}} days, total {{total}}",
+  "legend": {
+    "summary": "Total: <strong>{{total}}</strong> · Peak: <strong>{{max}}</strong>",
+    "peakOn": " on {{date}}"
+  },
+  "valuation": {
+    "title": "💰 Current stock value",
+    "summary": "{{articles}} articles · {{quantity}} pcs · as of {{at}}"
+  },
+  "live": {
+    "ordersOpen": "Orders open",
+    "inPicking": "In picking",
+    "readyPack": "Ready to pack",
+    "doneToday": "Done today",
+    "inventoryOpen": "Stocktake open",
+    "replenOpen": "Replen open",
+    "critical": "Stock critical",
+    "warning": "Stock warning"
+  },
+  "range": {
+    "label": "Period:",
+    "d1": "24 h",
+    "d7": "7 days",
+    "d30": "30 days",
+    "d90": "90 days"
+  },
+  "kpi": {
+    "label": {
+      "orders": "Orders (period)",
+      "pickLists": "Pick lists (period)",
+      "picksPerHour": "Picks per hour",
+      "avgDistance": "Ø pick distance"
+    },
+    "hint": {
+      "since": "since {{date}}",
+      "done": "{{count}} completed",
+      "picksPerHour": "picked lines / time span from first to last pick",
+      "completedPickLists": "over completed pick lists"
+    }
+  },
+  "perDay": {
+    "pickLists": "Pick lists per day",
+    "orders": "Orders per day"
+  },
+  "byStatus": {
+    "title": "Orders by status",
+    "none": "No orders in the period."
+  },
+  "topArticles": {
+    "title": "Top 10 articles (pick frequency)",
+    "none": "No picks in the period yet."
+  },
+  "topBins": {
+    "title": "Top 10 locations (utilisation)",
+    "none": "No stock available."
+  },
+  "col": {
+    "sku": "SKU",
+    "article": "Article",
+    "picks": "Picks",
+    "sumQuantity": "Σ quantity",
+    "bin": "Bin"
+  },
+  "abc": {
+    "title": "ABC analysis ({{range}} days)",
+    "hint": "A = top 80 % of the picked quantity · B = 80–95 % · C = the last 5 %. Focus your optimisation on A articles.",
+    "class": "Class",
+    "share": "Share"
+  },
+  "heat": {
+    "title": "Pick heatmap ({{range}} days)",
+    "hint": "Bins by pick frequency, descending. Hot = visited often, should be at the front. Cold bins with high stock are slotting candidates."
+  },
+  "pickers": {
+    "title": "Picker performance ({{range}}d)",
+    "hint": "Per picker: completed pick lists, picked items, Ø distance and Ø duration. \"anonymous\" = no user assignment recorded.",
+    "computing": "Calculating…",
+    "none": "No completed pick lists in the period.",
+    "picker": "Picker",
+    "pickLists": "Pick lists",
+    "items": "Items",
+    "avgDistance": "Ø distance",
+    "avgDuration": "Ø duration"
+  },
+  "slotting": {
+    "title": "Slotting suggestions",
+    "hint": "Heavy-picked articles on cold bins → better move them to the front. Sorted by estimated distance saved per period.",
+    "none": "No suggestions — everything optimal or too little data.",
+    "current": "Current",
+    "suggested": "Suggestion",
+    "savings": "Savings"
+  },
+  "dead": {
+    "title": "Dead stock (≥ 90 days without movement)",
+    "hint": "Articles with stock that have not moved for ≥ 90 days. Candidates for a promotion / disposal.",
+    "none": "No dead stock 🎉",
+    "stock": "Stock",
+    "days": "Days"
+  },
+  "audit": {
+    "title": "Audit log",
+    "filter": "Filter",
+    "entity": "Entity",
+    "all": "— all —",
+    "entityId": "Entity ID (optional)",
+    "entityIdShort": "Entity ID",
+    "entityIdPlaceholder": "GUID or substring",
+    "max": "Max. entries",
+    "entries": "Entries",
+    "entriesCount": "Entries ({{count}})",
+    "what": "the audit log",
+    "caption": "Audit entries",
+    "col": {
+      "time": "Time",
+      "operation": "Operation",
+      "changes": "Changes",
+      "user": "User"
+    },
+    "empty": "No entries for this filter."
+  }
+}

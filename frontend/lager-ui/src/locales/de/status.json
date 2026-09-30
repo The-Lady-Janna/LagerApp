@@ -1,0 +1,90 @@
+{
+  "pill": {
+    "inbound": {
+      "Draft": "Draft",
+      "Received": "Received",
+      "Cancelled": "Cancelled"
+    },
+    "purchaseOrder": {
+      "Draft": "Draft",
+      "Sent": "Sent",
+      "PartiallyReceived": "PartiallyReceived",
+      "Received": "Received",
+      "Cancelled": "Cancelled"
+    },
+    "shipment": {
+      "Ready": "Ready",
+      "Labeled": "Labeled",
+      "Shipped": "Shipped",
+      "Delivered": "Delivered",
+      "Cancelled": "Cancelled"
+    },
+    "wave": {
+      "Open": "Open",
+      "Released": "Released",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "qc": {
+      "Pending": "Pending",
+      "Sellable": "Sellable",
+      "BGrade": "BGrade",
+      "Defect": "Defect",
+      "Destroy": "Destroy"
+    },
+    "order": {
+      "New": "New",
+      "Picking": "Picking",
+      "Picked": "Picked",
+      "Packed": "Packed",
+      "Shipped": "Shipped",
+      "Cancelled": "Cancelled"
+    }
+  },
+  "order": {
+    "New": "Neu",
+    "Picking": "In Kommissionierung",
+    "Picked": "Kommissioniert",
+    "Packed": "Gepackt",
+    "Shipped": "Versendet",
+    "Cancelled": "Storniert"
+  },
+  "expiry": {
+    "Expired": "Abgelaufen",
+    "Critical": "Kritisch",
+    "Soon": "Bald",
+    "Ok": "OK"
+  },
+  "pickList": {
+    "Pending": "Angelegt",
+    "InProgress": "In Arbeit",
+    "Picked": "Gepickt",
+    "Completed": "Verpackt",
+    "Cancelled": "Storniert"
+  },
+  "inventory": {
+    "Open": "Offen",
+    "Reconciled": "Abgeglichen",
+    "Cancelled": "Storniert"
+  },
+  "return": {
+    "Draft": "Entwurf",
+    "Processed": "Verarbeitet",
+    "Cancelled": "Storniert"
+  },
+  "replenishment": {
+    "Open": "Offen",
+    "Completed": "Erledigt",
+    "Cancelled": "Storniert"
+  },
+  "binType": {
+    "Standard": "Standard",
+    "HotPick": "Hot-Pick",
+    "Reserve": "Reserve"
+  },
+  "auditOperation": {
+    "Added": "Hinzugefügt",
+    "Modified": "Geändert",
+    "Deleted": "Gelöscht"
+  }
+}

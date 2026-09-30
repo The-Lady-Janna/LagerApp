@@ -1,0 +1,37 @@
+{
+  "retry": "Erneut versuchen",
+  "reload": "Neu laden",
+  "confirm": "Bestätigen",
+  "cancel": "Abbrechen",
+  "loading": "Lade…",
+  "loadingModule": "Lade Modul…",
+  "saving": "Speichere…",
+  "logout": "Abmelden",
+  "toHome": "Zur Startseite",
+  "closeMessage": "Meldung schließen",
+  "save": "Speichern",
+  "edit": "Bearbeiten",
+  "delete": "Löschen",
+  "add": "Hinzufügen",
+  "remove": "Entfernen",
+  "no": "nein",
+  "update": {
+    "available": "Neue Version verfügbar.",
+    "dismiss": "Hinweis schließen"
+  },
+  "scanner": {
+    "title": "Barcode scannen",
+    "manualTitle": "Manuelle Eingabe",
+    "cameraError": "Kamera nicht verfügbar: {{message}}",
+    "reasonOff": "Die Kamera-Erkennung ist ausgeschaltet.",
+    "reasonInsecure": "Der Kamerazugriff ist nur über HTTPS (oder localhost) möglich.",
+    "reasonUnsupported": "Dein Browser unterstützt die Kamera-Barcode-Erkennung nicht.",
+    "manualHint": "Tippe den Code per Hand ein oder verwende einen externen Scanner, der den Text in das Eingabefeld schickt.",
+    "code": "Code",
+    "placeholder": "Code eingeben + Enter",
+    "retryCamera": "Kamera erneut versuchen",
+    "video": "Kamerabild",
+    "hint": "Barcode in den Sucher halten…",
+    "manual": "Code manuell eingeben"
+  }
+}

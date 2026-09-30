@@ -1,0 +1,37 @@
+{
+  "retry": "Try again",
+  "reload": "Reload",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "loading": "Loading…",
+  "loadingModule": "Loading module…",
+  "saving": "Saving…",
+  "logout": "Log out",
+  "toHome": "Go to start page",
+  "closeMessage": "Close message",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "add": "Add",
+  "remove": "Remove",
+  "no": "no",
+  "update": {
+    "available": "A new version is available.",
+    "dismiss": "Dismiss notice"
+  },
+  "scanner": {
+    "title": "Scan barcode",
+    "manualTitle": "Manual entry",
+    "cameraError": "Camera not available: {{message}}",
+    "reasonOff": "Camera detection is switched off.",
+    "reasonInsecure": "Camera access is only possible over HTTPS (or localhost).",
+    "reasonUnsupported": "Your browser does not support camera barcode detection.",
+    "manualHint": "Type the code by hand or use an external scanner that sends the text to the input field.",
+    "code": "Code",
+    "placeholder": "Enter code + Enter",
+    "retryCamera": "Try camera again",
+    "video": "Camera image",
+    "hint": "Hold the barcode in the viewfinder…",
+    "manual": "Enter code manually"
+  }
+}

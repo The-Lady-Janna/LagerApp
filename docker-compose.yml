@@ -1,0 +1,79 @@
+# Lager: Oberfläche und API aus einem Container, Daten auf einem Volume.
+#
+#   docker compose up --build        baut das Image und startet Lager auf http://localhost:8080
+#   docker compose logs lager        zeigt das Einmalpasswort des Admins (steht nur beim allerersten Start im Log)
+#   docker compose down              stoppt; die Daten bleiben im Volume "lager-data" (mit "down -v" wären sie weg!)
+#
+# Einstellungen stehen in ".env" (Vorlage: .env.example; ohne .env gelten sichere Standardwerte).
+# Varianten:
+#   MySQL statt SQLite   docker compose -f docker-compose.yml -f docker-compose.mysql.yml up --build
+#   HTTPS über Caddy     docker compose --profile https up --build   (Beispiel: deploy/Caddyfile, Kamera-Scan am Handy
+#                        und Service-Worker brauchen HTTPS)
+
+services:
+  lager:
+    build: .
+    image: lager:local
+    restart: unless-stopped
+    ports:
+      # Standard 8080. Nur vom eigenen Rechner erreichbar (z. B. hinter Caddy): LAGER_PORT=127.0.0.1:8080
+      - "${LAGER_PORT:-8080}:8080"
+    volumes:
+      # SQLite-Datenbank, JWT-Key, Logs und Backups (siehe ENV im Dockerfile). Backups sind unverschlüsselt und enthalten
+      # Passwort-Hashes: nicht ungeschützt weitergeben.
+      - lager-data:/data
+    environment:
+      # Erlaubte Host-Namen (Host-Header). Sonst antwortet die API mit 400: für Zugriff im LAN oder unter einer Domain in
+      # .env eintragen, z. B. AllowedHosts=lager.example.com. localhost bleibt immer erlaubt (Healthcheck).
+      AllowedHosts: "${AllowedHosts:-localhost};localhost;127.0.0.1"
+      # Hinter einem Reverse-Proxy (Caddy): Weitergabe-Header nur von diesem Netz auswerten (Client-IP für das Rate-Limit).
+      # Einschalten mit Security__ForwardedHeaders__Enabled=true in .env; das Docker-Standardnetz liegt in 172.16.0.0/12.
+      Security__ForwardedHeaders__Enabled: "${Security__ForwardedHeaders__Enabled:-false}"
+      Security__ForwardedHeaders__KnownNetworks__0: "${Security__ForwardedHeaders__KnownNetworks__0:-172.16.0.0/12}"
+      # Ohne Wert = wird aus .env (oder der Shell) übernommen, sofern dort gesetzt; sonst bleibt die Einstellung des Images.
+      # Bewusst eine Liste statt "env_file: .env": so gelangen Zugangsdaten wie LAGER_DB_ROOT_PASSWORD nie in diesen Container.
+      # Weitere Einstellungen (jede Umgebungsvariable von ASP.NET Core; "__" steht für ":") hier ergänzen.
+      Auth__BootstrapAdminPassword:
+      Jwt__SigningKey:
+      Cors__AllowedOrigins__0:
+      Backup__AllowRestore:
+      # Automatisches Backup: tägliche Startzeit als HH:mm in UTC (ohne Wert: kein Zeitplan) und Zahl der aufbewahrten Backups (Standard 14).
+      Backup__Schedule:
+      Backup__RetentionCount:
+      Database__Seed:
+      # Demo-Modus (nur in eine leere Datenbank): Demo__Enabled=true; das Image läuft als Production, dort zusätzlich Demo__AllowInProduction=true.
+      Demo__Enabled:
+      Demo__AllowInProduction:
+      Serilog__MinimumLevel__Default:
+      Logging__RetainedFileCount:
+    healthcheck:
+      # Bereit = Datenbank erreichbar; bei 503 meldet Docker den Container als "unhealthy".
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8080/health/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # Optional (Profil "https"): TLS-Terminierung mit automatischem Zertifikat. Konfiguration: deploy/Caddyfile.
+  caddy:
+    image: caddy:2
+    profiles: ["https"]
+    restart: unless-stopped
+    depends_on:
+      lager:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      LAGER_DOMAIN: "${LAGER_DOMAIN:-localhost}"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  lager-data:
+  caddy-data:
+  caddy-config:

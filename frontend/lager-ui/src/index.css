@@ -1,0 +1,534 @@
+/* Design-Tokens.
+   Hellmodus = Default. Dark-Mode wird über [data-theme="dark"] auf <html>
+   aktiviert (siehe state/theme.ts, das auch color-scheme mitzieht).
+   ALLE Farben der Oberfläche kommen aus diesen Variablen — Seiten und
+   Komponenten schreiben keine Hex-Werte, sondern var(--c-…). Ausnahme sind
+   die Zeichenflächen (Konva-Canvas), deren Farben in lib/canvasColors.ts
+   zentral stehen, und das feste Dunkel-Design des Mobile-Pickers (--pk-*).
+
+   Kontrast: Alle Text-/Hintergrund-Paare (Text auf --c-bg/-surface/-…-bg,
+   Pill-Farben, Sidebar) erreichen in Hell UND Dunkel mindestens 4,5:1
+   (tests/WP19/tokens.test.ts prüft das gegen diese Datei). */
+:root {
+  color-scheme: light;
+
+  /* Flächen und Text */
+  --c-bg: #f1f5f9;
+  --c-text: #1e293b;
+  --c-muted: #5b6b80;
+  --c-border: #cbd5e1;
+  --c-border-light: #e2e8f0;
+  --c-surface: #ffffff;
+  --c-surface-alt: #f8fafc;
+  --c-overlay: rgba(15, 23, 42, 0.55);
+  --c-shadow: rgba(15, 23, 42, 0.3);
+
+  /* Sidebar (in beiden Themes dunkel) */
+  --c-sidebar-bg: #0f172a;
+  --c-sidebar-text: #cbd5e1;
+  --c-sidebar-muted: #94a3b8;
+  --c-sidebar-border: #334155;
+  --c-sidebar-hover: #1e293b;
+
+  /* Primär-/Link-/Fokusfarbe. --c-primary ist Flächenfarbe mit weißem Text (--c-on-primary),
+     --c-link ist Textfarbe auf den Flächen. */
+  --c-primary: #2563eb;
+  --c-primary-hover: #1d4ed8;
+  --c-on-primary: #ffffff;
+  --c-link: #1d4ed8;
+  --c-focus: #2563eb;
+
+  /* Semantik: -Text/Grundfarbe auf --c-surface UND auf dem zugehörigen -bg lesbar. */
+  --c-danger: #b91c1c;
+  --c-danger-hover: #991b1b;
+  --c-danger-text: #b91c1c;
+  --c-danger-bg: #fee2e2;
+  --c-danger-border: #fca5a5;
+  --c-success: #166534;
+  --c-success-bg: #dcfce7;
+  --c-success-border: #86efac;
+  --c-warning: #92400e;
+  --c-warning-bg: #fef3c7;
+  --c-warning-border: #fcd34d;
+  --c-info: #1e40af;
+  --c-info-bg: #dbeafe;
+  --c-info-border: #93c5fd;
+
+  /* Status-Pills (Farbe je Ton, siehe components/StatusPill.tsx) */
+  --pill-neutral-bg: #e2e8f0;
+  --pill-neutral-fg: #334155;
+  --pill-info-bg: var(--c-info-bg);
+  --pill-info-fg: var(--c-info);
+  --pill-success-bg: var(--c-success-bg);
+  --pill-success-fg: var(--c-success);
+  --pill-warning-bg: var(--c-warning-bg);
+  --pill-warning-fg: var(--c-warning);
+  --pill-danger-bg: var(--c-danger-bg);
+  --pill-danger-fg: var(--c-danger-text);
+  --pill-accent-bg: #ede9fe;
+  --pill-accent-fg: #5b21b6;
+  --pill-special-bg: #fce7f3;
+  --pill-special-fg: #9d174d;
+
+  /* Mobile-Picker: bewusst festes Dunkel-Design (Lager-Halle, Handschuhe, wechselndes Licht) — unabhängig vom Theme. */
+  --pk-bg: #0f172a;
+  --pk-surface: #1e293b;
+  --pk-surface-strong: #334155;
+  --pk-border: #475569;
+  --pk-text: #f1f5f9;
+  --pk-soft: #cbd5e1;
+  --pk-muted: #94a3b8;
+  --pk-primary: #2563eb;
+  --pk-scan: #0369a1;
+  --pk-ok: #15803d;
+  --pk-ok-text: #86efac;
+  --pk-warn: #f59e0b;
+  --pk-warn-text: #fbbf24;
+  --pk-warn-bg: #422006;
+  --pk-warn-fg: #fde68a;
+  --pk-bin: #1e40af;
+  --pk-error-bg: #450a0a;
+  --pk-error-fg: #fecaca;
+  --pk-error-border: #7f1d1d;
+  --pk-error-text: #fca5a5;
+}
+
+[data-theme='light'] { color-scheme: light; }
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --c-bg: #0f172a;
+  --c-text: #f1f5f9;
+  --c-muted: #94a3b8;
+  --c-border: #475569;
+  --c-border-light: #334155;
+  --c-surface: #1e293b;
+  --c-surface-alt: #0f172a;
+  --c-overlay: rgba(2, 6, 23, 0.7);
+  --c-shadow: rgba(0, 0, 0, 0.6);
+
+  --c-sidebar-bg: #020617;
+  --c-sidebar-text: #cbd5e1;
+  --c-sidebar-muted: #94a3b8;
+  --c-sidebar-border: #334155;
+  --c-sidebar-hover: #1e293b;
+
+  /* Weißer Text auf #3b82f6 hätte nur 3,7:1 — Flächenfarbe bleibt #2563eb, Links werden heller. */
+  --c-primary: #2563eb;
+  --c-primary-hover: #1d4ed8;
+  --c-link: #60a5fa;
+  --c-focus: #93c5fd;
+
+  --c-danger: #dc2626;
+  --c-danger-hover: #b91c1c;
+  --c-danger-text: #fca5a5;
+  --c-danger-bg: #450a0a;
+  --c-danger-border: #7f1d1d;
+  --c-success: #86efac;
+  --c-success-bg: #14532d;
+  --c-success-border: #166534;
+  --c-warning: #fde68a;
+  --c-warning-bg: #422006;
+  --c-warning-border: #92400e;
+  --c-info: #93c5fd;
+  --c-info-bg: #1e3a8a;
+  --c-info-border: #1e40af;
+
+  --pill-neutral-bg: #334155;
+  --pill-neutral-fg: #cbd5e1;
+  --pill-accent-bg: #4c1d95;
+  --pill-accent-fg: #c4b5fd;
+  --pill-special-bg: #500724;
+  --pill-special-fg: #f9a8d4;
+}
+
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  font-size: 14px;
+  color: var(--c-text);
+  background: var(--c-bg);
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; background: var(--c-bg); color: var(--c-text); }
+
+a { color: var(--c-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Sichtbarer Tastaturfokus (nur bei Tastaturbedienung, nicht bei Mausklick). */
+:focus-visible { outline: 2px solid var(--c-focus); outline-offset: 2px; }
+.sidebar :focus-visible { outline-color: #93c5fd; }
+
+button, .button {
+  font: inherit;
+  padding: 6px 12px;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text);
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Ein Link im Button-Look (statt <Link><button>, das ungültiges HTML ist). */
+.button { display: inline-block; text-decoration: none; line-height: normal; }
+.button:hover { text-decoration: none; }
+button:hover, .button:hover { background: var(--c-surface-alt); }
+button.primary, .button.primary { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary-hover); }
+button.primary:hover, .button.primary:hover { background: var(--c-primary-hover); }
+button.danger { background: var(--c-danger); color: #fff; border-color: var(--c-danger-hover); }
+button.danger:hover { background: var(--c-danger-hover); }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Schaltfläche im Link-Look (z. B. "Status neu laden" im Text). */
+button.link-button { background: transparent; border: none; padding: 0; color: var(--c-link); text-decoration: underline; }
+button.link-button:hover { background: transparent; }
+
+input, select, textarea {
+  font: inherit;
+  padding: 6px 8px;
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+  background: var(--c-surface);
+  color: var(--c-text);
+}
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; text-align: left; border-bottom: 1px solid var(--c-border-light); }
+th { background: var(--c-surface-alt); font-weight: 600; }
+tr:hover td { background: var(--c-surface-alt); }
+caption { text-align: left; padding: 0 0 8px; color: var(--c-muted); font-size: 12px; }
+/* Tabellen außerhalb einer .card bekommen einen eigenen horizontalen Scroll-Container. */
+.table-wrap { max-width: 100%; overflow-x: auto; position: relative; }
+/* position: relative an den Scroll-Containern (.main, .card, .table-wrap): .visually-hidden ist absolut positioniert und bekäme sonst
+   das Fenster als Bezugsfläche — ein verstecktes <span> in der letzten Spalte einer breiten Tabelle ragte dann über den Seitenrand
+   und erzeugte horizontalen Seiten-Scroll (375 px), statt im Tabellen-Scroll mitzulaufen. */
+
+/* Vollbild-Seiten (Login, Mobile-Picker): dvh berücksichtigt die dynamische Browserleiste auf Handys, 100vh ist der Fallback. */
+.screen-min { min-height: 100vh; min-height: 100dvh; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* "Zum Inhalt springen" — erst bei Tastaturfokus sichtbar. */
+.skip-link {
+  position: absolute; left: 8px; top: -60px; z-index: 500;
+  background: var(--c-primary); color: var(--c-on-primary);
+  padding: 8px 14px; border-radius: 4px; font-weight: 600;
+}
+.skip-link:focus { top: 8px; text-decoration: none; }
+
+.app {
+  display: grid;
+  /* minmax(0, 1fr): der Inhalt darf die Spalte nicht aufspreizen (sonst horizontaler Seiten-Scroll). */
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.sidebar {
+  background: var(--c-sidebar-bg);
+  color: var(--c-sidebar-text);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar h1 { font-size: 18px; color: #fff; margin: 0 0 24px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+.sidebar nav a {
+  color: var(--c-sidebar-text);
+  padding: 6px 12px 6px 24px;
+  border-radius: 4px;
+  display: block;
+  font-size: 13px;
+}
+.sidebar nav a:hover { background: var(--c-sidebar-hover); text-decoration: none; }
+.sidebar nav a.active { background: var(--c-primary); color: var(--c-on-primary); }
+
+/* Gruppen-Header: kleiner und dezenter als die Items selbst, damit die
+   Hierarchie beim Scannen klar wird. Caret links als Klapp-Affordance. */
+.sidebar .nav-group { display: flex; flex-direction: column; }
+.sidebar .nav-group + .nav-group { margin-top: 8px; }
+.sidebar .nav-group-header {
+  display: flex; align-items: center; gap: 6px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--c-sidebar-muted);
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.sidebar .nav-group-header:hover { background: var(--c-sidebar-hover); color: var(--c-sidebar-text); }
+.sidebar .nav-group-caret {
+  display: inline-block;
+  width: 10px;
+  font-size: 9px;
+  color: var(--c-sidebar-muted);
+}
+.sidebar .nav-group-items { display: flex; flex-direction: column; gap: 2px; }
+.sidebar .sidebar-hint { font-size: 11px; margin-top: 12px; color: var(--c-sidebar-muted); }
+
+.sidebar .sidebar-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--c-sidebar-border); font-size: 12px; }
+.sidebar .sidebar-user { color: var(--c-sidebar-text); }
+.sidebar .sidebar-roles { color: var(--c-sidebar-muted); font-size: 11px; margin-top: 2px; }
+.sidebar .sidebar-button {
+  width: 100%; margin-top: 4px;
+  background: transparent; color: var(--c-sidebar-text);
+  border: 1px solid var(--c-sidebar-muted); padding: 6px 10px; border-radius: 4px; font-size: 12px;
+}
+.sidebar .sidebar-button:hover { background: var(--c-sidebar-hover); }
+.sidebar .theme-switch { margin-top: 8px; display: flex; gap: 2px; }
+.sidebar .theme-switch button {
+  flex: 1; margin: 0; padding: 4px 6px; font-size: 11px; width: auto;
+  background: transparent; color: var(--c-sidebar-text);
+  border: 1px solid var(--c-sidebar-muted); border-radius: 4px;
+}
+.sidebar .theme-switch button[aria-pressed='true'] { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary); }
+.sidebar .warehouse-select { margin-bottom: 12px; }
+.sidebar .warehouse-select label { color: var(--c-sidebar-muted); font-size: 11px; margin-bottom: 4px; }
+.sidebar .warehouse-select select { width: 100%; }
+
+/* Kopfleiste mit Hamburger — nur auf schmalen Bildschirmen sichtbar (siehe Media-Query unten). */
+.app-topbar { display: none; }
+.sidebar-backdrop { display: none; }
+
+.main { padding: 24px; overflow: auto; background: var(--c-bg); min-width: 0; position: relative; }
+.main h2 { margin: 0 0 16px; }
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-light);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 16px;
+  /* min-width:0 löst das CSS-Grid-/Flex-Default `min-width: auto` auf.
+     Ohne das wächst eine Card mit breitem Tabellen-Inhalt ungehindert über
+     ihre Zelle hinaus und überlappt die Nachbar-Card. */
+  min-width: 0;
+  /* Backup wenn ein Inhalt trotzdem breiter wird (Tabelle mit vielen Spalten,
+     langem code-Text): horizontaler Scrollbar lokal in der Card, statt
+     dass die Card aus dem Grid bricht. */
+  overflow-x: auto;
+  position: relative;   /* Bezugsfläche für .visually-hidden (siehe .table-wrap) */
+}
+.card--info { background: var(--c-info-bg); border-color: var(--c-info-border); }
+.card--muted { background: var(--c-surface-alt); }
+/* Einklappbarer Karten-Kopf (components/CollapsibleCard.tsx): der Titel ist ein echter Button. */
+.collapsible-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.collapsible-toggle {
+  display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0;
+  background: transparent; border: none; padding: 0; margin: 0;
+  font: inherit; text-align: left; color: inherit; user-select: none;
+}
+.collapsible-toggle:hover { background: transparent; }
+.collapsible-caret { display: inline-block; width: 14px; transition: transform 0.15s; }
+.collapsible-caret[data-open='true'] { transform: rotate(90deg); }
+.collapsible-body { margin-top: 12px; }
+/* Klickbare Kopfzeile einer aufklappbaren Zeile (Kunden): ein Button über die volle Breite, kein Button-Look. */
+.row-toggle {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px; width: 100%;
+  background: transparent; border: none; padding: 0; font: inherit; color: inherit; text-align: left;
+}
+.row-toggle:hover { background: transparent; }
+
+.row { display: flex; flex-direction: row; gap: 12px; align-items: center; }
+.toolbar { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+
+/* Hinweisboxen. Text- und Hintergrundfarbe kommen als Paar aus den Tokens (in Hell und Dunkel ≥ 4,5:1). */
+.error { color: var(--c-danger-text); padding: 12px; background: var(--c-danger-bg); border-radius: 4px; }
+.success { color: var(--c-success); padding: 12px; background: var(--c-success-bg); border-radius: 4px; }
+.warning { color: var(--c-warning); padding: 12px; background: var(--c-warning-bg); border-radius: 4px; }
+.info { color: var(--c-info); padding: 12px; background: var(--c-info-bg); border-radius: 4px; }
+.muted { color: var(--c-muted); }
+/* Textfarben für Werte (OK / Abweichung / Warnung). */
+.text-success { color: var(--c-success); }
+.text-danger { color: var(--c-danger-text); }
+.text-warning { color: var(--c-warning); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+/* Kachel-Raster (z. B. Report-Karten): so viele Spalten wie passen, nie breiter als der Container. */
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 16px; }
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--c-muted); }
+label > input, label > select, label > textarea {
+  font-size: 14px;
+  color: var(--c-text);
+}
+
+/* Status-Pills (components/StatusPill.tsx): Farbe ergibt sich aus dem Ton, nie aus Hex-Werten. */
+.pill {
+  display: inline-block; padding: 2px 8px; border-radius: 4px;
+  font-size: 12px; white-space: nowrap;
+  background: var(--pill-neutral-bg); color: var(--pill-neutral-fg);
+}
+.pill--neutral { background: var(--pill-neutral-bg); color: var(--pill-neutral-fg); }
+.pill--info { background: var(--pill-info-bg); color: var(--pill-info-fg); }
+.pill--success { background: var(--pill-success-bg); color: var(--pill-success-fg); }
+.pill--warning { background: var(--pill-warning-bg); color: var(--pill-warning-fg); }
+.pill--danger { background: var(--pill-danger-bg); color: var(--pill-danger-fg); }
+.pill--accent { background: var(--pill-accent-bg); color: var(--pill-accent-fg); }
+.pill--special { background: var(--pill-special-bg); color: var(--pill-special-fg); }
+
+/* Kennzahlen-Kachel (components/StatTile.tsx). */
+.stat-tile {
+  background: var(--c-surface); padding: 8px 12px; border-radius: 6px;
+  border: 1px solid var(--c-border-light);
+}
+.stat-tile-label { font-size: 11px; color: var(--c-muted); }
+.stat-tile-value { font-size: 24px; font-weight: 700; color: var(--c-text); }
+.stat-tile--success .stat-tile-value { color: var(--c-success); }
+.stat-tile--warning .stat-tile-value { color: var(--c-warning); }
+.stat-tile--danger .stat-tile-value { color: var(--c-danger-text); }
+.stat-tile--muted .stat-tile-value { color: var(--c-muted); }
+
+/* Fehler-Infrastruktur: ErrorBanner, globale Toasts, Bestätigungsdialog. */
+.error-banner { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+.error-banner-text { min-width: 0; overflow-wrap: anywhere; }
+.error-banner-reference { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+.error-banner-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.error-banner-actions button { padding: 2px 8px; font-size: 12px; }
+
+.toast-region {
+  position: fixed; top: 16px; right: 16px; z-index: 400;
+  display: flex; flex-direction: column; gap: 8px;
+  width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 10px 12px; border-radius: 8px; border-left: 4px solid;
+  background: #1e293b; color: #f8fafc; font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.toast-error { border-left-color: #ef4444; }
+.toast-success { border-left-color: #22c55e; }
+.toast-info { border-left-color: #3b82f6; }
+.toast-body { min-width: 0; overflow-wrap: anywhere; }
+.toast-title { display: block; margin-bottom: 2px; }
+.toast-count { opacity: 0.7; }
+.toast-reference { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+.toast-close { background: transparent; border: none; color: inherit; padding: 0 4px; font-size: 18px; line-height: 1; }
+.toast-close:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* "Neue Version verfügbar" (components/UpdateBanner.tsx): dunkle Leiste wie die Toasts, in beiden Themes gleich. */
+.update-banner {
+  position: fixed; right: 16px; bottom: 16px; z-index: 300; max-width: calc(100vw - 32px);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; border-radius: 8px;
+  background: #1e293b; color: #f8fafc; font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Modale Dialoge (components/Modal.tsx) — Grundlage für ConfirmDialog, Passwort-, Regal-, Benutzer-Dialog usw. */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 350;
+  background: var(--c-overlay);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.modal-backdrop--top { align-items: flex-start; padding-top: min(80px, 8vh); }
+.modal-backdrop--fullscreen { padding: 16px; flex-direction: column; background: rgba(0, 0, 0, 0.92); z-index: 1000; }
+.modal-dialog {
+  background: var(--c-surface); color: var(--c-text);
+  border: 1px solid var(--c-border); border-radius: 8px;
+  padding: 20px 24px; width: 100%; max-width: min(var(--modal-width, 460px), 100%);
+  max-height: 90vh; max-height: 90dvh; overflow: auto;
+  box-shadow: 0 20px 60px var(--c-shadow);
+}
+.modal-dialog:focus { outline: none; }
+.modal-dialog--flush { padding: 0; overflow: hidden; }
+.modal-dialog--bare { background: transparent; border: none; box-shadow: none; padding: 0; color: #fff; display: flex; flex-direction: column; align-items: center; }
+.modal-title { margin: 0 0 8px; }
+.modal-body { font-size: 14px; }
+.modal-body p { margin: 0 0 8px; }
+.modal-actions { margin: 16px 0 0; }
+body.modal-open { overflow: hidden; }
+
+/* Reports: Lagerwert-Banner und Live-Status-Leiste sind bewusst dunkle Flächen in beiden Themes. */
+.report-banner { background: #0c4a6e; color: #fff; border-color: #0c4a6e; }
+.live-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(110px, 100%), 1fr)); gap: 8px;
+  margin-bottom: 16px; padding: 10px; background: #0f172a; color: #f1f5f9; border-radius: 8px;
+}
+.live-tile { text-align: center; padding: 4px; }
+.live-tile-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+.live-tile-value { font-size: 22px; font-weight: 700; color: #f1f5f9; line-height: 1.1; }
+.live-tile--info .live-tile-value { color: #60a5fa; }
+.live-tile--warning .live-tile-value { color: #fbbf24; }
+.live-tile--success .live-tile-value { color: #4ade80; }
+.live-tile--danger .live-tile-value { color: #f87171; }
+
+/* Barcode-Scanner (components/BarcodeScanner.tsx): Kameraansicht auf dunklem Vollbild, in beiden Themes gleich. */
+.scanner-video { width: 100%; max-width: 480px; border-radius: 8px; background: #111; }
+.scanner-hint { color: #fff; margin-top: 12px; }
+.scanner-cancel { margin-top: 16px; padding: 12px 24px; font-size: 16px; background: #1f2937; color: #fff; border: 1px solid #475569; border-radius: 8px; }
+.scanner-cancel:hover { background: #334155; }
+
+/* Globale Suche (components/GlobalSearch.tsx) */
+.search-input { width: 100%; padding: 16px; font-size: 16px; border: none; border-bottom: 1px solid var(--c-border-light); border-radius: 0; }
+.search-input:focus-visible { outline-offset: -2px; }
+.search-results { list-style: none; margin: 0; padding: 0; max-height: 400px; overflow: auto; }
+.search-result { padding: 10px 16px; cursor: pointer; border-bottom: 1px solid var(--c-border-light); }
+.search-result[aria-selected='true'] { background: var(--c-surface-alt); box-shadow: inset 3px 0 0 var(--c-primary); }
+.search-kind { font-size: 11px; padding: 2px 6px; background: var(--c-border-light); border-radius: 3px; }
+
+/* Bildschirme unter 900 px: Sidebar als ausklappbarer Drawer (Hamburger in der Kopfleiste), Raster brechen um. */
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .app-topbar {
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 250;
+    padding: 8px 12px; background: var(--c-sidebar-bg); color: #fff;
+  }
+  .app-topbar strong { font-size: 16px; }
+  .app-topbar .nav-toggle {
+    background: transparent; color: #fff; border: 1px solid var(--c-sidebar-muted);
+    font-size: 20px; line-height: 1; padding: 4px 10px;
+  }
+  .app-topbar .nav-toggle:hover { background: var(--c-sidebar-hover); }
+  .sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0; z-index: 300;
+    width: min(280px, 85vw); overflow-y: auto;
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform 0.2s ease, visibility 0s linear 0.2s;
+  }
+  .app--nav-open .sidebar { transform: none; visibility: visible; transition: transform 0.2s ease; }
+  .app--nav-open .sidebar-backdrop { display: block; position: fixed; inset: 0; z-index: 290; background: var(--c-overlay); }
+  .main { padding: 16px; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .main { padding: 12px; }
+  .card { padding: 12px; }
+  .toolbar > input, .toolbar > select { min-width: 0; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .collapsible-caret { transition: none; }
+}
+
+/* Print-Layouts: hide chrome, full width content */
+@media print {
+  .sidebar, .app-topbar, .skip-link, .toolbar, button { display: none !important; }
+  .app { grid-template-columns: 1fr; }
+  .main { padding: 0; }
+  .card { border: none; box-shadow: none; }
+}
+
+/* Sprachumschalter DE/EN (components/LanguageSwitcher.tsx): in der Sidebar wie .theme-switch (oben), auf dem Login-Screen schlicht. */
+.lang-switch { display: flex; gap: 2px; }
+.lang-switch--plain { justify-content: flex-end; margin-bottom: 8px; }
+.lang-switch--plain button {
+  margin: 0; padding: 4px 10px; font-size: 11px; width: auto; border-radius: 4px;
+  background: transparent; color: var(--c-text); border: 1px solid var(--c-border);
+}
+.lang-switch--plain button[aria-pressed='true'] { background: var(--c-primary); color: var(--c-on-primary); border-color: var(--c-primary); }

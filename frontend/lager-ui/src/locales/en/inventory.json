@@ -1,0 +1,55 @@
+{
+  "title": "Stocktake",
+  "what": "the stocktakes",
+  "whatOne": "the stocktake",
+  "details": "Details",
+  "start": {
+    "title": "Start a new stocktake",
+    "hint": "Takes a snapshot of the current stock. You can then enter actual quantities and compare them with the expected ones.",
+    "namePlaceholder": "e.g. Annual stocktake 2026",
+    "onlyBin": "Only one bin (optional)",
+    "allBins": "— all bins —",
+    "submit": "Start",
+    "starting": "Starting…",
+    "failed": "The stocktake could not be started:"
+  },
+  "list": {
+    "caption": "Stocktakes"
+  },
+  "col": {
+    "name": "Name",
+    "status": "Status",
+    "lines": "Lines",
+    "created": "Created",
+    "reconciled": "Reconciled",
+    "actions": "Actions"
+  },
+  "detail": {
+    "title": "Stocktake — {{name}}",
+    "status": "Status:",
+    "lines": "Lines:",
+    "diffSum": "Σ |Diff|:",
+    "back": "← List",
+    "uncountedTip": "{{count}} line(s) have not been counted yet.",
+    "reconciling": "Booking…",
+    "reconcile": "✓ Reconcile (apply diffs)",
+    "uncounted": "{{count}} line(s) still without a count.",
+    "reconcileFailed": "The stocktake could not be completed:",
+    "countFailed": "The count could not be saved:",
+    "caption": "Count lines of the stocktake",
+    "colBin": "Bin",
+    "colSku": "SKU",
+    "colExpected": "Expected",
+    "colCounted": "Counted",
+    "colDiff": "Diff",
+    "colReason": "Reason",
+    "countedAria": "Counted quantity {{bin}} {{sku}}",
+    "open": "open",
+    "reasonAria": "Reason {{bin}} {{sku}}"
+  },
+  "confirm": {
+    "title": "Complete stocktake?",
+    "label": "Complete stocktake",
+    "body": "The differences ({{total}} pieces in total) will be booked as stock adjustments and the stocktake will be completed. This cannot be undone."
+  }
+}

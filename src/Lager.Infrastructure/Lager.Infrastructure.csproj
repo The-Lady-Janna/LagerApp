@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- TargetFramework, Nullable, ImplicitUsings u. a. kommen aus der Directory.Build.props im Repo-Root. -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lager.Domain\Lager.Domain.csproj" />
+    <ProjectReference Include="..\Lager.Application\Lager.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- IHttpContextAccessor (Auth/HttpContextCurrentUser) kommt aus dem ASP.NET-Core-Shared-Framework. -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.31" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.31" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Explizit gepinnt: SQLitePCLRaw.lib.e_sqlite3 <= 2.1.11 ist verwundbar (CVE-2025-6965 / GHSA-2m69-gcr7-jv3q,
+      SQLite < 3.50.2). EF Core 8.0.10 hat transitiv 2.1.6 gezogen. Die Version darf nicht hinter die
+      transitive von Microsoft.EntityFrameworkCore.Sqlite zurückfallen; der Test SqliteNativeLibraryTests
+      prüft die tatsächlich geladene SQLite-Version.
+    -->
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.13" />
+  </ItemGroup>
+
+</Project>

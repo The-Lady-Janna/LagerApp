@@ -1,0 +1,54 @@
+# EditorConfig: https://editorconfig.org
+# Gilt fuer Visual Studio, Rider, VS Code (mit Plugin) und die meisten anderen Editoren.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# Frontend, Konfiguration, Doku: 2 Leerzeichen
+[*.{ts,tsx,js,jsx,mjs,cjs,json,jsonc,yml,yaml,html,css,webmanifest,md}]
+indent_size = 2
+
+# MSBuild-Projektdateien: 2 Leerzeichen (wie im Bestand)
+[*.{csproj,props,targets}]
+indent_size = 2
+
+# Markdown: zwei Leerzeichen am Zeilenende sind ein harter Zeilenumbruch
+[*.md]
+trim_trailing_whitespace = false
+
+# Visual-Studio-Solution und Windows-Skripte: CRLF (siehe .gitattributes)
+[*.sln]
+charset = utf-8-bom
+end_of_line = crlf
+indent_style = tab
+
+[*.{bat,cmd}]
+end_of_line = crlf
+
+[*.sh]
+end_of_line = lf
+
+[Makefile]
+indent_style = tab
+
+# C#-Grundregeln. Bewusst nur als Hinweis (suggestion), nichts davon bricht den Build.
+[*.cs]
+indent_size = 4
+csharp_new_line_before_open_brace = all
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_using_directive_placement = outside_namespace:suggestion
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+# Der Bestand nutzt file-scoped Namespaces; es wird nichts erzwungen.
+csharp_style_namespace_declarations = file_scoped:suggestion
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion

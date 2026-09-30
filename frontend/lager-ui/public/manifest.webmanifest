@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "Lager",
+  "short_name": "Lager",
+  "description": "Selbst gehostetes Warehouse-Management-System: Artikel, Bestand, Bestellungen, Picken und Packen",
+  "lang": "de",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

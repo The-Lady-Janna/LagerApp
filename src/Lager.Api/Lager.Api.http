@@ -1,0 +1,538 @@
+# Lager.Api.http - Beispielanfragen an die Lager-API
+#
+# Öffnen in Visual Studio (Endpunkt-Explorer), JetBrains Rider oder Visual Studio Code (Erweiterung "REST Client").
+# Die Anfragen benennen sich mit "# @name ..." und lesen Werte aus früheren Antworten, z. B. {{login.response.body.$.token}}.
+# Von oben nach unten ausführen; jede Anfrage steht für sich und trennt ein "###".
+#
+# Start der API:  dotnet run --project src/Lager.Api   (Profil "http": Port 5099, Umgebung Development, Swagger unter /swagger)
+#                 Docker:  docker compose up           (Port 8080: @host unten anpassen)
+#
+# Anmeldung: Es gibt kein Standard-Passwort. Beim allerersten Start legt die API den Benutzer "admin" an (Benutzername aus
+# Auth:BootstrapAdminUsername) und schreibt ein Einmalpasswort EINMAL in die Konsole (oder nimmt Auth:BootstrapAdminPassword).
+# Dieses Einmalpasswort muss sofort gewechselt werden (Abschnitt 1). Danach gilt nur noch das neue Passwort (@password).
+#
+# Zugangsdaten hier eintragen; keine echten Passwörter in die Versionsverwaltung übernehmen.
+
+@host = http://localhost:5099
+@username = admin
+@oneTimePassword = <Einmalpasswort aus der Konsole>
+@password = <neues Passwort, mindestens 10 Zeichen>
+
+# Beim Wiederholen der Beispiele hochzählen: SKU, Bestellnummer und Lager-Codes müssen eindeutig sein.
+@run = 1
+
+###############################################################################
+# 0. Health und Version (Health anonym, Version braucht die Anmeldung)
+###############################################################################
+
+### Liveness: der Prozess läuft
+GET {{host}}/health/live
+Accept: application/json
+
+### Readiness: die Datenbank ist erreichbar (200) oder nicht (503)
+GET {{host}}/health/ready
+Accept: application/json
+
+###############################################################################
+# 1. Anmeldung
+###############################################################################
+
+### 1a. NUR beim allerersten Start: mit dem Einmalpasswort anmelden (das Token erlaubt nur den Passwortwechsel und /api/auth/me)
+# @name firstLogin
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{oneTimePassword}}"
+}
+
+### 1b. NUR beim allerersten Start: das Passwort ändern (Antwort: ein NEUES Token; das alte ist damit ungültig)
+# @name changePassword
+POST {{host}}/api/auth/change-password
+Authorization: Bearer {{firstLogin.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "currentPassword": "{{oneTimePassword}}",
+  "newPassword": "{{password}}"
+}
+
+### 1c. Anmelden (immer): das Token dieser Anfrage gilt für alle folgenden Abschnitte
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+### Wer bin ich? (prüft das Token)
+GET {{host}}/api/auth/me
+Authorization: Bearer {{login.response.body.$.token}}
+
+### App-Version und Schema-Stand der Datenbank
+GET {{host}}/api/version
+Authorization: Bearer {{login.response.body.$.token}}
+
+###############################################################################
+# 2. Lager-Stammdaten (Rolle Manager): Lager -> Zone -> Gang -> Regal -> Lagerplatz
+###############################################################################
+
+### Lager anlegen (201 mit Location auf GET /api/warehouse/{id})
+# @name createWarehouse
+POST {{host}}/api/warehouse
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "HTTP{{run}}",
+  "name": "Beispiel-Lager {{run}}"
+}
+
+### Lager lesen
+GET {{host}}/api/warehouse/{{createWarehouse.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Lager ändern
+PUT {{host}}/api/warehouse/{{createWarehouse.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "HTTP{{run}}",
+  "name": "Beispiel-Lager {{run}} (umbenannt)"
+}
+
+### Zone anlegen
+# @name createZone
+POST {{host}}/api/warehouse/zones
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "warehouseId": "{{createWarehouse.response.body.$.id}}",
+  "code": "Z1",
+  "name": "Zone 1"
+}
+
+### Zone ändern
+PUT {{host}}/api/warehouse/zones/{{createZone.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "Z1",
+  "name": "Zone 1 (Wareneingang)"
+}
+
+### Gang anlegen
+# @name createAisle
+POST {{host}}/api/warehouse/aisles
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "zoneId": "{{createZone.response.body.$.id}}",
+  "code": "A1"
+}
+
+### Gang ändern
+PUT {{host}}/api/warehouse/aisles/{{createAisle.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "A1",
+  "orientation": "AlongX"
+}
+
+### Regal mit drei Lagerplätzen anlegen (die Antwort nennt die Lagerplätze in "locations")
+# @name createShelf
+POST {{host}}/api/warehouse/shelves
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "aisleId": "{{createAisle.response.body.$.id}}",
+  "code": "R1-{{run}}",
+  "position": { "xMm": 1000, "yMm": 1000, "zMm": 0 },
+  "widthMm": 1800,
+  "depthMm": 600,
+  "heightMm": 2000,
+  "initialBinCount": 3,
+  "binWidthMm": 600,
+  "binDepthMm": 600,
+  "binHeightMm": 500,
+  "binMaxWeightGrams": 50000
+}
+
+### Regal ändern
+PUT {{host}}/api/warehouse/shelves/{{createShelf.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "R1-{{run}}",
+  "widthMm": 1800,
+  "depthMm": 600,
+  "heightMm": 2200
+}
+
+### Lagerplatz in einem Regal ergänzen (201; Location zeigt auf die Liste der Lagerplätze)
+# Bekannter Fehler: Diese Anfrage antwortet derzeit 409 concurrency_conflict, weil WarehouseService.AddBinToShelfAsync das neue Fach
+# nicht als neu (Added) markiert. Der direkte Weg (POST /api/warehouse/storage-locations, gleich darunter) funktioniert.
+# @name addBin
+POST {{host}}/api/warehouse/shelves/{{createShelf.response.body.$.id}}/bins
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "R1-{{run}}-X",
+  "widthMm": 600,
+  "depthMm": 600,
+  "heightMm": 500,
+  "maxWeightGrams": 50000
+}
+
+### Lagerplatz direkt anlegen
+# @name createLocation
+POST {{host}}/api/warehouse/storage-locations
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "shelfId": "{{createShelf.response.body.$.id}}",
+  "code": "R1-{{run}}-Y",
+  "position": { "xMm": 0, "yMm": 0, "zMm": 0 },
+  "widthMm": 600,
+  "depthMm": 600,
+  "heightMm": 500,
+  "maxWeightGrams": 50000
+}
+
+### Lagerplatz ändern
+PUT {{host}}/api/warehouse/storage-locations/{{createLocation.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "R1-{{run}}-Y",
+  "widthMm": 600,
+  "depthMm": 600,
+  "heightMm": 600,
+  "maxWeightGrams": 60000
+}
+
+### Lagerplatz löschen (204; 409, solange Bestand oder offene Aufgaben darauf liegen)
+DELETE {{host}}/api/warehouse/storage-locations/{{createLocation.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Wegwerf-Lager: anlegen und von unten nach oben wieder löschen (DELETE: 204; 409 warehouse_not_empty, solange Bestand oder offene Aufgaben darunter liegen)
+# @name createTempWarehouse
+POST {{host}}/api/warehouse
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "code": "TMP{{run}}",
+  "name": "Wegwerf-Lager {{run}}"
+}
+
+### Wegwerf-Lager: Zone
+# @name createTempZone
+POST {{host}}/api/warehouse/zones
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "warehouseId": "{{createTempWarehouse.response.body.$.id}}",
+  "code": "Z1",
+  "name": "Zone 1"
+}
+
+### Wegwerf-Lager: Gang
+# @name createTempAisle
+POST {{host}}/api/warehouse/aisles
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "zoneId": "{{createTempZone.response.body.$.id}}",
+  "code": "A1"
+}
+
+### Wegwerf-Lager: Regal mit einem Lagerplatz
+# @name createTempShelf
+POST {{host}}/api/warehouse/shelves
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "aisleId": "{{createTempAisle.response.body.$.id}}",
+  "code": "T{{run}}",
+  "position": { "xMm": 1000, "yMm": 1000, "zMm": 0 },
+  "widthMm": 1800,
+  "depthMm": 600,
+  "heightMm": 2000,
+  "initialBinCount": 1,
+  "binWidthMm": 600,
+  "binDepthMm": 600,
+  "binHeightMm": 500,
+  "binMaxWeightGrams": 50000
+}
+
+### Regal löschen (204; samt seinen leeren Lagerplätzen)
+DELETE {{host}}/api/warehouse/shelves/{{createTempShelf.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Gang löschen (204)
+DELETE {{host}}/api/warehouse/aisles/{{createTempAisle.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Zone löschen (204)
+DELETE {{host}}/api/warehouse/zones/{{createTempZone.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Lager löschen (204)
+DELETE {{host}}/api/warehouse/{{createTempWarehouse.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Ganzes Layout lesen
+GET {{host}}/api/warehouse/layout
+Authorization: Bearer {{login.response.body.$.token}}
+
+###############################################################################
+# 3. Artikel
+###############################################################################
+
+### Artikel anlegen (201 mit Location auf GET /api/articles/{id}); Maße in mm, Gewicht in g, Preis in Cent
+# @name createArticle
+POST {{host}}/api/articles
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "sku": "HTTP-{{run}}",
+  "name": "Beispielartikel aus der .http-Datei",
+  "description": "Sechskantschraube M8x40, 100 Stück",
+  "dimensions": { "lengthMm": 120, "widthMm": 80, "heightMm": 40 },
+  "weightGrams": 450,
+  "stacking": { "isStackable": true, "stackingAxis": "Z", "stackingIncrementMm": 30, "maxStackCount": 8 },
+  "minStock": 5,
+  "reorderPoint": 10,
+  "maxStock": 100,
+  "purchasePriceCents": 1250,
+  "gtin": "4006381333931"
+}
+
+### Artikel lesen
+GET {{host}}/api/articles/{{createArticle.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Artikel suchen (Name, SKU, Alternativ-SKU oder GTIN)
+GET {{host}}/api/articles?search=HTTP-
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Artikel per gescanntem Code auflösen (GTIN, SKU oder Alternativ-SKU; 404 unbekannt, 409 mehrdeutig)
+GET {{host}}/api/articles/by-code/4006381333931
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Artikel ändern
+PUT {{host}}/api/articles/{{createArticle.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "name": "Beispielartikel (geändert)",
+  "description": "Sechskantschraube M8x40, 100 Stück",
+  "dimensions": { "lengthMm": 120, "widthMm": 80, "heightMm": 40 },
+  "weightGrams": 450,
+  "stacking": { "isStackable": true, "stackingAxis": "Z", "stackingIncrementMm": 30, "maxStackCount": 8 },
+  "minStock": 5,
+  "reorderPoint": 10,
+  "maxStock": 100,
+  "purchasePriceCents": 1300,
+  "gtin": "4006381333931"
+}
+
+###############################################################################
+# 4. Bestand, Bestellung, Pickliste
+###############################################################################
+
+### Bestand einbuchen (Bestandskorrektur, Rolle Manager): 50 Stück in den ersten Lagerplatz des Regals
+# @name adjustStock
+POST {{host}}/api/stock/adjust
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "articleId": "{{createArticle.response.body.$.id}}",
+  "storageLocationId": "{{createShelf.response.body.$.locations[0].id}}",
+  "delta": 50,
+  "lotNumber": "CH-{{run}}",
+  "expiryDate": "2027-12-31T00:00:00Z"
+}
+
+### Bestellung anlegen (manuell; 201 mit Location auf GET /api/orders/{id})
+# @name createOrder
+POST {{host}}/api/orders/manual
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "orderNumber": "HTTP-{{run}}",
+  "customerReference": "Beispielkunde",
+  "lines": [
+    { "articleId": "{{createArticle.response.body.$.id}}", "quantity": 2 }
+  ]
+}
+
+### Bestellung über die externe Bestell-API anlegen (Zeilen per SKU; der Idempotency-Key macht den Aufruf wiederholbar: derselbe Key liefert 200 statt eines Duplikats)
+# @name createApiOrder
+POST {{host}}/api/orders
+Authorization: Bearer {{login.response.body.$.token}}
+Idempotency-Key: http-beispiel-{{run}}
+Content-Type: application/json
+
+{
+  "orderNumber": "HTTP-API-{{run}}",
+  "customerReference": "Externer Shop",
+  "lines": [
+    { "sku": "HTTP-{{run}}", "quantity": 1 }
+  ]
+}
+
+### Bestellung lesen
+GET {{host}}/api/orders/{{createOrder.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Bestellung stornieren (aus New, Picking oder Picked; aus Packed oder Shipped 409)
+# Zum Ausprobieren eine eigene Bestellung stornieren: die Bestellung für die Pickliste unten bleibt offen.
+POST {{host}}/api/orders/{{createApiOrder.response.body.$.id}}/cancel
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Pickliste generieren (optimierte Route; alle Bestellungen müssen New sein; 201 mit Location auf GET /api/picklists/{id})
+# @name createPickList
+POST {{host}}/api/picklists/generate
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "orderIds": [ "{{createOrder.response.body.$.id}}" ]
+}
+
+### Pickliste lesen
+GET {{host}}/api/picklists/{{createPickList.response.body.$.id}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Lieferschein der Pickliste als PDF
+GET {{host}}/api/picklists/{{createPickList.response.body.$.id}}/shipping-label.pdf
+Authorization: Bearer {{login.response.body.$.token}}
+
+### ZPL-Etikett eines Lagerplatzes, 3 Kopien (Rolle Picker; Download als .zpl)
+GET {{host}}/api/labels/bin/{{createShelf.response.body.$.locations[0].id}}.zpl?copies=3
+Authorization: Bearer {{login.response.body.$.token}}
+
+###############################################################################
+# 5. Auswertungen
+###############################################################################
+
+### MHD-Warnliste: abgelaufen oder in den nächsten 30 Tagen ablaufend (days 1 bis 3660)
+GET {{host}}/api/reports/expiring?days=30
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Dashboard der letzten 7 Tage
+GET {{host}}/api/reports/dashboard?range=7
+Authorization: Bearer {{login.response.body.$.token}}
+
+###############################################################################
+# 6. CSV-Export und -Import (Rolle Manager)
+###############################################################################
+
+### Artikel als CSV exportieren (Semikolon und Dezimalkomma; delimiter=comma für Komma und Dezimalpunkt)
+GET {{host}}/api/export/articles.csv?delimiter=semicolon
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Bestand als CSV exportieren
+GET {{host}}/api/export/stock.csv
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Bewegungen (Ledger) eines Zeitraums als CSV exportieren
+GET {{host}}/api/export/movements.csv?from=2026-01-01&to=2026-12-31
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Artikel-Import prüfen (Trockenlauf, dryRun=true ist der Standard und schreibt nichts)
+POST {{host}}/api/import/articles?dryRun=true&delimiter=semicolon
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: multipart/form-data; boundary=LagerBoundary
+
+--LagerBoundary
+Content-Disposition: form-data; name="file"; filename="articles.csv"
+Content-Type: text/csv
+
+< ../../docs/samples/articles.csv
+--LagerBoundary--
+
+### Artikel-Import übernehmen (dryRun=false schreibt in einer Transaktion; skipErrors=true übernimmt nur die fehlerfreien Zeilen)
+POST {{host}}/api/import/articles?dryRun=false&skipErrors=false&delimiter=semicolon
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: multipart/form-data; boundary=LagerBoundary
+
+--LagerBoundary
+Content-Disposition: form-data; name="file"; filename="articles.csv"
+Content-Type: text/csv
+
+< ../../docs/samples/articles.csv
+--LagerBoundary--
+
+###############################################################################
+# 7. Backups (Rolle Admin, nur SQLite)
+###############################################################################
+
+### Backup-Einstellungen und Betriebszustand
+GET {{host}}/api/admin/backup-settings
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Sicherungsdateien auflisten
+GET {{host}}/api/admin/backups
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Backup jetzt erzeugen (201, Location = Download der Datei)
+# @name createBackup
+POST {{host}}/api/admin/backups
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Backup herunterladen (Enthält alle Daten samt Passwort-Hashes: sicher aufbewahren)
+GET {{host}}/api/admin/backups/{{createBackup.response.body.$.name}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### Backup löschen (204)
+DELETE {{host}}/api/admin/backups/{{createBackup.response.body.$.name}}
+Authorization: Bearer {{login.response.body.$.token}}
+
+### ACHTUNG: Restore ersetzt die LAUFENDE Datenbank durch ein vorhandenes Backup und verlangt danach einen Neustart der API.
+# Erlaubt in Development oder mit Backup:AllowRestore=true; "confirm" muss RESTORE lauten. Vorher ein eigenes Backup anlegen und
+# den Namen unten eintragen. Wer das nicht will, führt diese Anfrage nicht aus.
+POST {{host}}/api/admin/restore
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: multipart/form-data; boundary=LagerBoundary
+
+--LagerBoundary
+Content-Disposition: form-data; name="backupName"
+
+<Name aus GET /api/admin/backups>
+--LagerBoundary
+Content-Disposition: form-data; name="confirm"
+
+RESTORE
+--LagerBoundary--
+
+###############################################################################
+# 8. OpenAPI (nur in Development oder mit Swagger:Enabled=true)
+###############################################################################
+
+### OpenAPI-Beschreibung (Swagger UI: {{host}}/swagger)
+GET {{host}}/swagger/v1/swagger.json
+Accept: application/json

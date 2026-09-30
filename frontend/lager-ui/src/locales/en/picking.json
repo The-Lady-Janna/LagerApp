@@ -1,0 +1,244 @@
+{
+  "error": "Error:",
+  "open": "Open",
+  "col": {
+    "number": "Number",
+    "status": "Status",
+    "lines": "Lines",
+    "created": "Created",
+    "actions": "Actions",
+    "location": "Location",
+    "sku": "SKU",
+    "quantity": "Quantity",
+    "order": "Order"
+  },
+  "lists": {
+    "what": "the pick lists",
+    "title": "Pick lists",
+    "caption": "Pick lists",
+    "cardTitle": "Pick lists ({{count}})",
+    "distance": "Distance",
+    "waypoints": "Waypoints",
+    "empty": "No pick lists generated yet.",
+    "devOnlyTip": "Development function: the server only allows it in the Development environment.",
+    "reset": {
+      "button": "Reset unpacked pick lists ({{count}})",
+      "pending": "Resetting…",
+      "confirmHead_one": "Reset {{count}} unpacked pick list?",
+      "confirmHead_other": "Reset {{count}} unpacked pick lists?",
+      "confirmBody": "Only pick lists that have not been packed yet are removed. Pick lists that are already packed (status \"Completed\") and the stock booked with them are kept. The affected orders are reset to status \"New\".\n\nThis cannot be undone.",
+      "done": "{{count}} unpacked pick list(s) removed.",
+      "skipped": "{{count}} already packed pick list(s) were kept.",
+      "failed": "Error during reset:"
+    },
+    "reseed": {
+      "button": "Delete the whole DB + recreate demo data (development only)",
+      "pending": "Resetting the database…",
+      "confirm": "WARNING: All data will be deleted and replaced with demo data.\n\nThis affects: articles, warehouse layout (shelves, bins), stock, orders, pick lists, walls and pick points. All items you created manually will be lost.\n\nContinue?",
+      "confirmAgain": "Really sure? Last warning — all current data will be gone.",
+      "result": "{{message}} — {{articles}} articles, {{shelves}} shelves, {{bins}} bins, {{stockItems}} stock bookings, {{orders}} orders, {{walls}} walls, {{pickPoints}} pick points.",
+      "failed": "Error during reseed:"
+    },
+    "bulk": {
+      "title": "Bulk test data",
+      "hint": "Development function (the server only allows it in the Development environment). Adds random articles (~5%), stock (~10%) and orders (~85%) <strong>in addition</strong> to the existing DB. Clicking repeatedly stacks — each run has unique BULK IDs.",
+      "count": "Count",
+      "button": "+ {{count}} bulk records",
+      "pending": "Creating {{count}} items…",
+      "confirm": "Create {{count}} random test records?\n\nArticles, stock and orders are created IN ADDITION to the existing database and cannot be removed together again. Intended for development/test environments only.",
+      "result": "{{message}} ({{articles}} articles + {{stockItems}} stock items + {{orders}} orders)"
+    }
+  },
+  "detail": {
+    "what": "the pick list",
+    "title": "Pick list {{number}}",
+    "status": "Status:",
+    "distance": "Total distance:",
+    "lines": "Lines:",
+    "cart": "Cart:",
+    "finish": "✔ Finish picking",
+    "toPack": "📦 Go to packing",
+    "packed": "✔ Packed",
+    "openMobile": "📱 Open mobile picker",
+    "confirm": {
+      "title": "Finish picking?",
+      "label": "Mark as picked",
+      "body": "The pick list will be marked as “picking finished”. It will then appear under “Packing” for packing."
+    },
+    "recalc": {
+      "title": "Recalculate route",
+      "hint": "If you changed walls, shelves or bins, this recalculates the route with the current layout. Order and waypoints are updated.",
+      "start": "Start point",
+      "startAuto": "Automatic (first start pick point)",
+      "end": "End point (optional)",
+      "noEnd": "— no return route —",
+      "pending": "Calculating…",
+      "done": "Route updated."
+    },
+    "routeTitle": "Route in the warehouse",
+    "order": {
+      "title": "Sequence",
+      "caption": "Sequence of the lines"
+    }
+  },
+  "packing": {
+    "title": "Packing",
+    "overview": "Overview",
+    "tile": {
+      "ready": "Ready to pack",
+      "picking": "Still picking",
+      "done": "Already packed"
+    },
+    "ready": {
+      "title": "Ready to pack ({{count}})",
+      "hint": "Pick lists that have been picked and are waiting to be packed."
+    },
+    "picking": {
+      "title": "Still picking ({{count}})",
+      "hint": "Not yet finished from the picker's point of view — as soon as \"Finish picking\" is clicked, they move to the top."
+    },
+    "done": {
+      "title": "Packed ({{count}})"
+    },
+    "empty": "No entries.",
+    "cart": "Cart",
+    "orders": "Orders",
+    "pack": "📦 Pack"
+  },
+  "pack": {
+    "title": "Pick list {{number}} – Packing",
+    "alreadyPacked": " (already packed)",
+    "deviationConfirm": "Warning: the confirmed quantities deviate from the target.\nThis will be recorded in the pick list as is — really submit?",
+    "parcels": "Parcels",
+    "intro": "Each order becomes <strong>one parcel</strong>. Enter for each line how many pieces were actually packed — the planned quantity (or the quantity counted in the mobile picker) is pre-filled. On submit, the pick list is marked as <strong>Completed</strong> and all quantities are saved.",
+    "fromPicker": {
+      "counted_one": "Taken over from the mobile picker: {{count}} counted line",
+      "counted_other": "Taken over from the mobile picker: {{count}} counted lines",
+      "deviations": ", of which {{count}} deviate from the target ({{list}})",
+      "none": ", no deviation from the target",
+      "check": ". Please check — booking only happens with “Finish packing”."
+    },
+    "allPlanned": "All to planned quantity",
+    "totalsMatch": "Target: <strong>{{planned}}</strong> · Actual: <strong>{{actual}}</strong> ✓",
+    "totalsDiff": "Target: <strong>{{planned}}</strong> · Actual: <strong>{{actual}}</strong> ⚠ Deviation",
+    "caption": "Lines of the pick list by parcel",
+    "colArticle": "Article",
+    "colPlanned": "Target",
+    "colActual": "Actual",
+    "parcel": "📦 Parcel {{n}} — order <code>{{order}}</code>",
+    "parcelInfo_one": "({{count}} line, target {{planned}} / actual {{actual}}{{mark}})",
+    "parcelInfo_other": "({{count}} lines, target {{planned}} / actual {{actual}}{{mark}})",
+    "actualAria": "Actual quantity {{sku}}",
+    "confirmed": "confirmed: {{quantity}}",
+    "ok": "OK",
+    "alreadyPackedButton": "Already packed",
+    "confirming": "Confirming…",
+    "finish": "Finish packing",
+    "pdfBusy": "Loading PDF…",
+    "pdf": "📄 Delivery note as PDF",
+    "backToList": "Back to pick list",
+    "failed": "Packing failed:"
+  },
+  "mobile": {
+    "loading": "Loading pick list…",
+    "empty": "No lines in this pick list.",
+    "skuNotInBin": "SKU \"{{sku}}\" is not in this bin",
+    "targetReached": "{{sku}}: target quantity already counted",
+    "scanned": "{{sku}} +1 → {{result}} of {{total}}",
+    "undone": "Scan {{sku}} undone",
+    "binConfirmedMsg": "Bin {{bin}} confirmed",
+    "wrongBin": "Wrong bin scanned: {{scanned}} (expected: {{expected}})",
+    "finishFailed": "Picking could not be finished.",
+    "back": "Back",
+    "pickList": "Pick list",
+    "stop": "Stop {{n}} / {{total}}",
+    "binConfirmed": "✓ Bin confirmed",
+    "goToBin": "Go to bin",
+    "scanBin": "📷 Scan bin",
+    "order": "Order",
+    "planned": "Target",
+    "decrease": "Decrease quantity of {{sku}}",
+    "countedAria": "{{sku}} picked quantity",
+    "increase": "Increase quantity of {{sku}}",
+    "notCounted": "Not counted – counts as target",
+    "counted": "Counted: {{counted}} of {{planned}}",
+    "scanArticle": "📷 Scan article (+1)",
+    "undo": "↶ Undo scan ({{sku}})",
+    "deviations_one": "⚠ {{count}} line deviates from the target: {{list}}. The counted quantities are pre-filled as actual quantity on the packing page; booking only happens once “Finish packing” is confirmed there.",
+    "deviations_other": "⚠ {{count}} lines deviate from the target: {{list}}. The counted quantities are pre-filled as actual quantity on the packing page; booking only happens once “Finish packing” is confirmed there.",
+    "retryHint": "Your counts are still there — please tap “Finish picking” again.",
+    "prev": "← Back",
+    "next": "Next →",
+    "finish": "✓ Finish picking"
+  },
+  "carts": {
+    "what": "the pick carts",
+    "title": "Pick cart configurations",
+    "formEdit": "Edit cart",
+    "formNew": "New cart configuration",
+    "name": "Name",
+    "namePlaceholder": "e.g. Standard cart",
+    "levels": "Number of levels",
+    "maxWeight": "Max. total weight (kg)",
+    "levelWidth": "Level width (mm)",
+    "levelDepth": "Level depth (mm)",
+    "levelHeight": "Level height (mm)",
+    "schema": "Schematic preview",
+    "volume": "Total volume: <strong>{{volume}} m³</strong> ({{levels}} levels × {{w}}×{{d}}×{{h}} mm)",
+    "saveChanges": "Save changes",
+    "create": "Create cart",
+    "saveFailed": "Saving failed:",
+    "deleteFailed": "Deleting failed:",
+    "list": {
+      "title": "Existing configurations ({{count}})",
+      "caption": "Existing configurations",
+      "levels": "Levels",
+      "dimensions": "Level dimensions (W×D×H mm)",
+      "maxWeight": "Max. weight",
+      "volume": "Volume",
+      "empty": "No pick carts configured yet."
+    },
+    "delete": {
+      "title": "Delete cart configuration?",
+      "body": "The configuration <strong>{{name}}</strong> will be deleted. This cannot be undone."
+    },
+    "schemaAria": "Schematic of the pick cart with {{levels}} levels, depth {{depth}} mm",
+    "level": "Level {{n}}",
+    "depth": "Depth: {{depth}} mm"
+  },
+  "waves": {
+    "what": "the waves",
+    "title": "Waves",
+    "new": "+ New wave",
+    "caption": "Waves",
+    "description": "Description",
+    "cutoff": "Cutoff",
+    "orders": "Orders",
+    "pickLists": "Pick lists",
+    "release": {
+      "title": "Release wave?",
+      "label": "Release",
+      "body": "Release wave <code>{{number}}</code> with {{count}} order(s): a consolidated pick list will be created."
+    },
+    "cancel": {
+      "title": "Cancel wave?",
+      "label": "Cancel wave",
+      "back": "Back",
+      "body": "Wave <code>{{number}}</code> will be cancelled. This cannot be undone."
+    },
+    "row": {
+      "release": "▶ Release"
+    },
+    "form": {
+      "title": "New wave",
+      "descriptionPlaceholder": "e.g. Morning cutoff 12:00",
+      "cutoff": "Cutoff time (optional)",
+      "select": "Select orders ({{selected}} / {{total}})",
+      "none": "No open orders available.",
+      "orderInfo": "{{count}} lines",
+      "orderInfoRef": "{{count}} lines · {{ref}}",
+      "create": "Create wave ({{count}})",
+      "createFailed": "Creating failed:"
+    }
+  }
+}

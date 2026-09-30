@@ -1,0 +1,70 @@
+# Statische Sicherheitsanalyse mit CodeQL (C# und JavaScript/TypeScript).
+# Läuft bei Push auf main, bei Pull Requests und einmal pro Woche (neue Suchregeln finden auch alten Code).
+# Die Ergebnisse erscheinen unter "Security > Code scanning" im Repository.
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Montags 04:23 Uhr UTC
+    - cron: '23 4 * * 1'
+
+# Grundrechte auf "nur lesen"; der Analyse-Job hebt security-events auf "write" an.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  analyze:
+    name: Analyse (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # C# wird manuell gebaut, damit dasselbe SDK wie in der CI (global.json) verwendet wird.
+          - language: csharp
+            build-mode: manual
+          # JavaScript/TypeScript braucht keinen Build.
+          - language: javascript-typescript
+            build-mode: none
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: .NET SDK einrichten (Version aus global.json)
+        if: ${{ matrix.language == 'csharp' }}
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: CodeQL initialisieren
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      # Bewusst ohne LagerStrict: Warnungen sollen die Analyse nicht verhindern.
+      # --no-incremental erzwingt eine vollständige Kompilierung, die CodeQL beobachten kann.
+      - name: C#-Lösung bauen
+        if: ${{ matrix.language == 'csharp' }}
+        run: dotnet build Lager.sln -c Release --no-incremental
+
+      - name: CodeQL-Analyse durchführen
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"

@@ -1,0 +1,84 @@
+{
+  "sidebar": "Sidebar",
+  "main": "Main navigation",
+  "skipLink": "Skip to content",
+  "toggle": "Navigation",
+  "groups": {
+    "stammdaten": "Master data",
+    "wareneingang": "Inbound",
+    "bestand": "Stock",
+    "auslieferung": "Outbound",
+    "auswertung": "Analytics",
+    "system": "System",
+    "weitere": "More"
+  },
+  "routes": {
+    "articles": "Articles",
+    "suppliers": "Suppliers",
+    "customers": "Customers",
+    "layout": "Warehouse layout",
+    "cart-configs": "Pick carts",
+    "warehouses": "Warehouse structure",
+    "labels": "Labels",
+    "import-export": "Import & export",
+    "inbound": "Goods receipt",
+    "purchase-orders": "Purchasing",
+    "replenishment": "Replenishment",
+    "stock": "Stock",
+    "inventory": "Stocktake",
+    "orders": "Orders",
+    "picklists": "Pick lists",
+    "waves": "Waves",
+    "packing": "Packing",
+    "shipments": "Shipping",
+    "returns": "Returns",
+    "reports": "Reports",
+    "audit": "Audit log",
+    "traceability": "Lot traceability",
+    "users": "Users",
+    "system": "Backup & restore"
+  },
+  "footer": {
+    "loggedInAs": "Logged in as <strong>{{name}}</strong>",
+    "noRole": "no role",
+    "changePassword": "🔒 Change password"
+  },
+  "theme": {
+    "label": "Colour scheme",
+    "title": "Theme: {{name}}",
+    "short": {
+      "light": "☀️ light",
+      "dark": "🌙 dark",
+      "auto": "🖥 auto"
+    },
+    "names": {
+      "light": "Light",
+      "dark": "Dark",
+      "auto": "Automatic (like the operating system)"
+    }
+  },
+  "language": {
+    "label": "Language",
+    "names": {
+      "de": "Deutsch",
+      "en": "English"
+    }
+  },
+  "search": {
+    "title": "Search",
+    "aria": "Search for articles, bins, orders and customers",
+    "placeholder": "Search articles, bins, orders, customers… (at least 2 characters)",
+    "results": "Search results",
+    "hits_one": "{{count}} result",
+    "hits_other": "{{count}} results",
+    "loading": "Loading search data…",
+    "noHits": "No results.",
+    "kind": {
+      "article": "Article",
+      "bin": "Bin",
+      "order": "Order",
+      "customer": "Customer"
+    },
+    "footer": "↑↓ navigate · Enter open · Esc close · <kbd>Cmd/Ctrl+K</kbd> open"
+  }
+}

@@ -1,0 +1,41 @@
+# Lager mit MySQL statt SQLite: Zusatzdatei zu docker-compose.yml.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.mysql.yml up --build
+#
+# Pflicht in .env (Vorlage: .env.example): LAGER_DB_PASSWORD und LAGER_DB_ROOT_PASSWORD. Ohne sie bricht Compose ab.
+# Die Passwörter kommen in einen Verbindungsstring: Zeichen wie ";" oder "=" darin vermeiden.
+# Lager wartet mit dem Start, bis MySQL bereit ist (Healthcheck + depends_on). Backup und Restore der API gibt es nur für
+# SQLite; MySQL sichert man mit mysqldump (z. B. docker compose exec mysql mysqldump ...).
+
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: lager
+      MYSQL_USER: lager
+      MYSQL_PASSWORD: "${LAGER_DB_PASSWORD:?Bitte LAGER_DB_PASSWORD in .env setzen}"
+      MYSQL_ROOT_PASSWORD: "${LAGER_DB_ROOT_PASSWORD:?Bitte LAGER_DB_ROOT_PASSWORD in .env setzen}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      # Über TCP (127.0.0.1) statt Socket: während der Ersteinrichtung läuft nur ein temporärer Server ohne Netzwerk, der
+      # noch nicht "bereit" sein darf.
+      test: ["CMD-SHELL", "MYSQL_PWD=\"$$MYSQL_ROOT_PASSWORD\" mysqladmin ping --host=127.0.0.1 --user=root --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  lager:
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      Database__Provider: MySql
+      Database__ConnectionString: "Server=mysql;Port=3306;Database=lager;User=lager;Password=${LAGER_DB_PASSWORD:?Bitte LAGER_DB_PASSWORD in .env setzen}"
+      # Optional: feste Serverversion statt einmaliger Erkennung beim Start (z. B. 8.4.0 oder 10.11.0-mariadb).
+      # Database__MySqlServerVersion: "8.4.0"
+
+volumes:
+  mysql-data:

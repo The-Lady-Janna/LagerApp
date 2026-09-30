@@ -1,0 +1,74 @@
+# Automatische Abhängigkeits-Updates über Dependabot.
+# Alle Ökosysteme: wöchentlich (montags), Minor-/Patch-Updates gesammelt in einem Pull Request,
+# Major-Updates einzeln, höchstens 5 offene Pull Requests je Ökosystem, Commit-Präfix "deps".
+version: 2
+
+updates:
+  # Backend: NuGet-Pakete aller Projekte (Lager.sln im Root)
+  - package-ecosystem: nuget
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+    groups:
+      nuget-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Frontend: npm-Pakete der React-Anwendung
+  - package-ecosystem: npm
+    directory: "/frontend/lager-ui"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+    groups:
+      npm-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Actions in .github/workflows
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+    groups:
+      actions-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Basis-Images im Dockerfile (Node-, .NET-SDK- und ASP.NET-Image). Fehlt das Dockerfile (etwa in einem Fork ohne
+  # Docker-Dateien), meldet Dependabot für diesen Eintrag nur "keine Dateien gefunden".
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: deps
+    groups:
+      docker-minor-patch:
+        update-types:
+          - minor
+          - patch

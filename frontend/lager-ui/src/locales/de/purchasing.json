@@ -1,0 +1,128 @@
+{
+  "choose": "— wähle —",
+  "createFailed": "Anlegen fehlgeschlagen:",
+  "po": {
+    "what": "die Bestellungen",
+    "title": "Beschaffung",
+    "new": "+ Neue PO",
+    "sendFailed": "Versenden fehlgeschlagen:",
+    "toInbound": "Zum Wareneingang",
+    "caption": "Bestellungen an Lieferanten",
+    "inboundCreated": "Wareneingang {{shipment}} zur Bestellung {{po}} mit {{count}} Position(en) als Entwurf angelegt. Gebucht ist noch nichts: dazu im Wareneingang „Empfangen“ wählen.",
+    "col": {
+      "number": "Nummer",
+      "supplier": "Lieferant",
+      "status": "Status",
+      "value": "Wert",
+      "created": "Erstellt",
+      "expected": "Erwartet",
+      "actions": "Aktionen"
+    },
+    "suggestions": {
+      "title": "📌 Bestellvorschläge",
+      "hint": "Artikel deren Bestand unter ReorderPoint liegt, gruppiert nach Lieferant.",
+      "noSupplier": "Kein Lieferant zugewiesen",
+      "createPo": "→ PO erstellen ({{count}} Pos.)",
+      "leadTime": "Lieferzeit {{days}}d · {{count}} Artikel",
+      "line": "{{name}} — Bestand {{stock}}/{{reorder}} → Vorschlag {{suggested}}"
+    },
+    "send": {
+      "title": "Bestellung versenden?",
+      "label": "Versenden",
+      "theSupplier": "den Lieferanten",
+      "body": "Bestellung <code>{{number}}</code> an {{supplier}} versenden. Danach lässt sie sich nicht mehr bearbeiten."
+    },
+    "inbound": {
+      "title": "Wareneingang anlegen?",
+      "label": "Wareneingang anlegen",
+      "body": "Legt zur Bestellung <code>{{number}}</code> einen Wareneingang (Entwurf) mit den noch offenen Mengen an.<strong> Es wird noch nichts gebucht:</strong> den Bestand bucht erst der Wareneingang („Empfangen“), und erst dann gilt die Bestellung als (teilweise) geliefert.",
+      "target": "Ziel-Lagerplatz"
+    },
+    "row": {
+      "close": "Zu",
+      "details": "Details",
+      "createInbound": "📥 Wareneingang anlegen",
+      "sku": "SKU",
+      "ordered": "Bestellt",
+      "received": "Empfangen",
+      "price": "Preis"
+    },
+    "form": {
+      "titleSuggestion": "PO aus Vorschlag — {{supplier}}",
+      "titleNew": "Neue PO",
+      "supplier": "Lieferant",
+      "expected": "Erwartetes Lieferdatum",
+      "notes": "Notizen",
+      "caption": "Positionen der neuen Bestellung",
+      "article": "Artikel",
+      "quantity": "Menge",
+      "price": "Preis (Cent)",
+      "articleAria": "Artikel Zeile {{n}}",
+      "quantityAria": "Menge Zeile {{n}}",
+      "priceAria": "Preis in Cent Zeile {{n}}",
+      "removeAria": "Zeile {{n}} entfernen",
+      "addLine": "+ Zeile",
+      "create": "Anlegen (Draft)"
+    }
+  },
+  "suppliers": {
+    "what": "die Lieferanten",
+    "title": "Lieferanten",
+    "new": "+ Neuer Lieferant",
+    "toggleFailed": "Statusänderung fehlgeschlagen:",
+    "caption": "Lieferanten",
+    "col": {
+      "code": "Code",
+      "name": "Name",
+      "contact": "Kontakt",
+      "leadTime": "Lieferzeit",
+      "minOrder": "Min-Order",
+      "currency": "Währung",
+      "status": "Status",
+      "actions": "Aktionen"
+    },
+    "days": "{{count}}d",
+    "active": "✓ aktiv",
+    "inactive": "inaktiv",
+    "edit": "Edit",
+    "deactivate": "Deaktivieren",
+    "activate": "Aktivieren",
+    "form": {
+      "titleEdit": "Edit {{code}}",
+      "titleNew": "Neuer Lieferant",
+      "email": "Email",
+      "phone": "Telefon",
+      "leadTime": "Lieferzeit (Tage)",
+      "minOrder": "Min-Bestellwert (Cent)",
+      "notes": "Notizen",
+      "saveFailed": "Speichern fehlgeschlagen:"
+    }
+  },
+  "replenishment": {
+    "what": "die Nachschub-Aufgaben",
+    "title": "Replenishment",
+    "scanning": "Scanne…",
+    "scan": "🔍 Hot-Picks scannen",
+    "openOnly": "Nur offene",
+    "created": "✓ {{count}} neue Tasks erzeugt",
+    "scanFailed": "Scan fehlgeschlagen:",
+    "none": "Keine Tasks. Drücke \"Hot-Picks scannen\" um neue zu erzeugen.",
+    "caption": "Nachschub-Aufgaben",
+    "col": {
+      "sku": "SKU",
+      "source": "Quelle",
+      "target": "Ziel",
+      "suggested": "Vorschlag",
+      "status": "Status",
+      "actions": "Aktionen"
+    },
+    "book": "📦 Buchen",
+    "dialog": {
+      "title": "Replenishment buchen",
+      "label": "Buchen",
+      "actual": "Tatsächliche Menge",
+      "note": "Die Umlagerung wird gebucht und lässt sich nicht rückgängig machen.",
+      "failed": "Buchen fehlgeschlagen:"
+    }
+  }
+}

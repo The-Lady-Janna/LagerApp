@@ -1,0 +1,128 @@
+{
+  "choose": "— choose —",
+  "createFailed": "Creating failed:",
+  "po": {
+    "what": "the purchase orders",
+    "title": "Purchasing",
+    "new": "+ New PO",
+    "sendFailed": "Sending failed:",
+    "toInbound": "Go to goods receipt",
+    "caption": "Purchase orders to suppliers",
+    "inboundCreated": "Goods receipt {{shipment}} for purchase order {{po}} created as a draft with {{count}} line(s). Nothing has been booked yet: choose “Receive” in the goods receipt to do so.",
+    "col": {
+      "number": "Number",
+      "supplier": "Supplier",
+      "status": "Status",
+      "value": "Value",
+      "created": "Created",
+      "expected": "Expected",
+      "actions": "Actions"
+    },
+    "suggestions": {
+      "title": "📌 Order suggestions",
+      "hint": "Articles whose stock is below the reorder point, grouped by supplier.",
+      "noSupplier": "No supplier assigned",
+      "createPo": "→ Create PO ({{count}} lines)",
+      "leadTime": "Lead time {{days}}d · {{count}} articles",
+      "line": "{{name}} — stock {{stock}}/{{reorder}} → suggestion {{suggested}}"
+    },
+    "send": {
+      "title": "Send purchase order?",
+      "label": "Send",
+      "theSupplier": "the supplier",
+      "body": "Send purchase order <code>{{number}}</code> to {{supplier}}. It can no longer be edited afterwards."
+    },
+    "inbound": {
+      "title": "Create goods receipt?",
+      "label": "Create goods receipt",
+      "body": "Creates a goods receipt (draft) for purchase order <code>{{number}}</code> with the quantities still open.<strong> Nothing is booked yet:</strong> stock is only booked by the goods receipt (“Receive”), and only then is the order considered (partially) delivered.",
+      "target": "Target location"
+    },
+    "row": {
+      "close": "Close",
+      "details": "Details",
+      "createInbound": "📥 Create goods receipt",
+      "sku": "SKU",
+      "ordered": "Ordered",
+      "received": "Received",
+      "price": "Price"
+    },
+    "form": {
+      "titleSuggestion": "PO from suggestion — {{supplier}}",
+      "titleNew": "New PO",
+      "supplier": "Supplier",
+      "expected": "Expected delivery date",
+      "notes": "Notes",
+      "caption": "Lines of the new purchase order",
+      "article": "Article",
+      "quantity": "Quantity",
+      "price": "Price (cents)",
+      "articleAria": "Article line {{n}}",
+      "quantityAria": "Quantity line {{n}}",
+      "priceAria": "Price in cents line {{n}}",
+      "removeAria": "Remove line {{n}}",
+      "addLine": "+ Line",
+      "create": "Create (draft)"
+    }
+  },
+  "suppliers": {
+    "what": "the suppliers",
+    "title": "Suppliers",
+    "new": "+ New supplier",
+    "toggleFailed": "Status change failed:",
+    "caption": "Suppliers",
+    "col": {
+      "code": "Code",
+      "name": "Name",
+      "contact": "Contact",
+      "leadTime": "Lead time",
+      "minOrder": "Min order",
+      "currency": "Currency",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "days": "{{count}}d",
+    "active": "✓ active",
+    "inactive": "inactive",
+    "edit": "Edit",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "form": {
+      "titleEdit": "Edit {{code}}",
+      "titleNew": "New supplier",
+      "email": "Email",
+      "phone": "Phone",
+      "leadTime": "Lead time (days)",
+      "minOrder": "Min order value (cents)",
+      "notes": "Notes",
+      "saveFailed": "Saving failed:"
+    }
+  },
+  "replenishment": {
+    "what": "the replenishment tasks",
+    "title": "Replenishment",
+    "scanning": "Scanning…",
+    "scan": "🔍 Scan hot picks",
+    "openOnly": "Open only",
+    "created": "✓ {{count}} new tasks created",
+    "scanFailed": "Scan failed:",
+    "none": "No tasks. Press \"Scan hot picks\" to create new ones.",
+    "caption": "Replenishment tasks",
+    "col": {
+      "sku": "SKU",
+      "source": "Source",
+      "target": "Target",
+      "suggested": "Suggestion",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "book": "📦 Book",
+    "dialog": {
+      "title": "Book replenishment",
+      "label": "Book",
+      "actual": "Actual quantity",
+      "note": "The transfer will be booked and cannot be undone.",
+      "failed": "Booking failed:"
+    }
+  }
+}

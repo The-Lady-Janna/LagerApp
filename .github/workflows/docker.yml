@@ -1,0 +1,54 @@
+# Build-Check für das Docker-Image: baut das Dockerfile im Repository-Root, ohne es irgendwohin zu übertragen.
+# Es gibt bewusst weder einen Registry-Login noch einen Push; der Workflow braucht keine Secrets.
+#
+# Das Dockerfile liegt im Repository-Root. Fehlt es (etwa in einem Fork ohne Docker-Dateien), läuft der Job
+# durch und meldet nur einen Hinweis, statt rot zu werden.
+name: Docker Build-Check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'src/**'
+      - 'frontend/**'
+      - 'Directory.Build.props'
+      - 'global.json'
+      - 'Lager.sln'
+      - '.github/workflows/docker.yml'
+  pull_request:
+    paths:
+      - 'Dockerfile'
+      - '.dockerignore'
+      - 'src/**'
+      - 'frontend/**'
+      - 'Directory.Build.props'
+      - 'global.json'
+      - 'Lager.sln'
+      - '.github/workflows/docker.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Docker-Image bauen
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Hinweis, wenn es kein Dockerfile gibt
+        if: ${{ hashFiles('Dockerfile') == '' }}
+        run: echo "::notice title=Docker Build-Check übersprungen::Im Repository-Root liegt kein Dockerfile."
+
+      # Nur bauen (Standard-Builder der Runner), kein "docker push" und kein "docker login".
+      - name: Image bauen (ohne Push)
+        if: ${{ hashFiles('Dockerfile') != '' }}
+        run: docker build --file Dockerfile --tag lager:ci .

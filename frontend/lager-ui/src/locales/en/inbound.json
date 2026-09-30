@@ -1,0 +1,62 @@
+{
+  "title": "Goods receipt",
+  "what": "the goods receipts",
+  "new": "+ New goods receipt",
+  "partial": "Delivery {{number}} was created, but with only {{saved}} of {{total}} line(s). Please check the list and add the missing lines.",
+  "created": "Delivery {{number}} created with {{count}} line(s) (draft). Choose “Receive” to book it.",
+  "receiveFailed": "Booking the goods receipt failed:",
+  "form": {
+    "title": "New goods receipt",
+    "number": "Shipment number (optional, auto if empty)",
+    "supplierRef": "Supplier reference",
+    "lines": "Lines",
+    "linesCaption": "Lines of the new goods receipt",
+    "addLine": "+ Line",
+    "create": "Create (draft)",
+    "fix": "Please correct:",
+    "createFailed": "Creating failed:"
+  },
+  "col": {
+    "article": "Article",
+    "targetBin": "Target bin",
+    "quantity": "Quantity",
+    "lot": "Lot",
+    "expiry": "Expiry",
+    "actions": "Actions",
+    "number": "Number",
+    "supplier": "Supplier",
+    "status": "Status",
+    "lines": "Lines",
+    "created": "Created",
+    "received": "Received",
+    "sku": "SKU",
+    "bin": "Bin"
+  },
+  "list": {
+    "caption": "Goods receipts"
+  },
+  "confirm": {
+    "title": "Book goods receipt?",
+    "label": "Book goods receipt",
+    "body": "Delivery <code>{{number}}</code> ({{count}} line(s)) will be received and the stock booked into the target bins. This cannot be undone."
+  },
+  "row": {
+    "close": "Close",
+    "details": "Details",
+    "receive": "📥 Receive"
+  },
+  "line": {
+    "articleAria": "Article line {{n}}",
+    "binAria": "Target bin line {{n}}",
+    "quantityAria": "Quantity line {{n}}",
+    "lotAria": "Lot line {{n}}",
+    "expiryAria": "Expiry date line {{n}}",
+    "removeAria": "Remove line {{n}}",
+    "choose": "— choose —",
+    "required": "Required",
+    "optional": "optional",
+    "trackedHint": "This article is already tracked with lot and expiry date — both are required.",
+    "putaway": "💡 Putaway suggestion:",
+    "suggestionTitle": "{{reason}} · capacity score {{score}}"
+  }
+}

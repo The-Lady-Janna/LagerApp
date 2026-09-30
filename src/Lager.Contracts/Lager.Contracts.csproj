@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- TargetFramework, Nullable, ImplicitUsings u. a. kommen aus der Directory.Build.props im Repo-Root. -->
+
+  <PropertyGroup>
+    <!--
+      XML-Dokumentation: Die Kommentare der DTOs landen in Lager.Contracts.xml neben der DLL; Program.cs (LagerOpenApi) bindet die
+      Datei automatisch in Swagger ein, sodass Beschreibungen der DTOs im OpenAPI-Dokument erscheinen. Kommentare sind keine
+      Pflicht: CS1591 (fehlender Kommentar an einem öffentlichen Typ oder Member) würde in LagerStrict-Builds sonst jedes
+      undokumentierte DTO zum Fehler machen. Wie in Lager.Api ist CS1573 (Teil-Kommentar an Parametern) ausgenommen; dazu CS1587:
+      ein paar DTOs tragen ///-Kommentare direkt an Positionsparametern eines Records, die der Compiler nicht als Dokumentation
+      übernimmt (sie stehen in keinem gültigen Sprachelement). Sie schaden nicht, erscheinen aber auch nicht in Swagger; wer sie
+      dort haben will, überträgt sie als param-Tags in den Kommentar des Records und nimmt CS1587 wieder aus NoWarn.
+    -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591;CS1573;CS1587</NoWarn>
+  </PropertyGroup>
+
+</Project>

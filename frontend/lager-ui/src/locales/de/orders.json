@@ -1,0 +1,128 @@
+{
+  "title": "Bestellungen",
+  "what": "die Bestellungen",
+  "choose": "– wählen –",
+  "overview": "Übersicht",
+  "overdue": " (überfällig)",
+  "open": "Öffnen",
+  "tile": {
+    "total": "Gesamt",
+    "open": "Status New (offen)",
+    "withStock": "Mit Stock",
+    "withoutStock": "Ohne Stock",
+    "fifo": "Fällt aus durch FIFO",
+    "fifoTip": "Hat alleine genug Bestand, aber dringendere oder ältere Bestellungen verbrauchen ihn vorher",
+    "ineligible": "Nicht pickbar gesamt"
+  },
+  "cart": {
+    "title": "Wagen-Pickliste generieren",
+    "hint": "Bündelt offene Bestellungen ({{count}} verfügbar) in eine kombinierte Pickliste, bis der gewählte Wagen voll ist (Volumen oder Gewicht). Es zählt die Reihenfolge Priorität, Fälligkeit, Eingang. Orders ohne ausreichenden Bestand werden übersprungen.",
+    "config": "Wagen-Konfiguration",
+    "option": "{{name}} ({{levels}} Ebenen, {{volume}} m³, {{weight}} kg)",
+    "generating": "Generiere…",
+    "fill": "Wagen vollmachen",
+    "optimize": "So wenig Lagerplätze wie möglich anfahren",
+    "optimizeHint": " — wählt Orders, deren Artikel sich Bins mit bereits gewählten teilen (greedy)",
+    "none": "Noch keine Wagen-Konfiguration angelegt. <a>Jetzt einrichten</a>.",
+    "failed": "Pickliste konnte nicht erzeugt werden:"
+  },
+  "manual": {
+    "title": "Manuelle Bestellung anlegen",
+    "number": "Auftragsnummer",
+    "customerRef": "Kundenreferenz",
+    "customer": "Kunde",
+    "noCustomer": "– kein Kunde –",
+    "address": "Lieferadresse",
+    "noAddress": "– keine –",
+    "chooseCustomerFirst": "– erst Kunde wählen –",
+    "priority": "Priorität",
+    "due": "Fällig am (optional)",
+    "lines": "Positionen",
+    "articleAria": "Artikel für Position {{n}}",
+    "article": "– Artikel –",
+    "quantityAria": "Menge für Position {{n}}",
+    "removeAria": "Position {{n}} entfernen",
+    "addLine": "+ Position",
+    "create": "Bestellung anlegen",
+    "failed": "Bestellung konnte nicht angelegt werden:"
+  },
+  "list": {
+    "title": "Bestellungen ({{count}})",
+    "titleFiltered": "Bestellungen ({{count}} von {{total}})",
+    "sortHint": "Neue zuerst (Priorität, Fälligkeit, Eingang), ohne Stock unten",
+    "all": "Alle",
+    "caption": "Bestellungen",
+    "empty": "Keine Bestellungen."
+  },
+  "col": {
+    "number": "Nr.",
+    "status": "Status",
+    "priority": "Prio",
+    "due": "Fällig",
+    "customer": "Kunde",
+    "source": "Quelle",
+    "lines": "Pos.",
+    "created": "Angelegt",
+    "stock": "Stock",
+    "actions": "Aktionen"
+  },
+  "stock": {
+    "none": "kein Stock",
+    "fifoConflict": "FIFO-Konflikt",
+    "ok": "OK"
+  },
+  "priority": {
+    "0": "Normal",
+    "1": "Erhöht",
+    "2": "Hoch",
+    "3": "Dringend"
+  },
+  "cancel": {
+    "button": "Stornieren",
+    "aria": "Bestellung {{number}} stornieren",
+    "confirm": "Bestellung {{number}} stornieren?\n{{consequence}}",
+    "consequenceNew": "Sie lässt sich danach nicht mehr bearbeiten.",
+    "consequenceOther": "Ihre Positionen werden aus der Pickliste entfernt. Der Bestand ändert sich nicht (gebucht wird erst beim Verpacken).",
+    "failed": "Stornieren fehlgeschlagen:",
+    "failedFallback": "Stornieren fehlgeschlagen."
+  },
+  "detail": {
+    "what": "die Bestellung",
+    "notFound": "Bestellung nicht gefunden.",
+    "title": "Bestellung {{number}}",
+    "status": "Status:",
+    "source": "Quelle:",
+    "customerRef": "Kundenref.:",
+    "customer": "Kunde:",
+    "priority": "Priorität:",
+    "due": "Fällig:",
+    "created": "Angelegt:",
+    "externalRef": "Externe Referenz:",
+    "address": "Lieferadresse:",
+    "noAddress": "— (keine Lieferadresse verknüpft)",
+    "cancelling": "Storniere…",
+    "cancel": "Bestellung stornieren",
+    "lines": "Positionen",
+    "colSku": "SKU",
+    "colQuantity": "Menge",
+    "pick": {
+      "title": "Pickliste generieren",
+      "start": "Startpunkt",
+      "startAuto": "Automatisch (erster Start-Pickpunkt)",
+      "end": "Endpunkt (optional)",
+      "noEnd": "— kein Rückweg —",
+      "failedFallback": "Pickliste fehlgeschlagen."
+    },
+    "pack": {
+      "title": "Packvorschlag",
+      "hint": "Eine Heuristik (Kartonwahl nach Volumen und Gewicht), keine 3D-Packoptimierung: als Anhaltspunkt nutzen, nicht als Vorgabe.",
+      "computing": "Berechne…",
+      "failed": "Packvorschlag fehlgeschlagen:",
+      "failedFallback": "Packvorschlag fehlgeschlagen.",
+      "warnings": "Hinweise zum Packvorschlag:",
+      "cartons": "{{count}} Karton(s)",
+      "cartonsUnpacked": "{{count}} Karton(s), {{unpacked}} unverpackt",
+      "carton": "<strong>Karton {{n}}: {{type}}</strong> ({{l}}×{{w}}×{{h}} mm, {{weight}} kg, Füllgrad {{fill}}%)"
+    }
+  }
+}

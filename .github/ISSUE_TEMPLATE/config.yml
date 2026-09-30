@@ -1,0 +1,7 @@
+# Konfiguration der Issue-Auswahl auf GitHub.
+# Leere Issues bleiben erlaubt; Sicherheitslücken werden auf die Sicherheitsrichtlinie verwiesen.
+blank_issues_enabled: true
+contact_links:
+  - name: Sicherheitslücke melden
+    url: https://github.com/The-Lady-Janna/LagerApp/security/policy
+    about: Sicherheitslücken bitte vertraulich melden (siehe SECURITY.md), nicht als öffentliches Issue.
