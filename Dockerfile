@@ -15,7 +15,7 @@ COPY frontend/lager-ui/ ./
 RUN npm run build
 
 # ---- 2) API veröffentlichen --------------------------------------------------------------------------------------
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS publish
 WORKDIR /build
 # Directory.Build.props setzt Framework und Sprachversion für alle Projekte; global.json bleibt draußen, damit
 # jedes 8.0-SDK des Basis-Images passt. Erst nur die Projektdateien (Restore-Schicht im Cache), dann der Quellcode.
