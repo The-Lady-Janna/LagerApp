@@ -1,6 +1,7 @@
 # Automatische Abhängigkeits-Updates über Dependabot.
 # Alle Ökosysteme: wöchentlich (montags), Minor-/Patch-Updates gesammelt in einem Pull Request,
-# Major-Updates einzeln, höchstens 5 offene Pull Requests je Ökosystem, Commit-Präfix "deps".
+# Major-Updates einzeln (ausgenommen die an net8.0 gekoppelten NuGet-Familien, siehe unten), höchstens 5 offene
+# Pull Requests je Ökosystem, Commit-Präfix "deps".
 version: 2
 
 updates:
@@ -20,6 +21,19 @@ updates:
         update-types:
           - minor
           - patch
+    # Pakete, deren Hauptversion an das Ziel-Framework (net8.0) gekoppelt ist: Major-Sprünge nur bewusst und
+    # gemeinsam mit einem Framework-Upgrade, nie als Einzel-PR. Alle EF-Core-Pakete (und Pomelo) müssen dieselbe
+    # Hauptversion haben - ein PR, der nur einen Teil anhebt, bricht zur Laufzeit mit einer TypeLoadException
+    # (so entstanden die roten Dependabot-PRs "Microsoft.EntityFrameworkCore.Sqlite 8 -> 9").
+    ignore:
+      - dependency-name: "Microsoft.EntityFrameworkCore*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Pomelo.EntityFrameworkCore.MySql"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.AspNetCore.*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "Microsoft.Extensions.*"
+        update-types: ["version-update:semver-major"]
 
   # Frontend: npm-Pakete der React-Anwendung
   - package-ecosystem: npm
