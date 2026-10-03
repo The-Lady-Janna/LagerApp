@@ -25,7 +25,7 @@
     <PackageReference Include="QuestPDF" Version="2024.12.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <!-- ReadFrom.Configuration (LagerLogging in Program.cs): kommt schon transitiv über Serilog.AspNetCore, hier ausdrücklich, weil direkt verwendet. -->
-    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
   </ItemGroup>
