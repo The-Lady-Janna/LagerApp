@@ -22,7 +22,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <!-- Community-Lizenz, siehe Hinweis in Documents/ShippingLabelRenderer.cs. Nur innerhalb dieser Lizenzlinie aktualisieren. -->
-    <PackageReference Include="QuestPDF" Version="2024.12.3" />
+    <PackageReference Include="QuestPDF" Version="2026.9.1" />
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     <!-- ReadFrom.Configuration (LagerLogging in Program.cs): kommt schon transitiv über Serilog.AspNetCore, hier ausdrücklich, weil direkt verwendet. -->
     <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
