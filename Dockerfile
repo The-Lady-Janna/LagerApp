@@ -6,7 +6,7 @@
 
 # ---- 1) Frontend bauen (Vite) ------------------------------------------------------------------------------------
 # Node 22: die "engines" der package.json erlauben 20.19+ und 22.13+; Node 20 ist seit April 2026 ohne Wartung.
-FROM node:22-slim AS frontend
+FROM node:26-slim AS frontend
 WORKDIR /build/frontend/lager-ui
 # Erst nur die Paketdateien: die npm-Schicht bleibt im Cache, solange sich package*.json nicht ändern.
 COPY frontend/lager-ui/package.json frontend/lager-ui/package-lock.json ./
