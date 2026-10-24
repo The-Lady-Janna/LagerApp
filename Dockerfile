@@ -5,7 +5,7 @@
 # Drei Stufen: Frontend bauen (Node) -> API veröffentlichen (.NET SDK) -> schlankes Laufzeit-Image (ASP.NET, Debian).
 
 # ---- 1) Frontend bauen (Vite) ------------------------------------------------------------------------------------
-# Node 22: die "engines" der package.json erlauben 20.19+ und 22.13+; Node 20 ist seit April 2026 ohne Wartung.
+# Node 26: die "engines" der package.json erlauben 20.19+ und 22.13+ (also auch 26); Node 20 ist seit April 2026 ohne Wartung.
 FROM node:26-slim AS frontend
 WORKDIR /build/frontend/lager-ui
 # Erst nur die Paketdateien: die npm-Schicht bleibt im Cache, solange sich package*.json nicht ändern.
