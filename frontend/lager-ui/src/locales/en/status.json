@@ -80,7 +80,10 @@
   "binType": {
     "Standard": "Standard",
     "HotPick": "Hot pick",
-    "Reserve": "Reserve"
+    "Reserve": "Reserve",
+    "Packing": "Packing buffer",
+    "Outgoing": "Outgoing",
+    "Returns": "Returns"
   },
   "auditOperation": {
     "Added": "Added",

@@ -1,3 +1,4 @@
+using Lager.Api.Errors;
 using Lager.Application.Warehouse;
 using Lager.Contracts.Warehouse;
 using Microsoft.AspNetCore.Authorization;
@@ -20,8 +21,13 @@ namespace Lager.Api.Controllers;
 public class WarehouseController : ControllerBase
 {
     private readonly WarehouseService _service;
+    private readonly GridLayoutService _grid;
 
-    public WarehouseController(WarehouseService service) => _service = service;
+    public WarehouseController(WarehouseService service, GridLayoutService grid)
+    {
+        _service = service;
+        _grid = grid;
+    }
 
     /// <summary>Liefert das ganze Lager-Layout: alle Lager mit Zonen, Gängen, Regalen und Lagerplätzen.</summary>
     [HttpGet("layout")]
@@ -411,5 +417,46 @@ public class WarehouseController : ControllerBase
     {
         var ok = await _service.DeletePickPointAsync(id, ct);
         return ok ? NoContent() : NotFound();
+    }
+
+    // ---- Einfaches Raster-Layout ----
+
+    /// <summary>Liefert das Raster-Layout eines Lagers (ohne gespeichertes Raster die Vorgaben für ein neues).</summary>
+    /// <param name="id">Id des Lagers.</param>
+    [HttpGet("{id:guid}/grid")]
+    [ProducesResponseType<GridLayoutDto>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<GridLayoutDto>> GetGrid(Guid id, CancellationToken ct)
+    {
+        var dto = await _grid.GetAsync(id, ct);
+        return dto is null ? NotFound() : dto;
+    }
+
+    /// <summary>Speichert das Raster-Layout eines Lagers und erzeugt daraus Regale, Behälter, Wände und Pickpunkte.</summary>
+    /// <remarks>
+    /// Ersetzt alle Felder. <c>ExpectedVersion</c> muss der <c>Version</c> aus dem letzten Abruf entsprechen, sonst 409
+    /// <c>grid_conflict</c>. Würde das Speichern Behälter mit Bestand, offenen Aufgaben oder Belegen entfernen, ändert sich nichts:
+    /// 409 <c>grid_cells_in_use</c> mit der Liste <c>cells</c> der betroffenen Felder.
+    /// </remarks>
+    /// <param name="id">Id des Lagers.</param>
+    [HttpPut("{id:guid}/grid")]
+    [Authorize(Policy = "Manager")]
+    [ProducesResponseType<SaveGridLayoutResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ValidationProblemDetails>(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<SaveGridLayoutResult>> SaveGrid(Guid id, [FromBody] SaveGridLayoutRequest request, CancellationToken ct)
+    {
+        try
+        {
+            var result = await _grid.SaveAsync(id, request, ct);
+            return result is null ? NotFound() : result;
+        }
+        catch (GridCellsInUseException ex)
+        {
+            var problem = Problems.Create(HttpContext, StatusCodes.Status409Conflict, GridLayoutService.CellsInUseError, ex.Message);
+            problem.Extensions["cells"] = ex.Cells;
+            return new ObjectResult(problem) { StatusCode = StatusCodes.Status409Conflict, ContentTypes = { Problems.ContentType } };
+        }
     }
 }

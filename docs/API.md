@@ -298,7 +298,7 @@ Alle Pfade beginnen mit `/api`. `{id}` und ähnliche Platzhalter sind GUIDs. All
 | POST | /api/warehouse/storage-locations | Manager | Lagerplatz in einem Regal anlegen |
 | PUT | /api/warehouse/storage-locations/{id} | Manager | Code, Maße und Höchstgewicht eines Lagerplatzes ändern |
 | PUT | /api/warehouse/storage-locations/{id}/position | Manager | Lagerplatz verschieben |
-| PUT | /api/warehouse/storage-locations/{id}/bin-type | Manager | Typ (Standard, HotPick, Reserve) und Nachschub-Schwelle setzen |
+| PUT | /api/warehouse/storage-locations/{id}/bin-type | Manager | Typ (Standard, HotPick, Reserve, Packing, Outgoing, Returns) und Nachschub-Schwelle setzen; Packing/Outgoing/Returns sind Pufferplätze ohne Pick- und Einlagerungsbestand |
 | DELETE | /api/warehouse/storage-locations/{id} | Manager | Lagerplatz löschen (409 `in_use`, wenn Bestand oder Belege ihn verwenden) |
 | POST | /api/warehouse/shelves | Manager | Regal in einem bestehenden Gang anlegen (optional mit Fächern) |
 | PUT | /api/warehouse/shelves/{id} | Manager | Code und Abmessungen eines Regals ändern |
@@ -314,6 +314,10 @@ Alle Pfade beginnen mit `/api`. `{id}` und ähnliche Platzhalter sind GUIDs. All
 | PUT | /api/warehouse/pick-points/{id} | Manager | Beschriftung und Typ ändern |
 | PUT | /api/warehouse/pick-points/{id}/position | Manager | Pickpunkt verschieben |
 | DELETE | /api/warehouse/pick-points/{id} | Manager | Pickpunkt löschen |
+| GET | /api/warehouse/{id}/grid | angemeldet | Raster-Layout eines Lagers (einfacher Editor); ohne Raster die Vorgaben (`exists: false`) |
+| PUT | /api/warehouse/{id}/grid | Manager | Raster speichern und anwenden: erzeugt Regale mit Behältern, Wände und Pickpunkte; 409 `grid_conflict` (zwischenzeitlich geändert, `expectedVersion`), 409 `grid_cells_in_use` mit `cells` (Behälter mit Bestand, Aufgaben oder Belegen würden entfernt) |
+
+Das **Raster-Layout** (Seite **Lager-Layout**, Modus „Raster“) beschreibt ein Lager wie eine Tabelle: jedes Feld ist Laufweg, Wand, Tür, Hindernis, Regal mit X Behältern, Start, Ende, Verpackung, Packpuffer, Warenausgang, Wareneingang oder Retourenfläche. Beim Speichern erzeugt der Server daraus die gewohnten Objekte; Regeln und Codes: [features/raster-layout.md](features/raster-layout.md).
 
 Die Lagerstruktur (Lager, Zonen, Gänge, Regale, Lagerplätze) lässt sich vollständig per API und in der Oberfläche (Seite **Lagerstruktur**) pflegen. Codes sind ohne Beachtung der Schreibweise eindeutig (Lagerplatz-Codes im ganzen System), Löschen prüft Bestand, offene Aufgaben und Belege vorab und löscht nie teilweise; alle Regeln und Grenzen: [features/lager-stammdaten.md](features/lager-stammdaten.md).
 

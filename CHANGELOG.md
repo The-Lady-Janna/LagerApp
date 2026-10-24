@@ -6,7 +6,14 @@ Das Format basiert auf [Keep a Changelog 1.1.0](https://keepachangelog.com/de/1.
 
 ## [Unreleased]
 
-Noch keine Änderungen seit 0.1.0. Neue Änderungen kommen hier hinein (siehe [CONTRIBUTING.md](CONTRIBUTING.md)).
+### Hinzugefügt
+
+- **Raster-Layout (einfacher Layout-Editor):** Seite Lager-Layout, Modus „Raster (einfach)“. Das Lager wird wie eine Tabelle gezeichnet: jedes Feld ist Laufweg, Wand, Tür, Hindernis, Regal mit X Behältern, Packpuffer, Warenausgang, Retourenfläche, Start, Ende, Verpackung oder Wareneingang. Malen per Ziehen, Feldart per Rechtsklick/Doppelklick/Enter direkt im Raster, Rückgängig/Wiederholen. Beim Speichern erzeugt der Server Regale mit Lagerplätzen (gangbasierte Codes `A01-03-2`), Wände und Pickpunkte; der bisherige Editor bleibt als „Erweitert (frei)“. Neue Endpunkte `GET`/`PUT /api/warehouse/{id}/grid`, neue Tabelle `GridLayouts` (Schema-Schritt `3500_AddGridLayout`). Details: [docs/features/raster-layout.md](docs/features/raster-layout.md).
+- **Pufferplätze:** neue Bin-Typen `Packing`, `Outgoing` und `Returns`. Bestand darin ist für Picklisten nicht verfügbar, Einlagerungs- und Slotting-Vorschläge nennen diese Plätze nicht.
+
+### Geändert
+
+- Ohne ausdrücklichen Startpunkt beginnt eine Pickroute am ersten Pickpunkt vom Typ **Start**; ein Pickpunkt vom Typ **Beides** (etwa die Verpackung) ist nur noch Ersatz, wenn es keinen Start gibt.
 
 ## [0.1.0] - JJJJ-MM-TT
 

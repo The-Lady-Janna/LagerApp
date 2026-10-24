@@ -80,7 +80,10 @@
   "binType": {
     "Standard": "Standard",
     "HotPick": "Hot-Pick",
-    "Reserve": "Reserve"
+    "Reserve": "Reserve",
+    "Packing": "Packpuffer",
+    "Outgoing": "Warenausgang",
+    "Returns": "Retouren"
   },
   "auditOperation": {
     "Added": "Hinzugefügt",

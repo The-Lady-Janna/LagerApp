@@ -62,7 +62,9 @@ interface TreeContext {
   allBinCodes: readonly string[]
 }
 
-const BIN_TONES: Readonly<Record<BinType, PillTone>> = { Standard: 'neutral', HotPick: 'warning', Reserve: 'info' }
+const BIN_TONES: Readonly<Record<BinType, PillTone>> = {
+  Standard: 'neutral', HotPick: 'warning', Reserve: 'info', Packing: 'accent', Outgoing: 'success', Returns: 'special',
+}
 
 /// <summary>
 /// Lagerstruktur pflegen: Baumansicht Lager > Zone > Gang > Regal > Lagerplatz mit Anlegen, Bearbeiten und Löschen (ConfirmDialog),

@@ -217,7 +217,7 @@ public static class SlottingCalculator
 
             // Aktueller Bin: dort, wo der Artikel tatsächlich gepickt wird und Bestand hat.
             var current = bins
-                .Where(b => qtyByArticleBin.ContainsKey((x, b.Id)))
+                .Where(b => !b.BinType.IsBuffer() && qtyByArticleBin.ContainsKey((x, b.Id)))
                 .OrderByDescending(b => freqByBin.GetValueOrDefault((x, b.Id)))
                 .ThenByDescending(b => qtyByArticleBin[(x, b.Id)])
                 .ThenBy(b => b.Code, StringComparer.Ordinal)
@@ -233,7 +233,7 @@ public static class SlottingCalculator
             foreach (var target in bins)
             {
                 if (target.Id == current.Id || claimedBins.Contains(target.Id)) continue;
-                if (target.BinType == BinType.Reserve) continue;
+                if (target.BinType == BinType.Reserve || target.BinType.IsBuffer()) continue;
                 var distTarget = dist[target.Id];
                 if (distTarget >= distCurrent) continue;
 

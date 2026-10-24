@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState, type ReactNode } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Circle, Group, Line, Rect, RegularPolygon, Text } from 'react-konva'
@@ -50,7 +50,11 @@ type PendingDelete =
   | { kind: 'wall'; wall: WallDto }
   | { kind: 'pickpoint'; point: PickPointDto }
 
-export function LayoutEditorPage() {
+/**
+ * Erweiterter (freier) Layout-Editor. `headerSlot` erscheint unter der Überschrift: die Seite Lager-Layout setzt dort die
+ * Umschaltung zum einfachen Raster-Editor ein (pages/LayoutPage.tsx).
+ */
+export function LayoutEditorPage({ headerSlot }: { headerSlot?: ReactNode } = {}) {
   const { t } = useTranslation()
   const layout = useWarehouseLayout()
   const locations = useStorageLocations()
@@ -360,6 +364,7 @@ export function LayoutEditorPage() {
   return (
     <>
       <h2>{t('warehouse:editor.title')}</h2>
+      {headerSlot}
       {canManageStructure && (
         <p className="muted" style={{ marginTop: -8 }}>
           <Trans i18nKey="warehouse:editor.structureHint" components={{ a: <Link to="/warehouses" /> }} />

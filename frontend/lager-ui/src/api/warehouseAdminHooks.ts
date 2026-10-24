@@ -13,9 +13,10 @@ import type { AisleDto, PositionDto, ShelfDto, StorageLocationDto, WarehouseDto,
 
 // ---- Typen ----------------------------------------------------------------------------------------------------------
 
-export type BinType = 'Standard' | 'HotPick' | 'Reserve'
+/** Packing, Outgoing und Returns sind Pufferplätze (Raster-Layout): kein Bestand für Picklisten und Einlagerung. */
+export type BinType = 'Standard' | 'HotPick' | 'Reserve' | 'Packing' | 'Outgoing' | 'Returns'
 
-export const BIN_TYPES: readonly BinType[] = ['Standard', 'HotPick', 'Reserve']
+export const BIN_TYPES: readonly BinType[] = ['Standard', 'HotPick', 'Reserve', 'Packing', 'Outgoing', 'Returns']
 
 // Die Anzeigenamen der Bin-Typen stehen in locales/<sprache>/status.json (status:binType.<Typ>).
 

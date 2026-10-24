@@ -101,6 +101,8 @@
     "ambiguous_code": "The code is ambiguous.",
     "warehouse_not_empty": "The warehouse is not empty.",
     "duplicate_gtin": "This GTIN is already assigned to another article.",
-    "invalid_gtin": "The GTIN is invalid."
+    "invalid_gtin": "The GTIN is invalid.",
+    "grid_conflict": "The grid was changed in the meantime. Please reload.",
+    "grid_cells_in_use": "Some cells contain containers that are still in use."
   }
 }

@@ -922,7 +922,7 @@ export interface ReplenishmentTaskDto {
 export interface PutawaySuggestionDto {
   binId: string
   binCode: string
-  binType: 'Standard' | 'HotPick' | 'Reserve'
+  binType: 'Standard' | 'HotPick' | 'Reserve' | 'Packing' | 'Outgoing' | 'Returns'
   currentQuantityOfArticle: number
   otherArticlesInBin: number
   capacityScore: number

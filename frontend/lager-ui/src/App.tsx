@@ -32,7 +32,7 @@ import { featureRoutes, type FeatureRoute } from './routes/registry'
 import { STATIC_NAV_GROUPS, buildNavGroups } from './routes/navigation'
 import { useAuth, isAuthenticated } from './state/auth'
 
-const LayoutEditorPage = lazy(() => import('./pages/LayoutEditorPage').then((m) => ({ default: m.LayoutEditorPage })))
+const LayoutPage = lazy(() => import('./pages/LayoutPage').then((m) => ({ default: m.LayoutPage })))
 const PickListPage = lazy(() => import('./pages/PickListPage').then((m) => ({ default: m.PickListPage })))
 const PackPickListPage = lazy(() => import('./pages/PackPickListPage').then((m) => ({ default: m.PackPickListPage })))
 const MobilePickerPage = lazy(() => import('./pages/MobilePickerPage').then((m) => ({ default: m.MobilePickerPage })))
@@ -155,7 +155,7 @@ export default function App() {
             <Route path="/picklists/:id/pack" element={<PackPickListPage />} />
             <Route path="/packing" element={<PackingOverviewPage />} />
             <Route path="/cart-configs" element={<RequireRole role="Manager"><CartConfigsPage /></RequireRole>} />
-            <Route path="/layout" element={<LayoutEditorPage />} />
+            <Route path="/layout" element={<LayoutPage />} />
             <Route path="/reports" element={<ReportsPage />} />
             <Route path="/audit" element={<RequireRole role="Manager"><AuditPage /></RequireRole>} />
             <Route path="/users" element={<RequireRole role="Admin"><UsersPage /></RequireRole>} />
