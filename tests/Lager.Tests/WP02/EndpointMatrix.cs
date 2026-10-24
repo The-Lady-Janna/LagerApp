@@ -346,5 +346,7 @@ public static class EndpointMatrix
         Put("api/warehouse/pick-points/{id:guid}", Tier.Manager),
         Put("api/warehouse/pick-points/{id:guid}/position", Tier.Manager),
         Delete("api/warehouse/pick-points/{id:guid}", Tier.Manager),
+        Get("api/warehouse/{id:guid}/grid"),
+        Put("api/warehouse/{id:guid}/grid", Tier.Manager),
     };
 }

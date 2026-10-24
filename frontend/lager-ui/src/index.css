@@ -91,6 +91,19 @@
   --pk-error-fg: #fecaca;
   --pk-error-border: #7f1d1d;
   --pk-error-text: #fca5a5;
+
+  /* Raster-Layout (components/gridEditor): Fläche und Schrift je Feldart, Text >= 4,5:1 auf seiner Fläche. */
+  --grid-wall-bg: #334155; --grid-wall-fg: #f8fafc;
+  --grid-door-bg: #d6d3d1; --grid-door-fg: #292524;
+  --grid-obstacle-bg: #94a3b8; --grid-obstacle-fg: #0f172a;
+  --grid-shelf-bg: #93c5fd; --grid-shelf-fg: #1e3a8a;
+  --grid-start-bg: #86efac; --grid-start-fg: #14532d;
+  --grid-end-bg: #fca5a5; --grid-end-fg: #7f1d1d;
+  --grid-packing-bg: #c4b5fd; --grid-packing-fg: #4c1d95;
+  --grid-packingstorage-bg: #99f6e4; --grid-packingstorage-fg: #134e4a;
+  --grid-outgoingstorage-bg: #fef08a; --grid-outgoingstorage-fg: #713f12;
+  --grid-goodsreceipt-bg: #fdba74; --grid-goodsreceipt-fg: #7c2d12;
+  --grid-returns-bg: #f9a8d4; --grid-returns-fg: #831843;
 }
 
 [data-theme='light'] { color-scheme: light; }
@@ -141,6 +154,18 @@
   --pill-accent-fg: #c4b5fd;
   --pill-special-bg: #500724;
   --pill-special-fg: #f9a8d4;
+
+  --grid-wall-bg: #e2e8f0; --grid-wall-fg: #0f172a;
+  --grid-door-bg: #57534e; --grid-door-fg: #f5f5f4;
+  --grid-obstacle-bg: #64748b; --grid-obstacle-fg: #f8fafc;
+  --grid-shelf-bg: #1d4ed8; --grid-shelf-fg: #dbeafe;
+  --grid-start-bg: #15803d; --grid-start-fg: #f0fdf4;
+  --grid-end-bg: #b91c1c; --grid-end-fg: #fef2f2;
+  --grid-packing-bg: #6d28d9; --grid-packing-fg: #ede9fe;
+  --grid-packingstorage-bg: #115e59; --grid-packingstorage-fg: #ccfbf1;
+  --grid-outgoingstorage-bg: #713f12; --grid-outgoingstorage-fg: #fef08a;
+  --grid-goodsreceipt-bg: #9a3412; --grid-goodsreceipt-fg: #ffedd5;
+  --grid-returns-bg: #9d174d; --grid-returns-fg: #fce7f3;
 }
 
 :root {

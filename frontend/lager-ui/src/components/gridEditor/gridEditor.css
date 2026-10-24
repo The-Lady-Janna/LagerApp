@@ -1,0 +1,151 @@
+/* Raster-Layout (einfacher Layout-Editor). Farben ausschließlich aus den Tokens in src/index.css (var(--c-...), var(--grid-...)),
+   damit Hell und Dunkel stimmen. Feldgröße und Kopfbreite kommen als --cell und --hdr vom GridSheet. */
+
+.grid-editor { display: flex; flex-direction: column; gap: 10px; }
+.grid-editor__facts { margin: 0; font-size: 12px; }
+.grid-editor__body { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 12px; align-items: start; }
+@media (max-width: 1100px) {
+  .grid-editor__body { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- Werkzeugleiste und Palette ---------------------------------------------------------------------------------- */
+.grid-toolbar { display: flex; flex-direction: column; gap: 8px; }
+.grid-toolbar__row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.grid-toolbar__group { display: inline-flex; gap: 4px; align-items: center; }
+.grid-toolbar__check { flex-direction: row; align-items: center; gap: 6px; color: var(--c-text); font-size: 13px; }
+.grid-palette { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.grid-tool { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; font-size: 13px; }
+.grid-tool.is-active { border-color: var(--c-focus); box-shadow: 0 0 0 2px var(--c-focus); background: var(--c-surface-alt); }
+.grid-tool__swatch {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; flex: 0 0 auto;
+  border: 1px solid var(--c-border); border-radius: 3px;
+  font-size: 11px; font-weight: 700; line-height: 1;
+}
+.grid-tool__swatch--select { background: var(--c-surface); color: var(--c-text); }
+
+.grid-stepper__label { font-size: 13px; color: var(--c-muted); margin-right: 2px; }
+.grid-stepper input { width: 56px; text-align: center; }
+
+.grid-savebar {
+  display: flex; gap: 8px; align-items: center; justify-content: space-between;
+  padding: 8px 12px; border: 1px solid var(--c-border-light); border-radius: 6px; background: var(--c-surface);
+}
+.grid-savebar.is-dirty { background: var(--c-warning-bg); border-color: var(--c-warning-border); color: var(--c-warning); }
+.grid-savebar__text { flex: 1 1 auto; min-width: 0; }
+.grid-savebar .grid-toolbar__group { flex: 0 0 auto; }
+
+/* ---- Raster ------------------------------------------------------------------------------------------------------ */
+.grid-sheet {
+  position: relative;
+  max-height: min(72vh, 900px);
+  overflow: auto;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  background: var(--c-surface);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x pan-y;
+  outline-offset: 2px;
+}
+.grid-sheet:focus-visible { outline: 2px solid var(--c-focus); }
+.grid-sheet--paint { touch-action: none; cursor: crosshair; }
+
+.grid-sheet__table { display: grid; position: relative; width: max-content; }
+.grid-sheet__row { display: contents; }
+
+.grid-sheet__corner, .grid-sheet__colhead, .grid-sheet__rowhead {
+  background: var(--c-surface-alt);
+  color: var(--c-muted);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  border-right: 1px solid var(--c-border-light);
+  border-bottom: 1px solid var(--c-border-light);
+}
+.grid-sheet__corner { position: sticky; top: 0; left: 0; z-index: 4; height: var(--hdr); }
+.grid-sheet__colhead { position: sticky; top: 0; z-index: 3; height: var(--hdr); }
+.grid-sheet__rowhead { position: sticky; left: 0; z-index: 3; height: var(--cell); }
+.grid-sheet__colhead.is-active, .grid-sheet__rowhead.is-active { color: var(--c-text); font-weight: 700; background: var(--c-border-light); }
+
+.grid-cell {
+  height: var(--cell);
+  border-right: 1px solid var(--c-border-light);
+  border-bottom: 1px solid var(--c-border-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: max(9px, calc(var(--cell) * 0.42));
+  font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
+  position: relative;
+  background: var(--c-surface);
+  color: var(--c-text);
+}
+.grid-cell.is-occupied::after {
+  content: '';
+  position: absolute; top: 2px; right: 2px;
+  width: max(4px, calc(var(--cell) * 0.18)); height: max(4px, calc(var(--cell) * 0.18));
+  border-radius: 50%;
+  background: currentColor;
+}
+.grid-cell.is-blocked { box-shadow: inset 0 0 0 3px var(--c-danger); }
+
+.grid-cell--walkway { background: var(--c-surface); }
+.grid-cell--wall { background: var(--grid-wall-bg); color: var(--grid-wall-fg); }
+.grid-cell--door { background: var(--grid-door-bg); color: var(--grid-door-fg); }
+.grid-cell--obstacle { background: var(--grid-obstacle-bg); color: var(--grid-obstacle-fg); }
+.grid-cell--shelf { background: var(--grid-shelf-bg); color: var(--grid-shelf-fg); }
+.grid-cell--start { background: var(--grid-start-bg); color: var(--grid-start-fg); }
+.grid-cell--end { background: var(--grid-end-bg); color: var(--grid-end-fg); }
+.grid-cell--packing { background: var(--grid-packing-bg); color: var(--grid-packing-fg); }
+.grid-cell--packingstorage { background: var(--grid-packingstorage-bg); color: var(--grid-packingstorage-fg); }
+.grid-cell--outgoingstorage { background: var(--grid-outgoingstorage-bg); color: var(--grid-outgoingstorage-fg); }
+.grid-cell--goodsreceipt { background: var(--grid-goodsreceipt-bg); color: var(--grid-goodsreceipt-fg); }
+.grid-cell--returns { background: var(--grid-returns-bg); color: var(--grid-returns-fg); }
+
+/* Ebene über den Feldern: Auswahl, Mal-Vorschau, Objekte des erweiterten Editors. */
+.grid-sheet__layer { position: absolute; left: var(--hdr); top: var(--hdr); pointer-events: none; z-index: 2; }
+.grid-sheet__selection {
+  position: absolute;
+  border: 2px solid var(--c-focus);
+  background: color-mix(in srgb, var(--c-focus) 14%, transparent);
+}
+.grid-sheet__selection--paint { opacity: 0.7; border-style: dashed; }
+.grid-sheet__cursor { position: absolute; border: 2px solid var(--c-focus); }
+.grid-sheet__overlay { position: absolute; left: 0; top: 0; overflow: visible; }
+.grid-sheet__overlay polyline { fill: none; stroke: var(--c-muted); stroke-opacity: 0.55; stroke-linecap: square; }
+.grid-sheet__overlay rect, .grid-sheet__overlay circle {
+  fill: none; stroke: var(--c-text); stroke-opacity: 0.6; stroke-width: 1.5px; stroke-dasharray: 4 3;
+}
+
+/* ---- Panel und Feldart-Auswahl ------------------------------------------------------------------------------------ */
+.grid-panel { position: sticky; top: 8px; display: flex; flex-direction: column; gap: 8px; }
+.grid-panel h3, .grid-panel h4 { margin: 0; }
+.grid-panel__count { font-weight: 400; font-size: 13px; }
+.grid-panel__help { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.grid-panel__facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 0; font-size: 13px; }
+.grid-panel__facts dt { color: var(--c-muted); }
+.grid-panel__facts dd { margin: 0; overflow-wrap: anywhere; }
+.grid-panel__codes { display: flex; flex-wrap: wrap; gap: 4px; }
+.grid-panel__mix { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.grid-panel__mix li { display: flex; align-items: center; gap: 6px; }
+
+.grid-chooser { display: flex; flex-direction: column; gap: 8px; }
+.grid-chooser__types { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.grid-chooser__types .grid-tool { justify-content: flex-start; text-align: left; }
+.grid-chooser__containers input { width: 80px; }
+.grid-chooser--popup {
+  position: fixed; z-index: 50; width: 320px; max-width: calc(100vw - 16px);
+  padding: 10px; margin: 0; box-shadow: 0 8px 24px var(--c-shadow);
+}
+.grid-chooser__title { font-weight: 700; }
+
+.grid-settings { border: 1px solid var(--c-border-light); border-radius: 6px; margin: 0 0 12px; padding: 8px 12px 12px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+.grid-settings legend { padding: 0 4px; color: var(--c-text); font-weight: 600; }
+
+/* ---- Moduswahl auf der Seite Lager-Layout ------------------------------------------------------------------------- */
+.layout-mode { display: inline-flex; border: 1px solid var(--c-border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.layout-mode button { border: none; border-radius: 0; padding: 6px 14px; }
+.layout-mode button + button { border-left: 1px solid var(--c-border); }
+.layout-mode button.is-active { background: var(--c-primary); color: var(--c-on-primary); }

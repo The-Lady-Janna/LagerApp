@@ -74,7 +74,7 @@ public class WarehouseService
         return WarehouseMapper.ToDto(warehouse);
     }
 
-    /// <summary>Löscht das Lager samt Zonen, Gängen, Regalen, Lagerplätzen, Wänden und Pickpunkten - sofern nichts davon in Benutzung ist.</summary>
+    /// <summary>Löscht das Lager samt Zonen, Gängen, Regalen, Lagerplätzen, Wänden, Pickpunkten und Raster - sofern nichts davon in Benutzung ist.</summary>
     public async Task<bool> DeleteWarehouseAsync(Guid id, CancellationToken ct = default)
     {
         var warehouse = await _repo.GetWarehouseAsync(id, ct);
@@ -87,6 +87,7 @@ public class WarehouseService
         // Wände und Pickpunkte hängen per Fremdschlüssel am Lager und gehen mit ihm.
         foreach (var wall in await _repo.ListWallsOfWarehouseAsync(id, ct)) _repo.RemoveWall(wall);
         foreach (var point in await _repo.ListPickPointsOfWarehouseAsync(id, ct)) _repo.RemovePickPoint(point);
+        if (await _repo.GetGridLayoutAsync(id, ct) is { } grid) _repo.RemoveGridLayout(grid);
 
         _repo.RemoveWarehouse(warehouse);
         await _uow.SaveChangesAsync(ct);

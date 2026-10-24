@@ -208,6 +208,14 @@ public class WarehouseRepository : IWarehouseRepository
     public async Task<IReadOnlyList<PickPoint>> ListPickPointsOfWarehouseAsync(Guid warehouseId, CancellationToken ct = default) =>
         await _db.PickPoints.Where(p => p.WarehouseId == warehouseId).ToListAsync(ct);
 
+    public Task<GridLayout?> GetGridLayoutAsync(Guid warehouseId, CancellationToken ct = default) =>
+        _db.GridLayouts.FirstOrDefaultAsync(g => g.WarehouseId == warehouseId, ct);
+
+    public async Task AddGridLayoutAsync(GridLayout grid, CancellationToken ct = default) =>
+        await _db.GridLayouts.AddAsync(grid, ct);
+
+    public void RemoveGridLayout(GridLayout grid) => _db.GridLayouts.Remove(grid);
+
     private static bool ContainsIgnoreCase(IEnumerable<string> codes, string code)
     {
         var wanted = code.Trim();

@@ -84,5 +84,23 @@ public enum BinType
 {
     Standard = 0,
     HotPick = 1,
-    Reserve = 2
+    Reserve = 2,
+
+    /// <summary>Packpuffer: gepickte Ware wartet aufs Verpacken. Kein Bestand für Picklisten und Einlagerung.</summary>
+    Packing = 3,
+
+    /// <summary>Warenausgang: verpackte Ware wartet auf den Versand. Kein Bestand für Picklisten und Einlagerung.</summary>
+    Outgoing = 4,
+
+    /// <summary>Retourenfläche: zurückgekommene Ware vor der Prüfung. Kein Bestand für Picklisten und Einlagerung.</summary>
+    Returns = 5
+}
+
+public static class BinTypes
+{
+    /// <summary>
+    /// Pufferplätze (Packpuffer, Warenausgang, Retouren) halten Ware, die nicht (mehr) frei verfügbar ist: Picklisten greifen
+    /// nicht darauf zu, Einlagerungs- und Slotting-Vorschläge nennen sie nicht.
+    /// </summary>
+    public static bool IsBuffer(this BinType type) => type is BinType.Packing or BinType.Outgoing or BinType.Returns;
 }

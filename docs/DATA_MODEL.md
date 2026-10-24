@@ -39,6 +39,7 @@ erDiagram
     Shelf ||--o{ StorageLocation : enthaelt
     Warehouse ||--o{ Wall : hat
     Warehouse ||--o{ PickPoint : hat
+    Warehouse ||--o| GridLayout : Raster
 
     Supplier ||--o{ Article : Standardlieferant
     Article ||--o{ BundleComponent : Bundle
@@ -139,7 +140,7 @@ erDiagram
 | Bereich | Tabellen (Entitäten) | Inhalt |
 |---|---|---|
 | Stammdaten | `Articles`, `BundleComponents`, `Suppliers`, `Customers`, `CustomerAddresses` | Artikel mit Maßen, Stapelbarkeit, Schwellen, Einkaufspreis, GTIN/EAN (optional, eindeutig), Alternativ-SKUs (CSV-Spalte), Saison-Fenster (gültig ab/bis, das Ende gilt inklusive; die API liefert daraus `isCurrentlyActive`); Bundle-Komponenten; Lieferanten; Kunden mit Adressen |
-| Lagerstruktur | `Warehouses`, `Zones`, `Aisles`, `Shelves`, `StorageLocations`, `Walls`, `PickPoints`, `PickCartConfigs` | Lager, Zonen, Gänge, Regale, Lagerplätze (Typ Standard/HotPick/Reserve, Nachschub-Schwelle), Wände als Polylinien, Pickpunkte (Start/Ende), Pickwagen |
+| Lagerstruktur | `Warehouses`, `Zones`, `Aisles`, `Shelves`, `StorageLocations`, `Walls`, `PickPoints`, `GridLayouts`, `PickCartConfigs` | Lager, Zonen, Gänge, Regale, Lagerplätze (Typ Standard/HotPick/Reserve oder Pufferplatz Packing/Outgoing/Returns, Nachschub-Schwelle), Wände als Polylinien, Pickpunkte (Start/Ende), Raster-Layout je Lager (Felder als JSON, daraus erzeugte Objekte), Pickwagen |
 | Bestand | `StockItems`, `StockMovements` | Bestandszeilen und das Ledger der Bewegungen |
 | Bestellungen | `Orders`, `OrderLines` | Kundenbestellungen (Status, Priorität, Fälligkeit, Kunde, Lieferadresse, externe Referenz) |
 | Kommissionieren | `PickLists`, `PickItems`, `PickWaves`, `PickListSequence` | Picklisten mit Route (Wegpunkte als JSON) und Positionen, Wellen, Zähler der Nummernkreise |

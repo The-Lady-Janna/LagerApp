@@ -24,6 +24,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ArticleService>();
         services.AddScoped<WarehouseService>();
+        services.AddScoped<GridLayoutService>();
         services.AddScoped<StockService>();
         services.AddScoped<OrderService>();
         services.AddScoped<PickListService>();

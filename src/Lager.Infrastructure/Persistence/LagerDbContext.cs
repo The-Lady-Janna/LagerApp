@@ -27,6 +27,7 @@ public class LagerDbContext : DbContext
     public DbSet<StorageLocation> StorageLocations => Set<StorageLocation>();
     public DbSet<Wall> Walls => Set<Wall>();
     public DbSet<PickPoint> PickPoints => Set<PickPoint>();
+    public DbSet<GridLayout> GridLayouts => Set<GridLayout>();
     public DbSet<StockItem> StockItems => Set<StockItem>();
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<OrderLine> OrderLines => Set<OrderLine>();

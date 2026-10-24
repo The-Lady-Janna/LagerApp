@@ -16,7 +16,8 @@ public record PickRequest(Guid OrderId, Guid OrderLineId, Guid ArticleId, int Qu
 /// bricht mit <see cref="InvalidOperationException"/> ab, statt zu überzuteilen.
 ///
 /// Auswahlreihenfolge je Anforderung:
-///  1. nur nicht abgelaufene Chargen (MHD &lt; heute UTC gilt als nicht verfügbar),
+///  1. nur nicht abgelaufene Chargen (MHD &lt; heute UTC gilt als nicht verfügbar) außerhalb von Pufferplätzen
+///     (<see cref="BinTypes.IsBuffer"/>: Packpuffer, Warenausgang, Retouren),
 ///  2. FEFO - frühestes MHD zuerst, Ware ohne MHD zuletzt,
 ///  3. HotPick- vor Standard- vor Reserve-Lagerplätzen (<see cref="BinType"/>),
 ///  4. kleinerer (Rest-)Bestand zuerst - angebrochene Plätze werden leergeräumt,
@@ -38,6 +39,8 @@ public sealed class StockAllocator
         foreach (var s in stock)
         {
             if (s.Quantity <= 0 || s.IsExpired(today)) continue;
+            // Pufferplätze (Packpuffer, Warenausgang, Retouren) halten keine frei verfügbare Ware.
+            if (locations.TryGetValue(s.StorageLocationId, out var location) && location.BinType.IsBuffer()) continue;
             if (!_byArticle.TryGetValue(s.ArticleId, out var rows))
                 _byArticle[s.ArticleId] = rows = new List<StockItem>();
             rows.Add(s);

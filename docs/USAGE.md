@@ -149,9 +149,20 @@ Die Bedeutung steht unter [Konzepte](#bundles--kits) und [GTIN und Scan-Auflösu
 
 **Stammdaten → Pickwagen** (Rolle Manager): Konfiguration eines Kommissionierwagens: Name, Anzahl Ebenen, Ebenen-Maße (Breite, Tiefe, Höhe in mm) und maximales Gesamtgewicht. Aus Ebenenzahl und -maßen ergibt sich das Gesamtvolumen; die Wagen-Pickliste nutzt Volumen und Gewicht als Kapazität.
 
+### Lager-Layout: Raster (einfach)
+
+**Stammdaten → Lager-Layout**, Umschalter **Raster (einfach)**: das Lager wie eine Tabelle, Spalten A, B, C …, Zeilen 1, 2, 3 …, jedes Feld standardmäßig 1 m × 1 m. Jedes Feld ist **Laufweg** (leer), **Wand**, **Tür / Tor**, **Hindernis / Säule**, **Regal** mit X Behältern, **Packpuffer**, **Warenausgang**, **Retouren** (je mit X Behältern), **Start**, **Ende**, **Verpackung** oder **Wareneingang**.
+- **Malen**: oben eine Feldart wählen und mit der Maus über das Raster ziehen (ein Rechteck auf einmal)
+- **Auswählen und wählen**: mit **Auswählen** Felder markieren, dann **Rechtsklick**, Doppelklick oder Enter: die Feldart direkt im Raster wählen; Pfeiltasten bewegen die Markierung (Umschalt erweitert), **Entf** macht Laufweg daraus, **Strg+Z / Strg+Y** macht rückgängig bzw. wiederholt
+- **Behälter je Lagerfeld**: gilt für neu gemalte Lagerfelder und ändert markierte Lagerfelder sofort
+- **Größe und Behälter …**: Spalten, Zeilen, Feldgröße und die Behältermaße (für alle Lagerfelder)
+- **Speichern** erzeugt daraus Regale mit Lagerplätzen, Wände und Pickpunkte; **Verwerfen** kehrt zum gespeicherten Stand zurück
+
+Codes sind gangbasiert: jede Reihe von Regalfeldern ist ein Gang (`A01`, `A02` …, von oben nach unten), das Regal darin `A01-03`, der Behälter `A01-03-2`; Packpuffer, Warenausgang und Retouren beginnen mit `PK`, `WA`, `RT`. Vergebene Codes bleiben, auch wenn man später Felder ergänzt. Behälter mit Bestand, offenen Aufgaben oder Belegen lassen sich nicht wegmalen: das Speichern lehnt dann ab und markiert die Felder rot. Behälter in Packpuffer, Warenausgang und Retouren sind **Pufferplätze**: Picklisten und Einlagerungsvorschläge nutzen sie nicht. Ein frei gezeichnetes Lager ohne Raster öffnet im erweiterten Editor; im Raster erscheinen seine Objekte gestrichelt zur Orientierung und bleiben beim Speichern unangetastet. Regeln und API: [features/raster-layout.md](features/raster-layout.md).
+
 ### Lager-Layout (CAD-Editor)
 
-**Stammdaten → Lager-Layout**: Draufsicht.
+**Stammdaten → Lager-Layout**, Umschalter **Erweitert (frei)**: Draufsicht in Millimetern.
 - **Mausrad**: Zoom, **Ziehen auf leerer Fläche**: Verschieben
 - **Regal ziehen**: verschiebt es (Raster 100 mm); **+ Neues Regal** legt ein Regal in einem bestehenden Gang an (optional gleich mit Fächern). Gibt es genau einen Gang, ist er vorgewählt; gibt es noch keinen Gang, aber ein Lager, legt der Dialog die Zone `Z1` und den Gang `A1` gleich mit an; gibt es kein Lager, verweist er auf die Lagerstruktur.
 - **Regal anklicken**: Bins in diesem Regal, **+ Bin hinzufügen** (schlägt einen im ganzen System freien Code vor), Bins löschen (scheitert mit 409, solange Bestand oder Belege auf dem Lagerplatz liegen)

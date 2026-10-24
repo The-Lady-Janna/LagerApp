@@ -272,8 +272,11 @@ public class PickListService
         }
         else
         {
-            // Automatisch: erster Start-/Both-PickPoint DIESES Lagers.
-            var auto = pickPoints.FirstOrDefault(p => BelongsHere(p) && (p.Type == PickPointType.Start || p.Type == PickPointType.Both));
+            // Automatisch: erster Start-PickPoint DIESES Lagers, sonst der erste Both-PickPoint (etwa die Verpackung).
+            var auto = pickPoints
+                .Where(p => BelongsHere(p) && (p.Type == PickPointType.Start || p.Type == PickPointType.Both))
+                .OrderBy(p => p.Type == PickPointType.Start ? 0 : 1)
+                .FirstOrDefault();
             if (auto is not null) start = auto.Position;
         }
 

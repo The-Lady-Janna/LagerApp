@@ -164,3 +164,31 @@ public class UpdatePickPointRequestValidator : AbstractValidator<UpdatePickPoint
         RuleFor(x => x.Type).Must(EnumNames.IsDefinedName<PickPointType>).WithMessage(EnumNames.Message<PickPointType>());
     }
 }
+
+/// <summary>Raster speichern: Größe, Behältermaße und Felder innerhalb der Grenzen aus <see cref="GridLayout"/>.</summary>
+public class SaveGridLayoutRequestValidator : AbstractValidator<SaveGridLayoutRequest>
+{
+    public SaveGridLayoutRequestValidator()
+    {
+        RuleFor(x => x.CellSizeMm).InclusiveBetween(GridLayout.MinCellSizeMm, GridLayout.MaxCellSizeMm);
+        RuleFor(x => x.Columns).InclusiveBetween(1, GridLayout.MaxColumns);
+        RuleFor(x => x.Rows).InclusiveBetween(1, GridLayout.MaxRows);
+        RuleFor(x => x.ContainerWidthMm).DimensionMm()
+            .LessThanOrEqualTo(x => x.CellSizeMm).WithMessage("{PropertyPath} darf höchstens so groß wie ein Feld sein.");
+        RuleFor(x => x.ContainerDepthMm).DimensionMm()
+            .LessThanOrEqualTo(x => x.CellSizeMm).WithMessage("{PropertyPath} darf höchstens so groß wie ein Feld sein.");
+        RuleFor(x => x.ContainerHeightMm).DimensionMm();
+        RuleFor(x => x.ContainerMaxWeightGrams).WeightGrams();
+        RuleFor(x => x.Cells)
+            .NotNull().WithMessage("{PropertyPath} fehlt.")
+            .Must(c => c is null || c.Count <= GridLayout.MaxColumns * GridLayout.MaxRows)
+            .WithMessage($"Ein Raster hat höchstens {GridLayout.MaxColumns * GridLayout.MaxRows} Felder.");
+        RuleForEach(x => x.Cells).NotNull().ChildRules(cell =>
+        {
+            cell.RuleFor(c => c.Col).GreaterThanOrEqualTo(0);
+            cell.RuleFor(c => c.Row).GreaterThanOrEqualTo(0);
+            cell.RuleFor(c => c.Type).Must(EnumNames.IsDefinedName<GridCellType>).WithMessage(EnumNames.Message<GridCellType>());
+            cell.RuleFor(c => c.Containers).InclusiveBetween(0, GridLayout.MaxContainersPerCell);
+        }).When(x => x.Cells is not null && x.Cells.Count <= GridLayout.MaxColumns * GridLayout.MaxRows);
+    }
+}

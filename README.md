@@ -28,7 +28,7 @@ Self-hosted Warehouse-Management-System für kleine bis mittlere Lager: Warenein
 | **[TODO.md](TODO.md)** | Roadmap: was steht, was bewusst verschoben ist |
 | **[CHANGELOG.md](CHANGELOG.md)** | Änderungsverlauf |
 
-Je Bereich gibt es eine ausführliche Referenz unter `docs/features/`: [Lagerstruktur](docs/features/lager-stammdaten.md), [Artikel und GTIN](docs/features/artikel-gtin.md), [Chargen und MHD](docs/features/chargen-mhd.md), [CSV-Import und -Export](docs/features/csv-import-export.md), [Backup und Restore](docs/features/backup-restore.md), [Etiketten](docs/features/etiketten.md), [Demo-Modus](docs/features/demo-modus.md), [Mehrsprachigkeit](docs/features/i18n.md) und [Swagger und OpenAPI](docs/features/openapi.md). Beispieldateien zum Importieren liegen unter `docs/samples/`.
+Je Bereich gibt es eine ausführliche Referenz unter `docs/features/`: [Lagerstruktur](docs/features/lager-stammdaten.md), [Raster-Layout](docs/features/raster-layout.md), [Artikel und GTIN](docs/features/artikel-gtin.md), [Chargen und MHD](docs/features/chargen-mhd.md), [CSV-Import und -Export](docs/features/csv-import-export.md), [Backup und Restore](docs/features/backup-restore.md), [Etiketten](docs/features/etiketten.md), [Demo-Modus](docs/features/demo-modus.md), [Mehrsprachigkeit](docs/features/i18n.md) und [Swagger und OpenAPI](docs/features/openapi.md). Beispieldateien zum Importieren liegen unter `docs/samples/`.
 
 ---
 

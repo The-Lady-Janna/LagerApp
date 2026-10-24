@@ -168,6 +168,8 @@ public static class PutawayScorer
         var ranked = new List<(int Score, PutawaySuggestionDto Dto)>();
         foreach (var bin in bins)
         {
+            // Pufferplätze (Packpuffer, Warenausgang, Retouren) sind keine Einlagerungsziele.
+            if (bin.BinType.IsBuffer()) continue;
             stockByBin.TryGetValue(bin.Id, out var stockInBin);
             var (usedVolume, usedWeight) = BinFit.Occupancy(stockInBin, articles);
             if (!BinFit.Fits(article, quantity, bin, usedVolume, usedWeight)) continue;

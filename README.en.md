@@ -30,7 +30,7 @@ All documentation is written in German.
 | **[TODO.md](TODO.md)** | Roadmap: what is done, what is deliberately postponed |
 | **[CHANGELOG.md](CHANGELOG.md)** | Change history |
 
-There is a detailed reference per area under `docs/features/`: [warehouse structure](docs/features/lager-stammdaten.md), [articles and GTIN](docs/features/artikel-gtin.md), [lots and expiry dates](docs/features/chargen-mhd.md), [CSV import and export](docs/features/csv-import-export.md), [backup and restore](docs/features/backup-restore.md), [labels](docs/features/etiketten.md), [demo mode](docs/features/demo-modus.md), [multilingual UI](docs/features/i18n.md) and [Swagger and OpenAPI](docs/features/openapi.md). Sample files to import are in `docs/samples/`.
+There is a detailed reference per area under `docs/features/`: [warehouse structure](docs/features/lager-stammdaten.md), [grid layout](docs/features/raster-layout.md), [articles and GTIN](docs/features/artikel-gtin.md), [lots and expiry dates](docs/features/chargen-mhd.md), [CSV import and export](docs/features/csv-import-export.md), [backup and restore](docs/features/backup-restore.md), [labels](docs/features/etiketten.md), [demo mode](docs/features/demo-modus.md), [multilingual UI](docs/features/i18n.md) and [Swagger and OpenAPI](docs/features/openapi.md). Sample files to import are in `docs/samples/`.
 
 ---
 

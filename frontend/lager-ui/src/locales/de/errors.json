@@ -101,6 +101,8 @@
     "ambiguous_code": "Der Code ist nicht eindeutig.",
     "warehouse_not_empty": "Das Lager ist nicht leer.",
     "duplicate_gtin": "Diese GTIN ist bereits einem anderen Artikel zugeordnet.",
-    "invalid_gtin": "Die GTIN ist ungültig."
+    "invalid_gtin": "Die GTIN ist ungültig.",
+    "grid_conflict": "Das Raster wurde zwischenzeitlich geändert. Bitte neu laden.",
+    "grid_cells_in_use": "Einige Felder enthalten Behälter, die noch verwendet werden."
   }
 }

@@ -57,6 +57,11 @@ public interface IWarehouseRepository
     Task<IReadOnlyList<Wall>> ListWallsOfWarehouseAsync(Guid warehouseId, CancellationToken ct = default);
     Task<IReadOnlyList<PickPoint>> ListPickPointsOfWarehouseAsync(Guid warehouseId, CancellationToken ct = default);
 
+    /// <summary>Raster-Layout eines Lagers (verfolgt) oder <c>null</c>, wenn das Lager noch keins hat.</summary>
+    Task<GridLayout?> GetGridLayoutAsync(Guid warehouseId, CancellationToken ct = default);
+    Task AddGridLayoutAsync(GridLayout grid, CancellationToken ct = default);
+    void RemoveGridLayout(GridLayout grid);
+
     Task<IReadOnlyList<Wall>> ListWallsAsync(CancellationToken ct = default);
     Task<Wall?> GetWallAsync(Guid id, CancellationToken ct = default);
     Task AddWallAsync(Wall wall, CancellationToken ct = default);

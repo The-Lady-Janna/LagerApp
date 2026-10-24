@@ -26,6 +26,8 @@ export const queryKeys = {
   storageLocations: ['warehouse', 'locations'] as const,
   walls: ['warehouse', 'walls'] as const,
   pickPoints: ['warehouse', 'pick-points'] as const,
+  gridLayouts: ['warehouse', 'grid'] as const,
+  gridLayout: (warehouseId: string) => ['warehouse', 'grid', warehouseId] as const,
 
   // Bestand
   stock: ['stock'] as const,
