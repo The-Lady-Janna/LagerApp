@@ -109,3 +109,25 @@ export function blockedCellsOf(error: unknown): GridBlockedCell[] {
   return data.cells.filter((c): c is GridBlockedCell =>
     typeof c === 'object' && c !== null && typeof (c as GridBlockedCell).col === 'number' && typeof (c as GridBlockedCell).row === 'number')
 }
+
+/** Ergebnis von "Layout löschen": was entfernt wurde (`grid` = ein Raster war gespeichert). */
+export interface ClearLayoutResult {
+  zones: number
+  shelves: number
+  storageLocations: number
+  walls: number
+  pickPoints: number
+  grid: boolean
+}
+
+/** Löscht das ganze Layout eines Lagers (Struktur, Wände, Pickpunkte, Raster); das Lager bleibt. */
+export const useClearLayout = (warehouseId: string) => {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: async () => (await apiClient.delete<ClearLayoutResult>(`/warehouse/${warehouseId}/layout`)).data,
+    onSuccess: () => {
+      for (const queryKey of [queryKeys.gridLayouts, queryKeys.warehouseLayout, queryKeys.storageLocations, queryKeys.walls, queryKeys.pickPoints, queryKeys.stock])
+        void qc.invalidateQueries({ queryKey })
+    },
+  })
+}

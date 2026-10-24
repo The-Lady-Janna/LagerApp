@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "Lager (API + Oberfläche)",
+    "Projects": [
+      {
+        "Path": "src\Lager.Api\Lager.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "Komplett (API + Oberfläche)"
+      }
+    ]
+  },
+  {
+    "Name": "Nur API (Swagger)",
+    "Projects": [
+      {
+        "Path": "src\Lager.Api\Lager.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  }
+]

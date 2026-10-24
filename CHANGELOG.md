@@ -9,6 +9,8 @@ Das Format basiert auf [Keep a Changelog 1.1.0](https://keepachangelog.com/de/1.
 ### Hinzugefügt
 
 - **Raster-Layout (einfacher Layout-Editor):** Seite Lager-Layout, Modus „Raster (einfach)“. Das Lager wird wie eine Tabelle gezeichnet: jedes Feld ist Laufweg, Wand, Tür, Hindernis, Regal mit X Behältern, Packpuffer, Warenausgang, Retourenfläche, Start, Ende, Verpackung oder Wareneingang. Malen per Ziehen, Feldart per Rechtsklick/Doppelklick/Enter direkt im Raster, Rückgängig/Wiederholen. Beim Speichern erzeugt der Server Regale mit Lagerplätzen (gangbasierte Codes `A01-03-2`), Wände und Pickpunkte; der bisherige Editor bleibt als „Erweitert (frei)“. Neue Endpunkte `GET`/`PUT /api/warehouse/{id}/grid`, neue Tabelle `GridLayouts` (Schema-Schritt `3500_AddGridLayout`). Details: [docs/features/raster-layout.md](docs/features/raster-layout.md).
+- **Ein-Klick-Start in Visual Studio/Rider:** Startprofil „Komplett (API + Oberfläche)“ (erstes Profil in `launchSettings.json`). F5 startet das Backend, der SPA-Proxy (`Microsoft.AspNetCore.SpaProxy`, nur in diesem Profil aktiv) startet den Vite-Server und öffnet den Browser auf der Oberfläche; ein Debug-Build in Visual Studio holt fehlende Frontend-Pakete mit `npm ci`.
+- **Layout löschen:** Knopf auf der Seite Lager-Layout (beide Modi, Rolle Manager) und `DELETE /api/warehouse/{id}/layout`: entfernt nach Rückfrage Raster, Zonen, Gänge, Regale, Lagerplätze, Wände und Pickpunkte eines Lagers in einem Schritt, das Lager bleibt. Alles oder nichts: Bestand, offene Aufgaben oder Belege verhindern das Löschen (409).
 - **Pufferplätze:** neue Bin-Typen `Packing`, `Outgoing` und `Returns`. Bestand darin ist für Picklisten nicht verfügbar, Einlagerungs- und Slotting-Vorschläge nennen diese Plätze nicht.
 
 ### Geändert

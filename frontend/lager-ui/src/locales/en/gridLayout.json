@@ -133,5 +133,16 @@
       "containerHeightMm": "Height (mm)",
       "containerMaxWeightGrams": "Max. load (kg)"
     }
+  },
+  "clear": {
+    "button": "Delete layout",
+    "empty": "The layout is already empty.",
+    "title": "Delete the whole layout of {{warehouse}}?",
+    "confirm": "Delete everything",
+    "body": "This deletes {{shelves}} shelves with {{bins}} storage locations, {{walls}} walls, {{pickPoints}} pick points and the grid ({{cells}} used cells). The warehouse itself stays.",
+    "unsaved": "Unsaved grid changes are lost as well.",
+    "note": "This cannot be undone. If a storage location still holds stock or documents refer to it, nothing is deleted.",
+    "failed": "The layout was not deleted",
+    "done": "Layout deleted: {{shelves}} shelves, {{bins}} storage locations, {{walls}} walls, {{pickPoints}} pick points."
   }
 }

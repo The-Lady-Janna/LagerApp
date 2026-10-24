@@ -69,5 +69,8 @@ public record GridApplySummary(
 
 public record SaveGridLayoutResult(GridLayoutDto Layout, GridApplySummary Summary);
 
+/// <summary>Was "Layout löschen" (<c>DELETE /api/warehouse/{id}/layout</c>) entfernt hat; <c>Grid</c> = ein Raster war gespeichert.</summary>
+public record ClearLayoutResult(int Zones, int Shelves, int StorageLocations, int Walls, int PickPoints, bool Grid);
+
 /// <summary>Ein Feld, das sich nicht ändern lässt, weil Behälter darin noch verwendet werden (Bestand, Aufgaben, Belege).</summary>
 public record GridBlockedCellDto(int Col, int Row, string Ref, IReadOnlyList<string> ContainerCodes);
