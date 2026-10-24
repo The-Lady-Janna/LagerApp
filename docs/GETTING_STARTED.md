@@ -143,7 +143,9 @@ cd ../..
 
 ## 3. Erster Start
 
-Backend und Frontend laufen in **zwei separaten Terminals**, weil beide blockieren.
+**Mit Visual Studio (oder Rider):** `Lager.sln` öffnen, in der Startauswahl der Symbolleiste **Lager (API + Oberfläche)** wählen (gemeinsames Startprofil aus `Lager.slnLaunch`, ab Visual Studio 2022 17.11; sonst `Lager.Api` als Startprojekt mit dem Profil **Komplett (API + Oberfläche)**) und **Starten** (F5). `Lager.Api` steht als erstes Projekt in der Solution und ist deshalb ohne eigene Einstellung schon das Startprojekt; hat Visual Studio sich früher ein anderes gemerkt, einmal umstellen. Das startet das Backend auf `http://localhost:5099`; der SPA-Proxy startet dazu den Vite-Entwicklungsserver (`npm run dev` in `frontend/lager-ui`, eigenes Konsolenfenster) und öffnet den Browser auf `http://localhost:5173`. Fehlen die Frontend-Pakete, holt der erste Build in Visual Studio sie selbst (`npm ci`, dafür muss Node.js installiert sein). Beenden des Debuggens beendet auch den Vite-Server. Das Einmalpasswort des ersten Starts (siehe unten) steht im Konsolenfenster des Backends. Nur das Backend mit Swagger: **Nur API (Swagger)** bzw. Profil `http`.
+
+**Auf der Kommandozeile** laufen Backend und Frontend in **zwei separaten Terminals**, weil beide blockieren.
 
 ### Terminal 1 — Backend
 
@@ -151,7 +153,7 @@ Backend und Frontend laufen in **zwei separaten Terminals**, weil beide blockier
 dotnet run --project src/Lager.Api
 ```
 
-`dotnet run` nutzt das Profil `http` aus `src/Lager.Api/Properties/launchSettings.json`: Umgebung **`Development`**, Adresse `http://localhost:5099`. Beim allerersten Start passiert automatisch:
+`dotnet run` nutzt das erste Profil aus `src/Lager.Api/Properties/launchSettings.json` (**Komplett (API + Oberfläche)**): Umgebung **`Development`**, Adresse `http://localhost:5099`. Den Vite-Server startet es nur, wenn jemand `http://localhost:5099/` aufruft und er noch nicht läuft; mit Terminal 2 unten öffnet man direkt `http://localhost:5173`. Ganz ohne SPA-Proxy: `dotnet run --project src/Lager.Api --launch-profile http`. Beim allerersten Start passiert automatisch:
 
 1. Die SQLite-Datenbank `src/Lager.Api/lager.db` wird angelegt (dazu `lager.db-wal` und `lager.db-shm`; ein relativer Pfad gilt relativ zum Projektverzeichnis).
 2. Das Schema entsteht aus dem Modell (`EnsureCreated`), danach bringt der `SchemaUpgrader` jede Datenbank auf den aktuellen Stand (bei einer neuen Datenbank ohne Änderungen).

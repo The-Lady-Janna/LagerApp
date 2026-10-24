@@ -225,6 +225,47 @@ public class GridLayoutApiTests : IClassFixture<LagerApiFactory>
     }
 
     [Fact]
+    public async Task Clearing_the_layout_removes_grid_and_free_objects_but_keeps_the_warehouse_and_never_stocked_bins()
+    {
+        var admin = await AdminAsync();
+        var site = await admin.BuildSiteAsync(bins: 2);
+        var saved = await SaveAsync(admin, site.Warehouse.Id, Request(SmallWarehouse(), null));
+        await (await admin.PostAsJsonAsync("/api/warehouse/walls",
+                new CreateWallRequest(site.Warehouse.Id, "frei", new[] { new PositionDto(0, 0, 0), new PositionDto(5_000, 0, 0) }, 200)))
+            .ExpectStatusAsync(HttpStatusCode.Created);
+
+        // Bestand in einem Raster-Behälter: nichts wird gelöscht.
+        var stockedBin = (await admin.BinsAsync()).First(b => saved.Layout.ManagedShelfIds.Contains(b.ShelfId));
+        var article = await _world.AddArticleAsync();
+        var stockRow = await _world.AddLegacyStockAsync(article.Id, new WorldBuilder.Bin(stockedBin.Id, stockedBin.Code, BinType.Standard), 3);
+        var refused = await (await admin.DeleteAsync($"/api/warehouse/{site.Warehouse.Id}/layout")).ErrorAsync(HttpStatusCode.Conflict);
+        Assert.Equal("warehouse_not_empty", refused.Code);
+        Assert.Contains(stockedBin.Code, refused.Detail);
+        Assert.True((await GetAsync(admin, site.Warehouse.Id)).Exists);
+
+        await _world.DbAsync(async db =>
+        {
+            (await db.StockItems.FindAsync(stockRow))!.Remove(3);
+            await db.SaveChangesAsync();
+        });
+        var result = await (await admin.DeleteAsync($"/api/warehouse/{site.Warehouse.Id}/layout")).ExpectAsync<ClearLayoutResult>(HttpStatusCode.OK);
+
+        Assert.Equal(new ClearLayoutResult(Zones: 3, Shelves: 5, StorageLocations: 2 + 9, Walls: 2, PickPoints: 2, Grid: true), result);
+        var tree = (await admin.FindWarehouseAsync(site.Warehouse.Id))!;
+        Assert.Empty(tree.Zones);
+        Assert.DoesNotContain((await (await admin.GetAsync("/api/warehouse/walls")).ExpectAsync<List<WallDto>>(HttpStatusCode.OK)), w => w.WarehouseId == site.Warehouse.Id);
+        Assert.DoesNotContain((await (await admin.GetAsync("/api/warehouse/pick-points")).ExpectAsync<List<PickPointDto>>(HttpStatusCode.OK)), p => p.WarehouseId == site.Warehouse.Id);
+        Assert.False((await GetAsync(admin, site.Warehouse.Id)).Exists);
+
+        // Leeres Lager: geht noch einmal (nichts zu tun), unbekanntes Lager 404, Picker darf nicht.
+        Assert.Equal(new ClearLayoutResult(0, 0, 0, 0, 0, false),
+            await (await admin.DeleteAsync($"/api/warehouse/{site.Warehouse.Id}/layout")).ExpectAsync<ClearLayoutResult>(HttpStatusCode.OK));
+        await (await admin.DeleteAsync($"/api/warehouse/{Guid.NewGuid()}/layout")).ExpectStatusAsync(HttpStatusCode.NotFound);
+        var picker = await _world.ClientAsync("Picker");
+        await (await picker.DeleteAsync($"/api/warehouse/{site.Warehouse.Id}/layout")).ExpectStatusAsync(HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
     public async Task Invalid_grids_are_400_and_only_managers_may_save()
     {
         var admin = await AdminAsync();

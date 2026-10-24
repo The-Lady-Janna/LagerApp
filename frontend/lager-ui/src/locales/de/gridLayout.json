@@ -133,5 +133,16 @@
       "containerHeightMm": "Höhe (mm)",
       "containerMaxWeightGrams": "Höchstlast (kg)"
     }
+  },
+  "clear": {
+    "button": "Layout löschen",
+    "empty": "Das Layout ist schon leer.",
+    "title": "Ganzes Layout von {{warehouse}} löschen?",
+    "confirm": "Alles löschen",
+    "body": "Gelöscht werden {{shelves}} Regale mit {{bins}} Lagerplätzen, {{walls}} Wände, {{pickPoints}} Pickpunkte und das Raster ({{cells}} belegte Felder). Das Lager selbst bleibt bestehen.",
+    "unsaved": "Ungespeicherte Änderungen im Raster gehen ebenfalls verloren.",
+    "note": "Das lässt sich nicht rückgängig machen. Liegt noch Bestand in einem Lagerplatz oder verweisen Belege darauf, wird nichts gelöscht.",
+    "failed": "Das Layout wurde nicht gelöscht",
+    "done": "Layout gelöscht: {{shelves}} Regale, {{bins}} Lagerplätze, {{walls}} Wände, {{pickPoints}} Pickpunkte."
   }
 }

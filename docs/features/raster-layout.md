@@ -70,6 +70,15 @@ bekommen alle neuen Regale dieses Lagers den Lager-Code als Präfix (`WH02-A01-0
 Zwei Manager, die gleichzeitig dasselbe Raster bearbeiten: das zweite Speichern scheitert mit 409 `grid_conflict` (die mitgeschickte
 `expectedVersion` passt nicht mehr). Der Editor bietet „Erneut versuchen“, das lädt den neuen Stand.
 
+## Layout löschen
+
+Der Knopf **Layout löschen** neben dem Umschalter (Rolle Manager, in beiden Modi) räumt das Lager in einem Schritt leer:
+Raster, alle Zonen mit Gängen, Regalen und Lagerplätzen, alle Wände und Pickpunkte, auch die aus dem erweiterten Editor. Das Lager
+selbst bleibt und lässt sich danach neu zeichnen. Die Rückfrage nennt, was verschwindet. Es gelten dieselben Regeln wie beim Löschen
+eines Lagers, alles oder nichts: Bestand oder offene Aufgaben in einem Lagerplatz ergeben 409 `warehouse_not_empty`, Belege
+(Wareneingang, Retoure, Pickliste ...) 409 `in_use`. API: `DELETE /api/warehouse/{id}/layout` (Antwort: die Anzahl gelöschter
+Zonen, Regale, Lagerplätze, Wände und Pickpunkte).
+
 ## Pufferplätze
 
 Die Bin-Typen `Packing`, `Outgoing` und `Returns` markieren Plätze für Ware, die nicht frei verfügbar ist (gepickt und wartet aufs

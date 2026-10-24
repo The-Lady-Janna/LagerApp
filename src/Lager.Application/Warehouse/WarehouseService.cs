@@ -94,6 +94,34 @@ public class WarehouseService
         return true;
     }
 
+    /// <summary>
+    /// Leert das Layout eines Lagers in einem Schritt: alle Zonen samt Gängen, Regalen und Lagerplätzen, alle Wände und Pickpunkte
+    /// und das Raster. Das Lager selbst bleibt. Wie beim Löschen des Lagers geht das nur, wenn kein Lagerplatz Bestand, offene Aufgaben
+    /// oder Belege hat (409 <c>warehouse_not_empty</c> bzw. <c>in_use</c>); dann ändert sich nichts. <c>null</c> = Lager unbekannt.
+    /// </summary>
+    public async Task<ClearLayoutResult?> ClearLayoutAsync(Guid id, CancellationToken ct = default)
+    {
+        var warehouse = await _repo.GetWarehouseAsync(id, ct);
+        if (warehouse is null) return null;
+
+        var shelves = warehouse.Zones.SelectMany(z => z.Aisles).SelectMany(a => a.Shelves).ToList();
+        var bins = shelves.SelectMany(s => s.Locations).ToList();
+        await EnsureRemovableAsync(bins, $"Das Layout des Lagers '{warehouse.Code}'", singleBin: false, ct);
+        await _repo.RemoveEmptyStockRowsAsync(bins.Select(b => b.Id).ToList(), ct);
+
+        var zones = warehouse.Zones.ToList();
+        foreach (var zone in zones) _repo.RemoveZone(zone);
+        var walls = await _repo.ListWallsOfWarehouseAsync(id, ct);
+        foreach (var wall in walls) _repo.RemoveWall(wall);
+        var points = await _repo.ListPickPointsOfWarehouseAsync(id, ct);
+        foreach (var point in points) _repo.RemovePickPoint(point);
+        var grid = await _repo.GetGridLayoutAsync(id, ct);
+        if (grid is not null) _repo.RemoveGridLayout(grid);
+
+        await _uow.SaveChangesAsync(ct);
+        return new ClearLayoutResult(zones.Count, shelves.Count, bins.Count, walls.Count, points.Count, grid is not null);
+    }
+
     // ---- Zone ----
 
     public async Task<ZoneDto> CreateZoneAsync(CreateZoneRequest request, CancellationToken ct = default)

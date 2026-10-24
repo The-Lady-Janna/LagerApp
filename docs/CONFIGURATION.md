@@ -45,7 +45,7 @@ Arrays werden per Index gesetzt (`__0`, `__1`, ...). Der Standard in `appsetting
 | `ASPNETCORE_URLS` | ohne Angabe `http://localhost:5000`; `dotnet run` nimmt `http://localhost:5099` aus `launchSettings.json` | nein | Adressen, auf denen Kestrel lauscht, z. B. `http://127.0.0.1:5099`. Eine `https://`-Adresse darin liefert auch den Port für die HTTPS-Weiterleitung. |
 | `ASPNETCORE_HTTPS_PORT` (auch `HTTPS_PORT`) | – | nein | HTTPS-Port für die Weiterleitung (siehe `Security:HttpsPort`). |
 
-`dotnet run --project src/Lager.Api` startet mit dem Profil `http` aus `launchSettings.json` (Umgebung `Development`, Adresse `http://localhost:5099`). Ein veröffentlichtes Programm (`dotnet publish`) kennt `launchSettings.json` nicht und läuft ohne Angabe als `Production`.
+`dotnet run --project src/Lager.Api` startet mit dem ersten Profil aus `launchSettings.json`, **Komplett (API + Oberfläche)** (Umgebung `Development`, Adresse `http://localhost:5099`, dazu der SPA-Proxy, der bei Bedarf `npm run dev` in `frontend/lager-ui` startet und `/` auf `http://localhost:5173` umleitet; in Visual Studio der Start mit F5). `--launch-profile http` startet nur das Backend. Ein veröffentlichtes Programm (`dotnet publish`) kennt `launchSettings.json` nicht und läuft ohne Angabe als `Production`.
 
 **Swagger** (Swagger UI unter `/swagger`, OpenAPI-Beschreibung unter `/swagger/v1/swagger.json`) läuft in der Umgebung `Development` oder mit `Swagger:Enabled=true`; in jeder anderen Umgebung (auch im Docker-Image) ist es ohne Schalter nicht vorhanden:
 

@@ -145,6 +145,8 @@
 .grid-settings legend { padding: 0 4px; color: var(--c-text); font-weight: 600; }
 
 /* ---- Moduswahl auf der Seite Lager-Layout ------------------------------------------------------------------------- */
+.layout-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.layout-header .layout-mode { margin-bottom: 0; }
 .layout-mode { display: inline-flex; border: 1px solid var(--c-border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
 .layout-mode button { border: none; border-radius: 0; padding: 6px 14px; }
 .layout-mode button + button { border-left: 1px solid var(--c-border); }

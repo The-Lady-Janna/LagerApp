@@ -419,6 +419,23 @@ public class WarehouseController : ControllerBase
         return ok ? NoContent() : NotFound();
     }
 
+    /// <summary>Löscht das ganze Layout eines Lagers: Zonen, Gänge, Regale, Lagerplätze, Wände, Pickpunkte und Raster. Das Lager bleibt.</summary>
+    /// <remarks>
+    /// Alles oder nichts: hat ein Lagerplatz Bestand oder offene Aufgaben, 409 <c>warehouse_not_empty</c>; verweisen Belege darauf,
+    /// 409 <c>in_use</c>. Antwort: was entfernt wurde.
+    /// </remarks>
+    /// <param name="id">Id des Lagers.</param>
+    [HttpDelete("{id:guid}/layout")]
+    [Authorize(Policy = "Manager")]
+    [ProducesResponseType<ClearLayoutResult>(StatusCodes.Status200OK)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+    [ProducesResponseType<ProblemDetails>(StatusCodes.Status409Conflict)]
+    public async Task<ActionResult<ClearLayoutResult>> ClearLayout(Guid id, CancellationToken ct)
+    {
+        var result = await _service.ClearLayoutAsync(id, ct);
+        return result is null ? NotFound() : result;
+    }
+
     // ---- Einfaches Raster-Layout ----
 
     /// <summary>Liefert das Raster-Layout eines Lagers (ohne gespeichertes Raster die Vorgaben für ein neues).</summary>

@@ -14,9 +14,22 @@
     <NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!--
+      Start aus Visual Studio/Rider mit dem Profil "Komplett (API + Oberfläche)" (Properties/launchSettings.json): der SPA-Proxy
+      startet den Vite-Entwicklungsserver (npm run dev in frontend/lager-ui), falls er noch nicht läuft, und leitet den Browser
+      von http://localhost:5099 dorthin weiter. Aktiv nur mit ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=Microsoft.AspNetCore.SpaProxy
+      (steht nur in diesem Profil); Produktion, Docker und die Tests sind davon nicht berührt.
+    -->
+    <SpaRoot>..\..\frontend\lager-ui\</SpaRoot>
+    <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
+    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.31" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.31" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.31">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -35,5 +48,21 @@
     <ProjectReference Include="..\Lager.Infrastructure\Lager.Infrastructure.csproj" />
     <ProjectReference Include="..\Lager.Contracts\Lager.Contracts.csproj" />
   </ItemGroup>
+
+  <!--
+    Erster Start in Visual Studio auf einem frischen Klon: ohne node_modules könnte der Vite-Server nicht starten. Deshalb holt ein
+    Debug-Build in Visual Studio die Pakete einmalig (npm ci). Ohne Node.js nur eine Warnung (das Backend läuft trotzdem). Builds auf
+    der Kommandozeile, in der CI und in Docker tun hier nichts.
+  -->
+  <Target Name="LagerEnsureFrontendPackages" BeforeTargets="Build"
+          Condition="'$(BuildingInsideVisualStudio)' == 'true' And '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules')">
+    <Exec Command="node --version" IgnoreExitCode="true" StandardOutputImportance="low">
+      <Output TaskParameter="ExitCode" PropertyName="LagerNodeExitCode" />
+    </Exec>
+    <Warning Condition="'$(LagerNodeExitCode)' != '0'"
+             Text="Node.js wurde nicht gefunden: die Oberfläche (frontend/lager-ui) kann nicht starten. Node.js 22 installieren (https://nodejs.org) und Visual Studio neu starten." />
+    <Message Condition="'$(LagerNodeExitCode)' == '0'" Importance="high" Text="Frontend-Pakete fehlen, npm ci in $(SpaRoot) (einmalig, dauert etwas) ..." />
+    <Exec Condition="'$(LagerNodeExitCode)' == '0'" WorkingDirectory="$(SpaRoot)" Command="npm ci" />
+  </Target>
 
 </Project>

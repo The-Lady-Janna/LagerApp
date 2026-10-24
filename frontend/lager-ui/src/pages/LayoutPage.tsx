@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
-import { useWalls, useWarehouseLayout } from '../api/hooks'
+import { usePickPoints, useWalls, useWarehouseLayout } from '../api/hooks'
 import { useGridLayout } from '../api/gridLayoutHooks'
 import { ConfirmDialog } from '../components/ConfirmDialog'
 import { LoadState } from '../components/LoadState'
 import { GridEditor } from '../components/gridEditor/GridEditor'
+import { ClearLayoutButton } from '../components/gridEditor/ClearLayoutButton'
+import { useAuth } from '../state/auth'
 import { useActiveWarehouse } from '../state/activeWarehouse'
 import { LayoutEditorPage } from './LayoutEditorPage'
 import '../components/gridEditor/gridEditor.css'
@@ -22,6 +24,8 @@ export function LayoutPage() {
   const { t } = useTranslation()
   const layout = useWarehouseLayout()
   const walls = useWalls()
+  const pickPoints = usePickPoints()
+  const canEdit = useAuth((s) => s.hasRole('Manager'))
   const activeId = useActiveWarehouse((s) => s.activeId)
   const warehouses = layout.data ?? []
   const warehouse = warehouses.find((w) => w.id === activeId) ?? warehouses[0] ?? null
@@ -29,6 +33,8 @@ export function LayoutPage() {
   const [params, setParams] = useSearchParams()
   const [dirty, setDirty] = useState(false)
   const [pendingMode, setPendingMode] = useState<LayoutMode | null>(null)
+  // Nach "Layout löschen" startet der Raster-Editor neu (ein offener Entwurf ist dann hinfällig).
+  const [resetCount, setResetCount] = useState(0)
 
   // Laden, Fehler und "noch kein Lager" zeigt der erweiterte Editor schon passend an.
   if (!warehouse) return <LayoutEditorPage />
@@ -48,6 +54,7 @@ export function LayoutPage() {
 
   const switcher = (
     <>
+      <div className="layout-header">
       <div className="layout-mode" role="group" aria-label={t('gridLayout:mode.label')}>
         <button type="button" className={mode === 'grid' ? 'is-active' : ''} aria-pressed={mode === 'grid'} onClick={() => switchTo('grid')}>
           {t('gridLayout:mode.grid')}
@@ -55,6 +62,17 @@ export function LayoutPage() {
         <button type="button" className={mode === 'advanced' ? 'is-active' : ''} aria-pressed={mode === 'advanced'} onClick={() => switchTo('advanced')}>
           {t('gridLayout:mode.advanced')}
         </button>
+      </div>
+      {canEdit && (
+        <ClearLayoutButton
+          warehouse={warehouse}
+          walls={(walls.data ?? []).filter((w) => w.warehouseId === warehouse.id).length}
+          pickPoints={(pickPoints.data ?? []).filter((p) => p.warehouseId === warehouse.id).length}
+          gridCells={grid.data?.cells.length ?? 0}
+          unsavedGridChanges={mode === 'grid' && dirty}
+          onCleared={() => { setDirty(false); setResetCount((n) => n + 1) }}
+        />
+      )}
       </div>
       {mode === 'advanced' && grid.data?.exists && (
         <p className="card card--info" style={{ marginTop: 0 }}>{t('gridLayout:mode.managedHint')}</p>
@@ -81,7 +99,7 @@ export function LayoutPage() {
       <p className="muted" style={{ marginTop: 0 }}>{t('gridLayout:intro', { warehouse: `${warehouse.code} – ${warehouse.name}` })}</p>
       {mode === null
         ? <LoadState isLoading={grid.isLoading} error={grid.error} what={t('gridLayout:what')} onRetry={() => void grid.refetch()} />
-        : <GridEditor key={warehouse.id} warehouse={warehouse} onDirtyChange={setDirty} />}
+        : <GridEditor key={`${warehouse.id}:${resetCount}`} warehouse={warehouse} onDirtyChange={setDirty} />}
     </>
   )
 }

@@ -314,6 +314,7 @@ Alle Pfade beginnen mit `/api`. `{id}` und ähnliche Platzhalter sind GUIDs. All
 | PUT | /api/warehouse/pick-points/{id} | Manager | Beschriftung und Typ ändern |
 | PUT | /api/warehouse/pick-points/{id}/position | Manager | Pickpunkt verschieben |
 | DELETE | /api/warehouse/pick-points/{id} | Manager | Pickpunkt löschen |
+| DELETE | /api/warehouse/{id}/layout | Manager | ganzes Layout eines Lagers löschen (Zonen, Gänge, Regale, Lagerplätze, Wände, Pickpunkte, Raster), das Lager bleibt; alles oder nichts: 409 `warehouse_not_empty` bei Bestand/offenen Aufgaben, 409 `in_use` bei Belegen |
 | GET | /api/warehouse/{id}/grid | angemeldet | Raster-Layout eines Lagers (einfacher Editor); ohne Raster die Vorgaben (`exists: false`) |
 | PUT | /api/warehouse/{id}/grid | Manager | Raster speichern und anwenden: erzeugt Regale mit Behältern, Wände und Pickpunkte; 409 `grid_conflict` (zwischenzeitlich geändert, `expectedVersion`), 409 `grid_cells_in_use` mit `cells` (Behälter mit Bestand, Aufgaben oder Belegen würden entfernt) |
 

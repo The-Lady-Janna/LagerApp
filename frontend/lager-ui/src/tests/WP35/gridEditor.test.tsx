@@ -159,6 +159,27 @@ describe('Raster-Layout (einfacher Editor)', () => {
     expect(api.calls('PUT', '/warehouse/w1/grid')[0].body).toMatchObject({ expectedVersion: 'v1', cells: [] })
   })
 
+  it('löscht nach Rückfrage das ganze Layout und beginnt mit einem leeren Raster', async () => {
+    const user = userEvent.setup()
+    server = gridDto([{ col: 1, row: 1, ref: 'B2', type: 'Wall', containers: 0, shelfId: null, shelfCode: null, occupiedContainers: 0 }])
+    api.setRoute('DELETE /warehouse/:id/layout', () => {
+      server = gridDto()
+      return { zones: 1, shelves: 2, storageLocations: 8, walls: 1, pickPoints: 0, grid: true }
+    })
+    renderWithProviders(<LayoutPage />, { initialEntries: ['/layout'] })
+    await screen.findByRole('grid')
+    expect(cell(1, 1)).toHaveClass('grid-cell--wall')
+
+    await user.click(screen.getByRole('button', { name: 'Layout löschen' }))
+    const dialog = await screen.findByRole('dialog', { name: 'Ganzes Layout von WH01 löschen?' })
+    expect(within(dialog).getByText(/und das Raster \(1 belegte Felder\)/)).toBeInTheDocument()
+    await user.click(within(dialog).getByRole('button', { name: 'Alles löschen' }))
+
+    await waitFor(() => expect(api.calls('DELETE', '/warehouse/w1/layout')).toHaveLength(1))
+    await waitFor(() => expect(cell(1, 1)).toHaveClass('grid-cell--walkway'))
+    expect(useToasts.getState().toasts.map((toast) => toast.message)).toContainEqual(expect.stringMatching(/^Layout gelöscht: 2 Regale, 8 Lagerplätze/))
+  })
+
   it('zeigt Nutzern ohne Manager-Rolle das Raster nur an', async () => {
     signInAs(['Picker'])
     server = gridDto([{ col: 1, row: 1, ref: 'B2', type: 'Wall', containers: 0, shelfId: null, shelfCode: null, occupiedContainers: 0 }])
