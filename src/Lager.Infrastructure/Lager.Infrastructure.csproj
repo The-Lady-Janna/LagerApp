@@ -28,7 +28,7 @@
       transitive von Microsoft.EntityFrameworkCore.Sqlite zurückfallen; der Test SqliteNativeLibraryTests
       prüft die tatsächlich geladene SQLite-Version.
     -->
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.13" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.5" />
   </ItemGroup>
 
 </Project>
